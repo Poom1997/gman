@@ -1,4 +1,4 @@
-== INTRODUCTION ==
+# INTRODUCTION
 
   This program is created for 
   13016214 - Software Engineering Principle
@@ -10,25 +10,25 @@
   International College
   King Mongkut's Institute of Technology Ladkrabang (KMITL)
 
-== AUTHORS AND PROGRAMMER ==
+# AUTHORS AND PROGRAMMER
 
   Bhurinuth Wongsrisakul (58090030) - Project Manager
   Sira Pacheechan (58090037) - GUI Designer and Manager
   Atiruj Silnumkij (58090044) - Database Administrator
 
 
-== INITIAL DESCRIPTION == 
+# INITIAL DESCRIPTION
 
   This is a program created to manage the course/grades/and the student data using 
   Python Object Oriented Programming and POSTGRESql Database. This is to demonstrate
   how we use our programming plans and diagrams created during the course.
 
 
-== ADDITIONAL DESCRIPTION ==
+# ADDITIONAL DESCRIPTION
 
   This section will be updated once the project has been completed successfully.
 
-
+# 
 PROGRAM VERSION: 0.1(ALPHA)
 ALL COMPONENTS IN THE ALPHA VERSION OF THE PROGRAM CAN BE CHANGED OR PUBLISHED WITHOUT ANY RELEASE NOTES
 
