@@ -1,20 +1,20 @@
 # INTRODUCTION
 
-  This program is created for 
-  13016214 - Software Engineering Principle
-  13016215 - Software Engineering Principle Laboratory
+  This program is created for <br>
+  13016214 - Software Engineering Principle<br>
+  13016215 - Software Engineering Principle Laboratory<br>
 
-  End-Of-Term Project (Group of Three)
+  End-Of-Term Project (Group of Three)<br>
 
-  Software Engineering - Year 2 (Sem 2/2015)
-  International College
-  King Mongkut's Institute of Technology Ladkrabang (KMITL)
+  Software Engineering - Year 2 (Sem 2/2015)<br>
+  International College<br>
+  King Mongkut's Institute of Technology Ladkrabang (KMITL)<br>
 
 # AUTHORS AND PROGRAMMER
 
-  Bhurinuth Wongsrisakul (58090030) - Project Manager
-  Sira Pacheechan (58090037) - GUI Designer and Manager
-  Atiruj Silnumkij (58090044) - Database Administrator
+  Bhurinuth Wongsrisakul (58090030) - Project Manager  <br>
+  Sira Pacheechan (58090037) - GUI Designer and Manager <br>
+  Atiruj Silnumkij (58090044) - Database Administrator <br>
 
 
 # INITIAL DESCRIPTION
@@ -29,7 +29,7 @@
   This section will be updated once the project has been completed successfully.
 
 # 
-PROGRAM VERSION: 0.1(ALPHA)
-ALL COMPONENTS IN THE ALPHA VERSION OF THE PROGRAM CAN BE CHANGED OR PUBLISHED WITHOUT ANY RELEASE NOTES
+**PROGRAM VERSION: 0.1(ALPHA)<br>**
+ALL COMPONENTS IN THE ALPHA VERSION OF THE PROGRAM CAN BE CHANGED OR PUBLISHED WITHOUT ANY RELEASE NOTES<br>
 
-THIS DOCUMENT IS CREATED AS-OF 23 APRIL 2017
+THIS DOCUMENT IS CREATED AS-OF 23 APRIL 2017<br>
