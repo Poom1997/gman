@@ -2,11 +2,11 @@ from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
 
-class mainUI(QMainWindow):
+class pwUI(QMainWindow):
     def __init__(self,parent = None):
         QMainWindow.__init__(self,None)
         self.setMinimumSize(900,600)
-        self.setWindowTitle("Main")
+        self.setWindowTitle("Forget Your Password")
         palette = QPalette()
         palette.setBrush(QPalette.Background,QBrush(QPixmap("Images/background.png")))
         self.setPalette(palette)
@@ -15,7 +15,7 @@ class mainUI(QMainWindow):
 
     def UIinit(self):
         loader = QUiLoader()
-        form = loader.load("main.ui",None)
+        form = loader.load("pw.ui",None)
         self.setCentralWidget(form)
         self.home_button = form.findChild(QPushButton, "homeButton")
 
