@@ -12,7 +12,8 @@ class GUImanager(QMainWindow):
         #Main UI set up
         QMainWindow.__init__(self, None)
         self.setMinimumSize(900, 600)
-        self.setWindowTitle("G-Man version 1.0")
+        self.setWindowTitle("GMan Systems")
+        self.setFixedSize(self.size())
         
         palette = QPalette()
         palette.setBrush(QPalette.Background, QBrush(QPixmap("resources/images/background.png")))
@@ -28,9 +29,7 @@ class GUImanager(QMainWindow):
         self.central_widget.addWidget(self.pw_widget)
 
     def changePageLoginSection(self,signal = None):
-        
         if signal == "login":
-            print("login")
             self.centralWidget().setCurrentWidget(self.main_widget)
         if signal == "forget":
             print("forget")

@@ -20,7 +20,6 @@ class LoginUI(QMainWindow):
         self.setCentralWidget(form)
         self.logolabel = form.findChild(QLabel,"label_2")
         self.logolabel.setPixmap(self.logo)
-        self.wronglabel = form.findChild(QLabel,"wrong")
         self.user_id = form.findChild(QLineEdit, "usernameinp")
         self.password = form.findChild(QLineEdit, "pwinp")
 
@@ -28,26 +27,14 @@ class LoginUI(QMainWindow):
 
         self.forgetpw_button = form.findChild(QCommandLinkButton, "forgetButton")
 
-        self.status = form.findChild(QLabel,"status")
+
         self.login_button.clicked.connect(self.logIn)
         self.forgetpw_button.clicked.connect(self.forgetpass)
         
 
     def logIn(self):
-        self.testUsr = "Atiruj"
-        self.testPw = "Silnumkij"
-        if(self.user_id.text() == self.testUsr and self.password.text() == self.testPw):
-                self.wronglabel.setText("")
-                self.user_id.setText("")
-                self.password.setText("")
-                self.parent.changePageLoginSection("login")
-        else:
-            self.wronglabel.setText("***Wrong Username or Password***")
-            self.user_id.setText("")
-            self.password.setText("")
-        
+        self.parent.changePageLoginSection("login")
 
     def forgetpass(self):
-        self.wronglabel.setText("")
         self.parent.changePageLoginSection("forget")
         

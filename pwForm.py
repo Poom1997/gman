@@ -18,8 +18,9 @@ class pwUI(QMainWindow):
         form = loader.load("resources/UI/pw.ui",None)
         self.setCentralWidget(form)
         self.home_button = form.findChild(QPushButton, "homeButton2")
-        self.status = form.findChild(QLabel,"status")
+
         self.home_button.clicked.connect(self.goHome)
 
     def goHome(self):
         self.parent.changePageLoginSection("home")
+
