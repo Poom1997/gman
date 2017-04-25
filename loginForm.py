@@ -8,15 +8,15 @@ class LoginUI(QMainWindow):
         self.setMinimumSize(900, 600)
         self.setWindowTitle("Login")
         palette = QPalette()
-        palette.setBrush(QPalette.Background, QBrush(QPixmap("Images/background.png")))
-        self.logo = QPixmap("images/templogo.png")
+        palette.setBrush(QPalette.Background, QBrush(QPixmap("resources/images/background.png")))
+        self.logo = QPixmap("resources/images/templogo.png")
         self.setPalette(palette)
         self.parent = parent
         self.UIinit()
 
     def UIinit(self):
         loader = QUiLoader()
-        form = loader.load("login.ui", None)
+        form = loader.load("resources/UI/login.ui", None)
         self.setCentralWidget(form)
         self.logolabel = form.findChild(QLabel,"label_2")
         self.logolabel.setPixmap(self.logo)

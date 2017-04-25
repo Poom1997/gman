@@ -12,10 +12,11 @@ class GUImanager(QMainWindow):
         #Main UI set up
         QMainWindow.__init__(self, None)
         self.setMinimumSize(900, 600)
-        self.setWindowTitle("Manage")
+        self.setWindowTitle("GMan Systems")
+        self.setFixedSize(self.size())
         
         palette = QPalette()
-        palette.setBrush(QPalette.Background, QBrush(QPixmap("Images/background.png")))
+        palette.setBrush(QPalette.Background, QBrush(QPixmap("resources/images/background.png")))
         self.setPalette(palette)
 
         self.central_widget = QStackedWidget()
