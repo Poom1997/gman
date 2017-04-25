@@ -8,7 +8,7 @@ class mainUI(QMainWindow):
         self.setMinimumSize(900,600)
         self.setWindowTitle("Main")
         palette = QPalette()
-        palette.setBrush(QPalette.Background,QBrush(QPixmap("resources/images/background.png")))
+        palette.setBrush(QPalette.Background,QBrush(QPixmap("resources/imagess/background.png")))
         self.setPalette(palette)
         self.parent = parent
         self.UIinit()
@@ -18,6 +18,7 @@ class mainUI(QMainWindow):
         form = loader.load("resources/UI/main.ui",None)
         self.setCentralWidget(form)
         self.home_button = form.findChild(QPushButton, "homeButton")
+        self.status = form.findChild(QLabel,"status")
 
         self.home_button.clicked.connect(self.goHome)
 
