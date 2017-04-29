@@ -5,6 +5,7 @@ from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
 
+
 import sys
 
 class GUImanager(QMainWindow):
@@ -38,8 +39,6 @@ class GUImanager(QMainWindow):
         if signal == "home":
             print("home")
             self.centralWidget().setCurrentWidget(self.login_widget)
-
-
 
 def main():
     app = QApplication(sys.argv)

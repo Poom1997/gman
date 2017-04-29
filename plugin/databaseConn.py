@@ -11,79 +11,84 @@ class database:
         self.__DATABASE = "crazypetData"
         self.__DBUSER = "app"
         self.__DBPASS = "2rG3RSfTZ1"
-        self.__connection = ""
-        self.__query = ""
+        try:
+            self.connection = psycopg2.connect(host=self.__HOST,database=self.__DATABASE, user=self.__DBUSER, password=self.__DBPASS)
+            self.query = self.connection.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor)
+        except psycopg2.OperationalError:
+            raise invalidQueryException("Database Connection Error!")
         
-    def connect(self):
-        self.__connection = psycopg2.connect(host=self.__HOST,database=self.__DATABASE, user=self.__DBUSER, password=self.__DBPASS)
-        self.__query = self.__connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
-
     def disconnect(self):
-        self.__connection.close()
+        self.connection.close()
 
     def execute(self, command):
-        self.__query.execute(command)
+        self.query.execute(command)
         resultset = cur.fetchall()
         return resultset
 
-    def userLogin(self,username, password):
-        self.__query.execute("SELECT password FROM "+'"'+ "GMan" + '"' +".user_login WHERE username = '"+ username + "'")
-        resultset = self.__query.fetchone()
-        print(resultset)
-        if(len(resultset)==0):
-            raise invalidQueryException("Username do not exists")
-        hashed = bytes(resultset['password'], encoding="ascii")
+class databaseLogin(database):
+    def __init__(self):
+        super().__init__()
+
+    def userLogin(self, username, password):
         password = bytes(password, encoding="ascii")
-        print(password)
+        SQL = "SELECT password FROM \"GMan\".user_login WHERE username = %s"
+        DATA = (username,)
+        self.query.execute(SQL,DATA)
+        resultset = self.query.fetchone()
+        if(resultset == None):
+            raise invalidQueryException("Either Username or Password is Incorrect")
+        hashed = bytes(resultset.password, encoding="ascii")
         if (bcrypt.hashpw(password, hashed) == hashed):
             print('correct')
             return True
         else:
+            print('invalid')
             raise invalidQueryException("Either Username or Password is Incorrect")
         
     def createLogin(self,userid,username,password,email,userStatus= 0, userType = 0):
-        passwd_enc = password = bytes(password, encoding="ascii")
+        passwd_enc = bytes(password,encoding ="ascii")
         passwd_hashed = bcrypt.hashpw(passwd_enc, bcrypt.gensalt(14))
         passwd_hashed_dec = passwd_hashed.decode(encoding = "ascii")
-        query = "INSERT INTO "+'"'+"GMan"+'"'+".user_login(user_id, username, password, email, status, user_type)VALUES('"\
-            +userid+"', '"\
-            +username+"', '"\
-            +passwd_hashed_dec+"', '"\
-            +email+"', "+str(userStatus)+", "+str(userType)+")"
-        self.__query.execute(query)
-        self.__connection.commit()
+        SQL = "INSERT INTO \"GMan\".user_login(user_id, username, password, email, status, user_type)VALUES(%s,%s,%s,%s,%s,%s)"
+        DATA = (userid, username, passwd_hashed_dec, email, str(userStatus), str(userType))
+        try:
+            self.query.execute(SQL, DATA)
+            self.connection.commit()
+        except psycopg2.IntegrityError as e:
+            raise invalidQueryException("UserID or Username already exists")
+        
+    def editLogin(self, username, email, userStatus=0):
+        SQL = "UPDATE \"GMan\".user_login SET username=%s,email=%s,status=%s WHERE username=%s"
+        DATA = (username, email, str(userStatus),userid)
+        self.query.execute(SQL, DATA)
+        self.connection.commit()
 
-    def editLogin(self, userid, username, email, userStatus=0):
-        query = "UPDATE "+'"'+ "GMan" + '"' +".user_login SET username='"\
-                + username + "',email='"\
-                +email + "',status='"\
-                + str(userStatus) + "' WHERE user_id='"+ userid + "' AND username = '"+ username + "'"
-        print(query)
-        self.__query.execute(query)
-        self.__connection.commit()
-
-
+    def changePassword(self, username, oldPassword, newPassword):
+        password = bytes(oldPassword, encoding="ascii")
+        SQL = "SELECT password FROM \"GMan\".user_login WHERE username = %s"
+        DATA = (username,)
+        self.query.execute(SQL,DATA)
+        resultset = self.query.fetchone()
+        if(resultset == None):
+            raise invalidQueryException("Either Username or Password is Incorrect")
+        hashed = bytes(resultset.password, encoding="ascii")
+        if (bcrypt.hashpw(password, hashed) == hashed):
+            print('correct')
+            passwd_enc = bytes(newPassword,encoding ="ascii")
+            passwd_hashed = bcrypt.hashpw(passwd_enc, bcrypt.gensalt(14))
+            passwd_hashed_dec = passwd_hashed.decode(encoding = "ascii")
+            SQL = "UPDATE \"GMan\".user_login SET password=%s WHERE username = %s"
+            DATA = (passwd_hashed_dec,username)
+            self.query.execute(SQL, DATA)
+            self.connection.commit()
+        else:
+            raise invalidQueryException("Either Username or Password is Incorrect")
+        
     def deleteLogin(self,userid,username):
         query = "DELETE FROM "+'"'+"GMan"+'"'+".user_login WHERE user_id='"+ userid+ "' AND username = '"+ username + "'";
-        self.__query.execute(query)
-        self.__connection.commit()
-        
-##HOST = "myawsdatabase.ckpmuridajwz.us-west-2.rds.amazonaws.com"
-##conn = psycopg2.connect(host=HOST,database="crazypetData", user="app", password="2rG3RSfTZ1")
-##cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
-##cur.execute("SELECT * FROM "+'"'+ "GMan" + '"' +".test")
-##resultset = cur.fetchall()
-##print(resultset[0]['id'])
-##conn.close()
+        self.query.execute(query)
+        self.connection.commit()
 
-##password = b"abcde"
-##hashed = bcrypt.hashpw(password, bcrypt.gensalt(14))
-##print(hashed)
-##if (bcrypt.hashpw(password, hashed) == hashed):
-##    print("It Matches!")
-##else:
-##    print("Error")
+    def terminate(self):
+        self.disconnect()
 
-a = database()
-a.connect()
-a.deleteLogin("c580", "pun")
