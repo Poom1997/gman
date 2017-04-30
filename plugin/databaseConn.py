@@ -1,7 +1,6 @@
 import psycopg2
 import psycopg2.extras
 import bcrypt
-from Crypto.Cipher import AES
 
 class invalidQueryException(Exception): pass
 
