@@ -1,6 +1,9 @@
 from loginForm import *
 from mainForm import *
 from pwForm import *
+from profileForm import *
+from studentCourseForm import *
+from addCourseForm import *
 from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
@@ -24,21 +27,28 @@ class GUImanager(QMainWindow):
         self.login_widget = LoginUI(self)
         self.main_widget = mainUI(self)
         self.pw_widget = pwUI(self)
+        self.addCourse_widget = addCourseUI(self)
+        self.student_course_widget = StudentCourseUI(self)
+        self.profile_widget = profileUI(self)
         self.central_widget.addWidget(self.login_widget)
+        self.central_widget.addWidget(self.profile_widget)
         self.central_widget.addWidget(self.main_widget)
+        self.central_widget.addWidget(self.student_course_widget)
         self.central_widget.addWidget(self.pw_widget)
+        self.central_widget.addWidget(self.addCourse_widget)
+        self.central_widget.addWidget(self.profile_widget)
 
     def changePageLoginSection(self,signal = None):
         
         if signal == "login":
             print("login")
-            self.centralWidget().setCurrentWidget(self.main_widget)
+            self.centralWidget().setCurrentWidget(self.profile_widget)
         if signal == "forget":
             print("forget")
             self.centralWidget().setCurrentWidget(self.pw_widget)
         if signal == "home":
             print("home")
-            self.centralWidget().setCurrentWidget(self.login_widget)
+            self.centralWidget().setCurrentWidget(self.student_course_widget)
 
 def main():
     app = QApplication(sys.argv)
