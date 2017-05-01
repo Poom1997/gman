@@ -11,6 +11,9 @@ $RECYCLE.BIN/
 # Pycache Files
 __pycache__/
 
+#PyCharm Files
+.idea\
+
 # Windows Installer files
 *.cab
 *.msi
