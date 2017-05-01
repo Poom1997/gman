@@ -12,7 +12,7 @@ $RECYCLE.BIN/
 __pycache__/
 
 #PyCharm Files
-.idea\
+.idea/
 
 # Windows Installer files
 *.cab

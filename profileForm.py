@@ -23,7 +23,7 @@ class profileUI(QMainWindow):
 
         self.id = form.findChild(QLabel,"id")
         self.name = form.findChild(QLabel,"name")
-        self.surname = form.findChild(QLabel,"surmane")
+        self.surname = form.findChild(QLabel,"surname")
         self.email = form.findChild(QLabel,"email")
         self.faculty = form.findChild(QLabel,"faculty")
         self.major = form.findChild(QLabel,"major")
@@ -35,3 +35,9 @@ class profileUI(QMainWindow):
 
     def goHome(self):
         self.parent.changePageLoginSection("home")
+
+    def updatePage(self):
+        data = self.parent.getCurrentUser()
+        self.name.setText(data.name)
+        self.surname.setText(data.surname)
+        print(data)

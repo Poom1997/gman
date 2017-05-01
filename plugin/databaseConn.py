@@ -30,7 +30,7 @@ class databaseLogin(database):
 
     def userLogin(self, username, password):
         password = bytes(password, encoding="ascii")
-        SQL = "SELECT password FROM \"GMan\".user_login WHERE username = %s"
+        SQL = "SELECT password, user_id, user_type FROM \"GMan\".user_login WHERE username = %s"
         DATA = (username,)
         self.query.execute(SQL,DATA)
         resultset = self.query.fetchone()
@@ -38,8 +38,7 @@ class databaseLogin(database):
             raise invalidQueryException("Either Username or Password is Incorrect")
         hashed = bytes(resultset.password, encoding="ascii")
         if (bcrypt.hashpw(password, hashed) == hashed):
-            print('correct')
-            return True
+            return True, resultset.user_id, resultset.user_type 
         else:
             print('invalid')
             raise invalidQueryException("Either Username or Password is Incorrect")
@@ -84,10 +83,22 @@ class databaseLogin(database):
             raise invalidQueryException("Either Username or Password is Incorrect")
         
     def deleteLogin(self,userid,username):
-        query = "DELETE FROM "+'"'+"GMan"+'"'+".user_login WHERE user_id='"+ userid+ "' AND username = '"+ username + "'";
-        self.query.execute(query)
+        SQL = "DELETE FROM \"GMan\".user_login WHERE user_id=%s AND username =%s";
+        DATA = (userid, username)
+        self.query.execute(SQL, DATA)
         self.connection.commit()
 
     def terminate(self):
         self.disconnect()
 
+class databaseUser(database):
+    def __init__(self):
+        super().__init__()
+
+    def getInfo(self, inp_data):
+        if(inp_data[2] == 0):
+            SQL = "SELECT * FROM \"GMan\".student WHERE user_id =%s"
+            DATA = (inp_data[1],)
+            self.query.execute(SQL, DATA)
+            resultset = self.query.fetchone()
+            return resultset

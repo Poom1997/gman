@@ -13,7 +13,8 @@ import sys
 
 class GUImanager(QMainWindow):
     def __init__(self):
-        #Main UI set up
+        self.user = None
+        # Main UI set up
         QMainWindow.__init__(self, None)
         self.setMinimumSize(900, 600)
         self.setWindowTitle("G-Man version 1.0")
@@ -43,6 +44,7 @@ class GUImanager(QMainWindow):
         if signal == "login":
             print("login")
             self.centralWidget().setCurrentWidget(self.profile_widget)
+            self.profile_widget.updatePage()
         if signal == "forget":
             print("forget")
             self.centralWidget().setCurrentWidget(self.pw_widget)
@@ -50,6 +52,11 @@ class GUImanager(QMainWindow):
             print("home")
             self.centralWidget().setCurrentWidget(self.student_course_widget)
 
+    def setCurrentUser(self, user):
+        self.user = user
+        
+    def getCurrentUser(self):
+        return self.user
 def main():
     app = QApplication(sys.argv)
     ui = GUImanager()

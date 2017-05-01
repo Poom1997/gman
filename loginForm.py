@@ -36,6 +36,7 @@ class LoginUI(QMainWindow):
         
         try:
             self.login = database.databaseLogin()
+            self.data = database.databaseUser()
             self.status.setText("Online")
         except database.invalidQueryException as e:
             self.wronglabel.setText(str(e))
@@ -45,10 +46,14 @@ class LoginUI(QMainWindow):
         try:
             if(self.user_id.text() == "" or self.password.text() ==""):
                 raise database.invalidQueryException("Fields cannot be Empty")
-            elif(self.login.userLogin(self.user_id.text(), self.password.text())):
+            status = self.login.userLogin(self.user_id.text(), self.password.text())
+            if(status[0]):
                 self.wronglabel.setText("")
                 self.user_id.setText("")
                 self.password.setText("")
+                user_data = self.data.getInfo(status)
+                if(status[2] == 0):
+                    self.parent.setCurrentUser(user_data)
                 self.parent.changePageLoginSection("login")
         except database.invalidQueryException as e:
             self.wronglabel.setText(str(e))
