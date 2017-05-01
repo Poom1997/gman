@@ -57,7 +57,7 @@ class databaseLogin(database):
         
     def editLogin(self, username, email, userStatus=0):
         SQL = "UPDATE \"GMan\".user_login SET username=%s,email=%s,status=%s WHERE username=%s"
-        DATA = (username, email, str(userStatus),userid)
+        DATA = (username, email, str(userStatus),username)
         self.query.execute(SQL, DATA)
         self.connection.commit()
 
@@ -98,6 +98,14 @@ class databaseUser(database):
     def getInfo(self, inp_data):
         if(inp_data[2] == 0):
             SQL = "SELECT * FROM \"GMan\".student WHERE user_id =%s"
+            DATA = (inp_data[1],)
+            self.query.execute(SQL, DATA)
+            resultset = self.query.fetchone()
+            return resultset
+
+    def getAddress(self, inp_data):
+        if (inp_data[2] == 0):
+            SQL = "SELECT * FROM \"GMan\".address WHERE user_id =%s"
             DATA = (inp_data[1],)
             self.query.execute(SQL, DATA)
             resultset = self.query.fetchone()

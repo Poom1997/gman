@@ -37,11 +37,11 @@
    <property name="title">
     <string/>
    </property>
-   <widget class="QLineEdit" name="pwinp">
+   <widget class="QLineEdit" name="usernameinp">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>161</y>
+      <x>150</x>
+      <y>90</y>
       <width>241</width>
       <height>31</height>
      </rect>
@@ -53,7 +53,7 @@
      <string/>
     </property>
     <property name="echoMode">
-     <enum>QLineEdit::Password</enum>
+     <enum>QLineEdit::Normal</enum>
     </property>
    </widget>
    <widget class="QLabel" name="usernamelabel">
@@ -74,14 +74,17 @@
      <string>Username : </string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="usernameinp">
+   <widget class="QLineEdit" name="pwinp">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>91</y>
+      <x>150</x>
+      <y>160</y>
       <width>241</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Password</enum>
     </property>
    </widget>
    <widget class="QLabel" name="pwlabel">
