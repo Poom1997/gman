@@ -31,6 +31,7 @@ class LoginUI(QMainWindow):
         self.forgetpw_button = form.findChild(QCommandLinkButton, "forgetButton")
 
         self.status = form.findChild(QLabel,"status_2")
+        self.password.returnPressed.connect(self.logIn)
         self.login_button.clicked.connect(self.logIn)
         self.forgetpw_button.clicked.connect(self.forgetpass)
         
