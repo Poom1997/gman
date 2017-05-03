@@ -111,3 +111,17 @@ class databaseUser(database):
             self.query.execute(SQL, DATA)
             resultset = self.query.fetchone()
             return resultset
+
+    def getFaculty(self, inp_data):
+        SQL = "SELECT * FROM \"GMan\".faculty WHERE \"facultyID\" =%s"
+        DATA = (inp_data,)
+        self.query.execute(SQL, DATA)
+        resultset = self.query.fetchone()
+        return resultset
+
+    def getMajor(self, inp_data):
+        SQL = "SELECT * FROM \"GMan\".majors WHERE \"majorID\" =%s"
+        DATA = (inp_data,)
+        self.query.execute(SQL, DATA)
+        resultset = self.query.fetchone()
+        return resultset
