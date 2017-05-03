@@ -60,6 +60,26 @@ class profileUI(QMainWindow):
 
     def updatePage(self):
         data = self.parent.getCurrentUser()
-        self.name.setText(data.name)
-        self.surname.setText(data.surname)
-        print(data)
+        self.id.setText(data.getID())
+        self.name.setText(data.getName())
+        self.surname.setText(data.getSurname())
+        self.email.setText(data.getEmail())
+        self.faculty.setText(data.getFacultyName())
+        self.major.setText(data.getMajorName())
+        self.year.setText(data.year)
+        self.address.setText(data.getAddress())
+
+        #Status
+        status = data.getStatus()
+        if(status == 0):
+            self.student_status.setText("Learning")
+        elif(status==1):
+            self.student_status.setText("Probation")
+        elif (status == 2):
+            self.student_status.setText("Retired")
+        elif (status == 3):
+            self.student_status.setText("Withdrawn")
+        elif (status == 4):
+            self.student_status.setText("Suspended")
+        else:
+            self.student_status.setText("Unknown")
