@@ -17,10 +17,33 @@ class mainUI(QMainWindow):
         loader = QUiLoader()
         form = loader.load("resources/UI/main.ui",None)
         self.setCentralWidget(form)
-        self.home_button = form.findChild(QPushButton, "homeButton")
+
+        #Upper Bar
+        self.home_button = form.findChild(QPushButton,"homeButton")
+        self.profile_button = form.findChild(QPushButton,"profileButton")
+        self.grade_button = form.findChild(QPushButton,"gradeButton")
+        self.course_button = form.findChild(QPushButton,"courseButton")
+
+        #page properties
+        self.home_button2 = form.findChild(QPushButton, "homeButton2")
         self.status = form.findChild(QLabel,"status")
 
+        #Upper Bar pressed
         self.home_button.clicked.connect(self.goHome)
+        self.profile_button.clicked.connect(self.goProfile)
+        self.grade_button.clicked.connect(self.goGrade)
+        self.course_button.clicked.connect(self.goCourse)
+
+        self.home_button2.clicked.connect(self.goHome)
 
     def goHome(self):
         self.parent.changePageLoginSection("home")
+
+    def goProfile(self):
+        self.parent.changePageLoginSection("profile")
+
+    def goGrade(self):
+        self.parent.changePageLoginSection("grade")
+
+    def goCourse(self):
+        self.parent.changePageLoginSection("course")

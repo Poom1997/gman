@@ -6,7 +6,7 @@ class invalidQueryException(Exception): pass
 
 class database:
     def __init__(self):
-        self.__HOST = "myawsdatabase.ckpmuridajwz.us-west-2.rds.amazonaws.com"
+        self.__HOST = "myawsdatabase.c7mfxxgrjakk.ap-southeast-1.rds.amazonaws.com"
         self.__DATABASE = "crazypetData"
         self.__DBUSER = "app"
         self.__DBPASS = "2rG3RSfTZ1"

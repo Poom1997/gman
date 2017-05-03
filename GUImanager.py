@@ -17,6 +17,7 @@ class GUImanager(QMainWindow):
         # Main UI set up
         QMainWindow.__init__(self, None)
         self.setMinimumSize(900, 600)
+        self.setFixedSize(900,600)
         self.setWindowTitle("G-Man version 1.0")
         
         palette = QPalette()
@@ -43,15 +44,28 @@ class GUImanager(QMainWindow):
         
         if signal == "login":
             print("login")
-            self.centralWidget().setCurrentWidget(self.profile_widget)
+            self.centralWidget().setCurrentWidget(self.main_widget)
             self.profile_widget.updatePage()
         if signal == "forget":
             print("forget")
             self.centralWidget().setCurrentWidget(self.pw_widget)
         if signal == "home":
             print("home")
+            self.centralWidget().setCurrentWidget(self.main_widget)
+        if signal == "profile":
+            print("profile")
+            self.centralWidget().setCurrentWidget(self.profile_widget)
+        if signal == "grade":
+            print("grade")
+            pass
+            #self.centralWidget().setCurrentWidget(self.student_course_widget)
+        if signal == "course":
+            print("course")
             self.centralWidget().setCurrentWidget(self.student_course_widget)
 
+
+
+            
     def setCurrentUser(self, user):
         self.user = user
         
