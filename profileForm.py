@@ -17,10 +17,17 @@ class profileUI(QMainWindow):
         loader = QUiLoader()
         form = loader.load("resources/UI/profile.ui",None)
         self.setCentralWidget(form)
+
+        #Upper Bar
+        self.home_button = form.findChild(QPushButton,"homeButton")
+        self.profile_button = form.findChild(QPushButton,"profileButton")
+        self.grade_button = form.findChild(QPushButton,"gradeButton")
+        self.course_button = form.findChild(QPushButton,"courseButton")
+
+        #page properties
         self.home_button = form.findChild(QPushButton, "homeButton")
         self.edit_button = form.findChild(QPushButton, "editButton")
         self.status = form.findChild(QLabel,"status")
-
         self.id = form.findChild(QLabel,"id")
         self.name = form.findChild(QLabel,"name")
         self.surname = form.findChild(QLabel,"surname")
@@ -31,10 +38,25 @@ class profileUI(QMainWindow):
         self.student_status = form.findChild(QLabel,"sstatus")
         self.address = form.findChild(QLabel,"address")
 
+        #Upper Bar pressed
+        self.home_button.clicked.connect(self.goHome)
+        self.profile_button.clicked.connect(self.goProfile)
+        self.grade_button.clicked.connect(self.goGrade)
+        self.course_button.clicked.connect(self.goCourse)
+
         self.home_button.clicked.connect(self.goHome)
 
     def goHome(self):
         self.parent.changePageLoginSection("home")
+
+    def goProfile(self):
+        self.parent.changePageLoginSection("profile")
+
+    def goGrade(self):
+        self.parent.changePageLoginSection("grade")
+
+    def goCourse(self):
+        self.parent.changePageLoginSection("course")
 
     def updatePage(self):
         data = self.parent.getCurrentUser()

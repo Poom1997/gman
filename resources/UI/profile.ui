@@ -41,7 +41,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>0</y>
+       <y>-10</y>
        <width>901</width>
        <height>51</height>
       </rect>
@@ -53,7 +53,7 @@
       <property name="geometry">
        <rect>
         <x>720</x>
-        <y>20</y>
+        <y>30</y>
         <width>61</width>
         <height>16</height>
        </rect>
@@ -71,7 +71,7 @@
       <property name="geometry">
        <rect>
         <x>790</x>
-        <y>20</y>
+        <y>30</y>
         <width>53</width>
         <height>16</height>
        </rect>
@@ -85,17 +85,22 @@
        <string>OffLine</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="homeButton">
+     <widget class="QLabel" name="label_13">
       <property name="geometry">
        <rect>
-        <x>70</x>
-        <y>0</y>
-        <width>91</width>
-        <height>51</height>
+        <x>10</x>
+        <y>20</y>
+        <width>181</width>
+        <height>21</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+       </font>
+      </property>
       <property name="text">
-       <string>Home</string>
+       <string>G-Man Systems</string>
       </property>
      </widget>
     </widget>
@@ -485,6 +490,84 @@
       <string>Edit Profile</string>
      </property>
     </widget>
+    <widget class="QPushButton" name="gradeButton">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>40</y>
+       <width>151</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Grades</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="courseButton">
+     <property name="geometry">
+      <rect>
+       <x>450</x>
+       <y>40</y>
+       <width>151</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Courses</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="profileButton">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>40</y>
+       <width>151</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Profile</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="homeButton">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>40</y>
+       <width>151</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Home</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="temp">
+     <property name="geometry">
+      <rect>
+       <x>600</x>
+       <y>40</y>
+       <width>151</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Temporary</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="logoutButton">
+     <property name="geometry">
+      <rect>
+       <x>750</x>
+       <y>40</y>
+       <width>151</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Logout</string>
+     </property>
+    </widget>
     <zorder>groupBox</zorder>
     <zorder>groupBox_2</zorder>
     <zorder>label</zorder>
@@ -508,6 +591,12 @@
     <zorder>sstatus</zorder>
     <zorder>address</zorder>
     <zorder>editButton</zorder>
+    <zorder>gradeButton</zorder>
+    <zorder>courseButton</zorder>
+    <zorder>profileButton</zorder>
+    <zorder>homeButton</zorder>
+    <zorder>temp</zorder>
+    <zorder>logoutButton</zorder>
    </widget>
   </widget>
  </widget>
