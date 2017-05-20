@@ -125,3 +125,27 @@ class databaseUser(database):
         self.query.execute(SQL, DATA)
         resultset = self.query.fetchone()
         return resultset
+
+class databaseCourse(database):
+    def __init__(self):
+        super().__init__()
+
+    def addCourse(self, information):
+        try:
+            print(information)
+            SQL = "INSERT INTO \"GMan\".course (\"courseID\", \"courseName\", \"facultyID\",\
+              		\"majorID\", \"professorID\", \"year\", term, \"time\", building, room, credits,\"maxStud\", pre)\
+             		 VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            DATA = (information["courseID"],information["courseName"],information["facultyID"],\
+                    information["majorID"],information["lecturer"], information["year"],  information["term"], \
+                    information["period"],information["building"], information["room"],information["credit"], \
+                    information["student_limit"],information["pre"])
+            self.query.execute(SQL, DATA)
+            self.connection.commit()
+            return 1
+        except psycopg2.IntegrityError as e:
+            print(e.pgcode, e.pgerror)
+            return (str(e.pgcode), e.pgerror)
+        except psycopg2.DataError as e:
+            print(e.pgcode, e.pgerror)
+            return (str(e.pgcode), e.pgerror)

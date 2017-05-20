@@ -1,6 +1,7 @@
 from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
+import plugin.databaseConn as database
 
 class addCourseUI(QMainWindow):
     def __init__(self,parent = None):
@@ -61,23 +62,28 @@ class addCourseUI(QMainWindow):
         self.room.setText("")
 
     def saveCourse(self):
-        dialog = QDialog(self)
-
-        layout = QVBoxLayout()
-
-        label = QLabel('Save Successful')
-        layout.addWidget(label)
-
-        close_button = QPushButton("Close Window")
-        close_button.clicked.connect(dialog.close)
-        layout.addWidget(close_button)
-        dialog.setLayout(layout)
-        dialog.show()
-
-
-
-
-
-
-
-        
+        temp = {}
+        db = database.databaseCourse()
+        temp["courseID"] = self.course_code.text()
+        temp["courseName"] = self.course_name.text()
+        temp["credit"] = self.credits.text()
+        temp["lecturer"] = self.lecturer.text()
+        temp["period"] = self.period.text()
+        temp["year"] = self.year.text()
+        temp["term"] = self.term.text()
+        temp["facultyID"] = self.faculty.text()
+        temp["majorID"] = self.major.text()
+        temp["student_limit"] = self.student_limit.text()
+        temp["building"] = self.building.text()
+        temp["room"] = self.room.text()
+        temp["pre"] = ""
+        status = db.addCourse(temp)
+        if(status == 1):
+            self.parent.showOK("Course Saved", "The course has been saved successfully")
+            self.clearField()
+        elif(status[0] == "22P02"):
+            self.parent.showERROR("Data Integrity Error" + status[0] , "Invalid DataType or Incomplete Form.\nPlease check your fields.")
+        elif(status[0] == "23505"):
+            self.parent.showERROR("Data Duplication Error" + status[0], "CourseID already exists.")
+        elif (status[0] == "23503"):
+            self.parent.showERROR("Data Consistency Error" + status[0], "Either Professor ID, FacultyID, or Major ID is incorrect.")
