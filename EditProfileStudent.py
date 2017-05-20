@@ -8,16 +8,13 @@ class editProfileUI(QMainWindow):
         QMainWindow.__init__(self,None)
         self.setMinimumSize(900,600)
         self.setWindowTitle("Edit_Profile")
-        palette = QPalette()
-        palette.setBrush(QPalette.Background,QBrush(QPixmap("resources/imagess/background.png")))
-        self.setPalette(palette)
         self.parent = parent
         self.UIinit()
 
     def UIinit(self):
-        loader = QuiLoader()
-        form = loader.load("resources/UI/editProfileStudent.ui")
-        self.setcentralWidget(form)
+        loader = QUiLoader()
+        form = loader.load("resources/UI/editProfileStudent.ui",None)
+        self.setCentralWidget(form)
 
         #QPushButton
         self.confirm_button = form.findChild(QPushButton,"confirmButton")
@@ -29,7 +26,7 @@ class editProfileUI(QMainWindow):
         self.email_edit = form.findChild(QLineEdit,"emailEdit")
 
         #Connect
-        self.confirm_button = form.findChild(self.editSuccess)
+        self.confirm_button.clicked.connect(self.editSuccess)
         self.cancel_button.clicked.connect(self.cancel)
 
     def cancel(self):
