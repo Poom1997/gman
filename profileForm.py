@@ -23,6 +23,7 @@ class profileUI(QMainWindow):
         self.profile_button = form.findChild(QPushButton,"profileButton")
         self.grade_button = form.findChild(QPushButton,"gradeButton")
         self.course_button = form.findChild(QPushButton,"courseButton")
+        self.temp = form.findChild(QPushButton, "temp")
 
         #page properties
         self.home_button = form.findChild(QPushButton, "homeButton")
@@ -43,7 +44,7 @@ class profileUI(QMainWindow):
         self.profile_button.clicked.connect(self.goProfile)
         self.grade_button.clicked.connect(self.goGrade)
         self.course_button.clicked.connect(self.goCourse)
-
+        self.temp.clicked.connect(self.goTemp)
         self.home_button.clicked.connect(self.goHome)
 
     def goHome(self):
@@ -57,6 +58,9 @@ class profileUI(QMainWindow):
 
     def goCourse(self):
         self.parent.changePageLoginSection("course")
+
+    def goTemp(self):
+        self.parent.changePageLoginSection("addcourse")
 
     def updatePage(self):
         data = self.parent.getCurrentUser()
