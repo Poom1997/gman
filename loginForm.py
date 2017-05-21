@@ -2,6 +2,7 @@ from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
 import plugin.databaseConn as database
+import plugin.user as curUser
 
 class LoginUI(QMainWindow):
     def __init__(self,parent = None):
@@ -45,16 +46,21 @@ class LoginUI(QMainWindow):
         
     def logIn(self):
         try:
-            if(self.user_id.text() == "" or self.password.text() ==""):
-                raise database.invalidQueryException("Fields cannot be Empty")
-            status = self.login.userLogin(self.user_id.text(), self.password.text())
+            #if(self.user_id.text() == "" or self.password.text() ==""):
+                #raise database.invalidQueryException("Fields cannot be Empty")
+            #status = self.login.userLogin(self.user_id.text(), self.password.text())
+            status = self.login.userLogin("crazypet", "12345")
             if(status[0]):
                 self.wronglabel.setText("")
                 self.user_id.setText("")
                 self.password.setText("")
                 user_data = self.data.getInfo(status)
+                user_address = self.data.getAddress(status)
+                faculty = self.data.getFaculty(user_data.facultyID)
+                major = self.data.getMajor(user_data.majorID)
                 if(status[2] == 0):
-                    self.parent.setCurrentUser(user_data)
+                    student = curUser.student(user_data, user_address, faculty, major)
+                    self.parent.setCurrentUser(student)
                 self.parent.changePageLoginSection("login")
         except database.invalidQueryException as e:
             self.wronglabel.setText(str(e))

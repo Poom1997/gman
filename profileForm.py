@@ -1,6 +1,7 @@
 from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
+from EditProfileStudent import editProfileUI
 
 class profileUI(QMainWindow):
     def __init__(self,parent = None):
@@ -26,6 +27,7 @@ class profileUI(QMainWindow):
         self.profile_button = form.findChild(QPushButton,"profileButton")
         self.grade_button = form.findChild(QPushButton,"gradeButton")
         self.course_button = form.findChild(QPushButton,"courseButton")
+        self.temp = form.findChild(QPushButton, "temp")
 
         #page properties
         self.home_button = form.findChild(QPushButton, "homeButton")
@@ -46,8 +48,9 @@ class profileUI(QMainWindow):
         self.profile_button.clicked.connect(self.goProfile)
         self.grade_button.clicked.connect(self.goGrade)
         self.course_button.clicked.connect(self.goCourse)
-
+        self.temp.clicked.connect(self.goTemp)
         self.home_button.clicked.connect(self.goHome)
+        self.edit_button.clicked.connect(self.editProfile)
 
     def goHome(self):
         self.parent.changePageLoginSection("home")
@@ -61,8 +64,37 @@ class profileUI(QMainWindow):
     def goCourse(self):
         self.parent.changePageLoginSection("course")
 
+    def goTemp(self):
+        self.parent.changePageLoginSection("addcourse")
+
+    def editProfile(self):
+        self.edit = editProfileUI()
+        self.edit.show()
+        
+    
+
     def updatePage(self):
         data = self.parent.getCurrentUser()
-        self.name.setText(data.name)
-        self.surname.setText(data.surname)
-        print(data)
+        self.id.setText(data.getID())
+        self.name.setText(data.getName())
+        self.surname.setText(data.getSurname())
+        self.email.setText(data.getEmail())
+        self.faculty.setText(data.getFacultyName())
+        self.major.setText(data.getMajorName())
+        self.year.setText(data.year)
+        self.address.setText(data.getAddress())
+
+        #Status
+        status = data.getStatus()
+        if(status == 0):
+            self.student_status.setText("Learning")
+        elif(status==1):
+            self.student_status.setText("Probation")
+        elif (status == 2):
+            self.student_status.setText("Retired")
+        elif (status == 3):
+            self.student_status.setText("Withdrawn")
+        elif (status == 4):
+            self.student_status.setText("Suspended")
+        else:
+            self.student_status.setText("Unknown")
