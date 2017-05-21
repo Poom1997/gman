@@ -11,6 +11,7 @@ class profileUI(QMainWindow):
         palette = QPalette()
         palette.setBrush(QPalette.Background,QBrush(QPixmap("resources/imagess/background.png")))
         self.setPalette(palette)
+        self.bar = QPixmap("resources/images/bar.png")
         self.parent = parent
         self.UIinit()
 
@@ -20,6 +21,8 @@ class profileUI(QMainWindow):
         self.setCentralWidget(form)
 
         #Upper Bar
+        self.bar_group = form.findChild(QLabel,"barLabel")
+        self.bar_group.setPixmap(self.bar)
         self.home_button = form.findChild(QPushButton,"homeButton")
         self.profile_button = form.findChild(QPushButton,"profileButton")
         self.grade_button = form.findChild(QPushButton,"gradeButton")
