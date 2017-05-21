@@ -1,4 +1,3 @@
-from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
 from EditProfileStudent import editProfileUI
@@ -9,7 +8,7 @@ class profileUI(QMainWindow):
         self.setMinimumSize(900,600)
         self.setWindowTitle("Profile")
         palette = QPalette()
-        palette.setBrush(QPalette.Background,QBrush(QPixmap("resources/imagess/background.png")))
+        palette.setBrush(QPalette.Background,QBrush(QPixmap("resources/images/background.png")))
         self.setPalette(palette)
         self.bar = QPixmap("resources/images/bar.png")
         self.parent = parent
@@ -70,8 +69,6 @@ class profileUI(QMainWindow):
     def editProfile(self):
         self.edit = editProfileUI()
         self.edit.show()
-        
-    
 
     def updatePage(self):
         data = self.parent.getCurrentUser()

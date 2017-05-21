@@ -15,7 +15,6 @@ class LoginUI(QMainWindow):
         self.setPalette(palette)
         self.parent = parent
         self.UIinit()
-            
 
     def UIinit(self):
         loader = QUiLoader()

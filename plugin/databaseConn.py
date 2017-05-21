@@ -130,9 +130,23 @@ class databaseCourse(database):
     def __init__(self):
         super().__init__()
 
+    def termCourse(self, faculty, major, year, term):
+        SQL = "SELECT * FROM \"GMan\".course WHERE \"facultyID\"=%s AND \"majorID\"=%s AND \"year\"=%s AND term =%s"
+        DATA = (faculty, major, year, term)
+        self.query.execute(SQL, DATA)
+        resultset = self.query.fetchall()
+        return resultset
+
+    def currentCourse(self, user_id):
+        SQL = "SELECT course.* FROM \"GMan\".\"data\" data,\"GMan\".course  WHERE data.user_id=%s AND \
+                data.grade IS NULL AND data.\"courseID\" = course.\"courseID\""
+        DATA = (user_id,)
+        self.query.execute(SQL, DATA)
+        resultset = self.query.fetchall()
+        return resultset
+
     def addCourse(self, information):
         try:
-            print(information)
             SQL = "INSERT INTO \"GMan\".course (\"courseID\", \"courseName\", \"facultyID\",\
               		\"majorID\", \"professorID\", \"year\", term, \"time\", building, room, credits,\"maxStud\", pre)\
              		 VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
@@ -149,3 +163,29 @@ class databaseCourse(database):
         except psycopg2.DataError as e:
             print(e.pgcode, e.pgerror)
             return (str(e.pgcode), e.pgerror)
+
+    def dropCourseUser(self, user_id, courseID, year_taken):
+        SQL = "DELETE FROM  \"GMan\".\"data\" WHERE user_id=%s AND \"courseID\"=%s AND year_taken=%s"
+        DATA = (user_id, courseID, year_taken)
+        self.query.execute(SQL, DATA)
+        self.connection.commit()
+        return 1
+
+    def addCourseUser(self, user_id, year, term, courseID, year_taken):
+        try:
+            SQL = "INSERT INTO \"GMan\".\"data\" (user_id, \"courseID\", year_taken, \"year\", term) \
+                    VALUES(%s, %s, %s, %s, %s)"
+            DATA = (user_id, courseID, year_taken, year, term)
+            self.query.execute(SQL, DATA)
+            self.connection.commit()
+            return 1
+        except psycopg2.IntegrityError as e:
+            print(e.pgcode, e.pgerror)
+            return (str(e.pgcode), e.pgerror)
+
+    def allUserCourse(self, user_id):
+        SQL = "SELECT * FROM  \"GMan\".\"data\" WHERE user_id=%s AND GRADE IS NOT NULL"
+        DATA = (user_id,)
+        self.query.execute(SQL, DATA)
+        resultset = self.query.fetchall()
+        return resultset

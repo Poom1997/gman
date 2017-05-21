@@ -1,5 +1,3 @@
-import plugin.databaseConn as database
-
 class user:
     def __init__(self, data, address):
         self.id = data.user_id
@@ -33,6 +31,7 @@ class student(user):
         self.major = major
         self.year = data.year
         self.gpa = data.gpa
+        self.term = data.term
 
     def getFacultyName(self):
         temp = self.faculty.facultyName
@@ -41,6 +40,17 @@ class student(user):
     def getMajorName(self):
         temp = self.major.degree
         return temp
+
+    def getFacultyID(self):
+        temp = self.faculty.facultyID
+        return temp
+
+    def getMajorID(self):
+        temp = self.major.majorID
+        return temp
+
+    def getTerm(self):
+        return self.term
 
     def getYear(self):
         return self.year

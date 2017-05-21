@@ -18,7 +18,7 @@ class GUImanager(QMainWindow):
         QMainWindow.__init__(self, None)
         self.setMinimumSize(900, 600)
         self.setFixedSize(900,600)
-        self.setWindowTitle("G-Man version 0.5.6 (Alpha)")
+        self.setWindowTitle("G-Man version 0.6.1 (Alpha)")
         
         palette = QPalette()
         palette.setBrush(QPalette.Background, QBrush(QPixmap("resources/images/background.png")))
@@ -62,7 +62,7 @@ class GUImanager(QMainWindow):
         if signal == "course":
             print("course")
             self.centralWidget().setCurrentWidget(self.student_course_widget)
-
+            self.student_course_widget.updateCourse()
         if signal == "addcourse":
             print("addcourse")
             self.centralWidget().setCurrentWidget(self.addCourse_widget)
@@ -83,6 +83,19 @@ class GUImanager(QMainWindow):
         ret_val = msg.exec_()
         if (ret_val == QMessageBox.Ok):
             print("MessageBox Clicked:", ret_val)
+
+    def showCONFIRM(self, title, message):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Warning)
+        msg.setText(message)
+        msg.setWindowTitle(title)
+        msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+        ret_val = msg.exec_()
+        if (ret_val == QMessageBox.Ok):
+            print("MessageBox Clicked:", ret_val)
+            return True
+        else:
+            return False
 
     def showERROR(self, title, message):
         msg = QMessageBox()
