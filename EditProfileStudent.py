@@ -22,9 +22,16 @@ class editProfileUI(QMainWindow):
         self.upload_button = form.findChild(QPushButton,"uploadButton")
 
         #LineEdit
-        self.address_edit = form.findChild(QLineEdit,"addressEdit")
-        self.email_edit = form.findChild(QLineEdit,"emailEdit")
-
+        self.email_edit = form.findChild(QLineEdit,"eLineEdit")
+        self.village_building_edit = form.findChild(QLineEdit,"vLineEdit")
+        self.soi_edit = form.findChild(QLineEdit,"sLineEdit")
+        self.road_edit = form.findChild(QLineEdit,"rLineEdit")
+        self.district_edit = form.findChild(QLineEdit,"dLineEdit")
+        self.sub_district_edit = form.findChild(QLineEdit,"sLineEdit")
+        self.country_edit = form.findChild(QLineEdit,"cLineEdit")
+        self.province_edit = form.findChild(QLineEdit,"pLineEdit")
+        self.zip_code_edit = form.findChild(QLineEdit,"zLineEdit")
+        
         #Connect
         self.confirm_button.clicked.connect(self.editSuccess)
         self.cancel_button.clicked.connect(self.cancel)
