@@ -1,6 +1,7 @@
 from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
+from EditProfileStudent import editProfileUI
 
 class profileUI(QMainWindow):
     def __init__(self,parent = None):
@@ -46,6 +47,7 @@ class profileUI(QMainWindow):
         self.course_button.clicked.connect(self.goCourse)
         self.temp.clicked.connect(self.goTemp)
         self.home_button.clicked.connect(self.goHome)
+        self.edit_button.clicked.connect(self.editProfile)
 
     def goHome(self):
         self.parent.changePageLoginSection("home")
@@ -61,6 +63,12 @@ class profileUI(QMainWindow):
 
     def goTemp(self):
         self.parent.changePageLoginSection("addcourse")
+
+    def editProfile(self):
+        self.edit = editProfileUI()
+        self.edit.show()
+        
+    
 
     def updatePage(self):
         data = self.parent.getCurrentUser()
