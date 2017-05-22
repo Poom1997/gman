@@ -1,6 +1,9 @@
 from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
+from datetime import datetime
+import plugin.databaseConn as database
+import plugin.course as courseItem
 
 class StudentCourseUI(QMainWindow):
     def __init__(self,parent = None):
@@ -9,12 +12,17 @@ class StudentCourseUI(QMainWindow):
         self.setWindowTitle("Courses")
         palette = QPalette()
         palette.setBrush(QPalette.Background, QBrush(QPixmap("resources/images/background.png")))
-        self.logo = QPixmap("resources/images/templogo.png")
         self.bar = QPixmap("resources/images/bar.png")
         self.setPalette(palette)
         self.parent = parent
         self.rowUP = 0
         self.rowDN = 0
+        self.db = database.databaseCourse()
+        self.courseAvailable = []
+        self.currentCourse = []
+        self.allTakenCourse = []
+        self.parent = parent
+        self.data = None
         self.UIinit()
 
     def UIinit(self):
@@ -56,68 +64,120 @@ class StudentCourseUI(QMainWindow):
         self.header2.setResizeMode(6,QHeaderView.ResizeToContents)
 
         self.available_course.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.available_course.setSelectionMode(QAbstractItemView.SingleSelection)
         self.available_course.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
-        
         self.your_course.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.your_course.setSelectionMode(QAbstractItemView.SingleSelection)
         self.your_course.setEditTriggers(QAbstractItemView.NoEditTriggers)
-
-
 
         #Upper Bar pressed
         self.home_button.clicked.connect(self.goHome)
         self.profile_button.clicked.connect(self.goProfile)
         self.grade_button.clicked.connect(self.goGrade)
         self.course_button.clicked.connect(self.goCourse)
+
+        #Internal Button Pressed
         self.add_button.clicked.connect(self.addClick)
         self.delete_button.clicked.connect(self.deleteClick)
-
-        self.insertCourse()
 
     def addClick(self):
         colCount = 0
         temp = self.available_course.selectionModel().selectedRows()
         if(len(temp)>0):
-            self.your_course.insertRow(self.rowDN)
-            for item in self.available_course.selectedItems():
-                self.your_course.setItem(self.rowDN,colCount,QTableWidgetItem(item.text()))
-                colCount+=1
-            self.available_course.removeRow(temp[0].row())
-            self.rowUP -= 1
-            self.rowDN += 1
+            if (self.parent.showCONFIRM("Are you sure?", "Are you sure you add the selected course?\
+                                                                    By clicking yes, your course will be added immediately to the registration system.")):
+                self.your_course.insertRow(self.rowDN)
+                for item in self.available_course.selectedItems():
+                    self.your_course.setItem(self.rowDN,colCount,QTableWidgetItem(item.text()))
+                    if (colCount == 0):
+                        tempID = item.text()
+                    if(colCount == 4):
+                        pre = item.text()
+                    colCount+=1
+                self.available_course.removeRow(temp[0].row())
+                self.rowUP -= 1
+                self.rowDN += 1
+            print(len(pre))
+            print(self.allTakenCourse)
+            if(pre in self.allTakenCourse or len(pre) < 5):
+                if (self.db.addCourseUser(self.data.getID(), self.data.getYear(), self.data.getTerm(), tempID, datetime.now().year)):
+                    self.parent.showOK("Course Added", "Your course " + tempID + " has been added to the system.")
+            else:
+                self.parent.showERROR("Pre-requisite Course Error", "You have not taken the required course required for this course.\
+                                                                    Please complete that course before adding this course.")
+                self.updateCourse()
         
     def deleteClick(self):
         colCount = 0
         temp = self.your_course.selectionModel().selectedRows()
         if(len(temp)>0):
-            self.available_course.insertRow(self.rowUP)
-            for item in self.your_course.selectedItems():
-                self.available_course.setItem(self.rowUP,colCount,QTableWidgetItem(item.text()))
-                colCount+=1
-            self.your_course.removeRow(temp[0].row())
-            self.rowUP += 1
-            self.rowDN -= 1
-        
+            if(self.parent.showCONFIRM("Are you sure?", "Are you sure you want to drop the selected course?\
+                                                        Once you drop, you will have to re-take the course!\
+                                                        By clicking yes, your course will be removed immediately from the registration system.")):
+                self.available_course.insertRow(self.rowUP)
+                for item in self.your_course.selectedItems():
+                    self.available_course.setItem(self.rowUP,colCount,QTableWidgetItem(item.text()))
+                    if(colCount == 0):
+                        tempID = item.text()
+                    colCount+=1
+                self.your_course.removeRow(temp[0].row())
+                self.rowUP += 1
+                self.rowDN -= 1
+                if(self.db.dropCourseUser(self.data.getID() ,tempID, datetime.now().year)):
+                    self.parent.showOK("Course Removed", "Your course " + tempID + " has been removed from the system." )
 
+    def updateCourse(self):
+        currentID = []
+        self.data = self.parent.getCurrentUser()
 
-    def insertCourse(self):
-        self.available_course.setRowCount(2)
-        self.rowUP = 2
-        self.available_course.setItem(0,0,QTableWidgetItem("123214"))
-        self.available_course.setItem(0,1,QTableWidgetItem("Data Structure Design and Analysis"))
-        self.available_course.setItem(0,2,QTableWidgetItem("3"))
-        self.available_course.setItem(0,3,QTableWidgetItem("2/3"))
-        self.available_course.setItem(0,4,QTableWidgetItem("Statistic"))
-        self.available_course.setItem(0,5,QTableWidgetItem("9:00 - 12:00"))
-        self.available_course.setItem(0,6,QTableWidgetItem("30"))
+        temp = self.db.termCourse(self.data.getFacultyID(), self.data.getMajorID(), self.data.getYear(), self.data.getTerm())
+        self.courseAvailable = self.createBulk(temp)
 
-        self.available_course.setItem(1,0,QTableWidgetItem("111232"))
-        self.available_course.setItem(1,1,QTableWidgetItem("Something Useful"))
-        self.available_course.setItem(1,2,QTableWidgetItem("1"))
-        self.available_course.setItem(1,3,QTableWidgetItem("1/3"))
-        self.available_course.setItem(1,4,QTableWidgetItem("-"))
-        self.available_course.setItem(1,5,QTableWidgetItem("13:00 - 16:00"))
-        self.available_course.setItem(1,6,QTableWidgetItem("15"))
+        temp = self.db.currentCourse(self.data.getID())
+        self.currentCourse = self.createBulk(temp)
+
+        #Check Pre-requisite IF 'F' not counted
+        temp = self.db.allUserCourse(self.data.getID())
+        self.allTakenCourse = []
+        for elements in temp:
+            if(int(elements.allowRepeat) < 2):
+                self.allTakenCourse.append(elements.courseID)
+
+        for course in self.currentCourse:
+            currentID.append(course.getCourseID())
+
+        self.available_course.setRowCount(len(self.courseAvailable))
+        self.rowUP = len(self.courseAvailable)
+
+        self.your_course.setRowCount(len(self.currentCourse))
+        self.rowDN = len(self.currentCourse)
+
+        i = 0
+        for course in self.currentCourse:
+            self.your_course.setItem(i, 0, QTableWidgetItem(course.getCourseID()))
+            self.your_course.setItem(i, 1, QTableWidgetItem(course.getCourseName()))
+            self.your_course.setItem(i, 2, QTableWidgetItem(course.getCredit()))
+            self.your_course.setItem(i, 3, QTableWidgetItem(course.getYear()))
+            self.your_course.setItem(i, 4, QTableWidgetItem(course.getPre()))
+            self.your_course.setItem(i, 5, QTableWidgetItem(course.getTime()))
+            self.your_course.setItem(i, 6, QTableWidgetItem(course.getMaxStud()))
+            i = i + 1
+
+        i = 0
+        for course in self.courseAvailable:
+            if(course.getCourseID() in currentID):
+                self.available_course.removeRow(i)
+                self.rowUP = self.rowUP - 1
+            else:
+                self.available_course.setItem(i,0,QTableWidgetItem(course.getCourseID()))
+                self.available_course.setItem(i,1,QTableWidgetItem(course.getCourseName()))
+                self.available_course.setItem(i,2,QTableWidgetItem(course.getCredit()))
+                self.available_course.setItem(i,3,QTableWidgetItem(course.getYear()))
+                self.available_course.setItem(i,4,QTableWidgetItem(course.getPre()))
+                self.available_course.setItem(i,5,QTableWidgetItem(course.getTime()))
+                self.available_course.setItem(i,6,QTableWidgetItem(course.getMaxStud()))
+                i = i + 1
 
     def goHome(self):
         self.parent.changePageLoginSection("home")
@@ -130,5 +190,9 @@ class StudentCourseUI(QMainWindow):
 
     def goCourse(self):
         self.parent.changePageLoginSection("course")
-    
-        
+
+    def createBulk(self, data):
+        temp = []
+        for i in data:
+            temp.append(courseItem.course(i))
+        return temp

@@ -38,7 +38,6 @@ class addCourseUI(QMainWindow):
 
         self.save_button = form.findChild(QPushButton,"saveButton")
         self.clear_button = form.findChild(QPushButton,"clearButton")
-
         
         self.home_button.clicked.connect(self.goHome)
         self.save_button.clicked.connect(self.saveCourse)
@@ -87,3 +86,5 @@ class addCourseUI(QMainWindow):
             self.parent.showERROR("Data Duplication Error" + status[0], "CourseID already exists.")
         elif (status[0] == "23503"):
             self.parent.showERROR("Data Consistency Error" + status[0], "Either Professor ID, FacultyID, or Major ID is incorrect.")
+
+        db.disconnect()
