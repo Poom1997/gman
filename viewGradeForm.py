@@ -21,7 +21,7 @@ class viewGradeUI(QMainWindow):
         self.setCentralWidget(form)
 
         #Upper Bar
-        self.bar_group = form.findChild(QLabel,"barLabel")
+        self.bar_group = form.findChild(QLabel,"barLabel_2")
         self.bar_group.setPixmap(self.bar)
         self.home_button = form.findChild(QPushButton,"homeButton")
         self.profile_button = form.findChild(QPushButton,"profileButton")
@@ -41,9 +41,6 @@ class viewGradeUI(QMainWindow):
         self.course_button.clicked.connect(self.goCourse)
         self.temp.clicked.connect(self.goTemp)
         self.home_button.clicked.connect(self.goHome)
-        self.edit_button.clicked.connect(self.editProfile)
-
-    
 
     def goHome(self):
         self.parent.changePageLoginSection("home")
@@ -59,12 +56,7 @@ class viewGradeUI(QMainWindow):
 
     def goTemp(self):
         self.parent.changePageLoginSection("addcourse")
-
-    def editProfile(self):
-        self.edit = editProfileUI()
-        self.edit.show()
         
-    
 
     def updatePage(self):
         data = self.parent.getCurrentUser()

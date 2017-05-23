@@ -6,7 +6,7 @@ from PySide.QtUiTools import *
 class editProfileUI(QMainWindow):
     def __init__(self,parent = None):
         QMainWindow.__init__(self,None)
-        self.setMinimumSize(900,600)
+        self.setMinimumSize(900,6500)
         self.setWindowTitle("Edit_Profile")
         self.parent = parent
         self.UIinit()
