@@ -3,6 +3,7 @@ from mainForm import *
 from pwForm import *
 from profileForm import *
 from studentCourseForm import *
+from viewGradeForm import *
 from addCourseForm import *
 from PySide.QtCore import *
 from PySide.QtGui import *
@@ -29,9 +30,11 @@ class GUImanager(QMainWindow):
         self.login_widget = LoginUI(self)
         self.main_widget = mainUI(self)
         self.pw_widget = pwUI(self)
+        self.view_grade_widget = viewGradeUI(self)
         self.addCourse_widget = addCourseUI(self)
         self.student_course_widget = StudentCourseUI(self)
         self.profile_widget = profileUI(self)
+        self.central_widget.addWidget(self.view_grade_widget)
         self.central_widget.addWidget(self.login_widget)
         self.central_widget.addWidget(self.profile_widget)
         self.central_widget.addWidget(self.main_widget)
@@ -57,7 +60,7 @@ class GUImanager(QMainWindow):
             self.centralWidget().setCurrentWidget(self.profile_widget)
         if signal == "grade":
             print("grade")
-            pass
+            self.centralWidget().setCurrentWidget(self.view_grade_widget)
             #self.centralWidget().setCurrentWidget(self.student_course_widget)
         if signal == "course":
             print("course")
