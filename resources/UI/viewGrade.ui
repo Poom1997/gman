@@ -279,8 +279,8 @@
     <widget class="QLabel" name="barLabel_2">
      <property name="geometry">
       <rect>
-       <x>520</x>
-       <y>20</y>
+       <x>0</x>
+       <y>-10</y>
        <width>901</width>
        <height>51</height>
       </rect>
@@ -505,6 +505,31 @@
       <string>PASS</string>
      </property>
     </widget>
+    <zorder>barLabel_2</zorder>
+    <zorder>profileButton</zorder>
+    <zorder>label_2</zorder>
+    <zorder>label_3</zorder>
+    <zorder>printButton</zorder>
+    <zorder>homeButton</zorder>
+    <zorder>allTerm</zorder>
+    <zorder>logoutButton</zorder>
+    <zorder>gradeButton</zorder>
+    <zorder>label_15</zorder>
+    <zorder>thisTerm</zorder>
+    <zorder>courseButton</zorder>
+    <zorder>temp</zorder>
+    <zorder>status_3</zorder>
+    <zorder>label_6</zorder>
+    <zorder>label_4</zorder>
+    <zorder>label</zorder>
+    <zorder>label_5</zorder>
+    <zorder>label_7</zorder>
+    <zorder>label_8</zorder>
+    <zorder>label_9</zorder>
+    <zorder>gpaInp</zorder>
+    <zorder>gpsInp</zorder>
+    <zorder>crsInp</zorder>
+    <zorder>statusInp</zorder>
    </widget>
   </widget>
  </widget>
