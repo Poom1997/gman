@@ -130,8 +130,16 @@ class databaseCourse(database):
     def __init__(self):
         super().__init__()
 
+    def getCourseName(self, courseID):
+        SQL = "SELECT \"courseName\" FROM \"GMan\".course WHERE \"courseID\"=%s"
+        DATA = (courseID,)
+        self.query.execute(SQL, DATA)
+        resultset = self.query.fetchone()
+        return resultset
+
     def termCourse(self, faculty, major, year, term):
-        SQL = "SELECT * FROM \"GMan\".course WHERE \"facultyID\"=%s AND \"majorID\"=%s AND \"year\"=%s AND term =%s"
+        SQL = "SELECT * FROM \"GMan\".course WHERE \"facultyID\"=%s AND \"majorID\"=%s AND \"year\"=%s AND term =%s \
+                ORDER BY \"courseID\""
         DATA = (faculty, major, year, term)
         self.query.execute(SQL, DATA)
         resultset = self.query.fetchall()
@@ -139,7 +147,7 @@ class databaseCourse(database):
 
     def currentCourse(self, user_id):
         SQL = "SELECT course.* FROM \"GMan\".\"data\" data,\"GMan\".course  WHERE data.user_id=%s AND \
-                data.grade IS NULL AND data.\"courseID\" = course.\"courseID\""
+                data.grade IS NULL AND data.\"courseID\" = course.\"courseID\" ORDER BY \"data\".\"courseID\""
         DATA = (user_id,)
         self.query.execute(SQL, DATA)
         resultset = self.query.fetchall()
@@ -164,28 +172,57 @@ class databaseCourse(database):
             print(e.pgcode, e.pgerror)
             return (str(e.pgcode), e.pgerror)
 
-    def dropCourseUser(self, user_id, courseID, year_taken):
+    def dropCourseUser(self, user_id, courseID, year_taken, limit):
         SQL = "DELETE FROM  \"GMan\".\"data\" WHERE user_id=%s AND \"courseID\"=%s AND year_taken=%s"
         DATA = (user_id, courseID, year_taken)
         self.query.execute(SQL, DATA)
         self.connection.commit()
+        self.increaseLimitOne(courseID, limit)
         return 1
 
-    def addCourseUser(self, user_id, year, term, courseID, year_taken):
+    def addCourseUser(self, user_id, year, term, courseID, year_taken, limit):
         try:
             SQL = "INSERT INTO \"GMan\".\"data\" (user_id, \"courseID\", year_taken, \"year\", term) \
                     VALUES(%s, %s, %s, %s, %s)"
             DATA = (user_id, courseID, year_taken, year, term)
             self.query.execute(SQL, DATA)
             self.connection.commit()
+            self.decreaseLimitOne(courseID, limit)
             return 1
         except psycopg2.IntegrityError as e:
             print(e.pgcode, e.pgerror)
             return (str(e.pgcode), e.pgerror)
 
+    def increaseLimitOne(self, courseID, oldLimit):
+        SQL = "UPDATE \"GMan\".course SET \"maxStud\"=%s WHERE \"courseID\"=%s"
+        DATA = (oldLimit+1, courseID)
+        self.query.execute(SQL, DATA)
+        self.connection.commit()
+
+    def decreaseLimitOne(self, courseID, oldLimit):
+        SQL = "UPDATE \"GMan\".course SET \"maxStud\"=%s WHERE \"courseID\"=%s"
+        DATA = (oldLimit - 1, courseID)
+        self.query.execute(SQL, DATA)
+        self.connection.commit()
+
     def allUserCourse(self, user_id):
-        SQL = "SELECT * FROM  \"GMan\".\"data\" WHERE user_id=%s AND GRADE IS NOT NULL"
+        SQL = "SELECT * FROM  \"GMan\".\"data\" WHERE user_id=%s ORDER BY \"courseID\""
         DATA = (user_id,)
+        self.query.execute(SQL, DATA)
+        resultset = self.query.fetchall()
+        return resultset
+
+class databaseGrade(database):
+    def getPastCourse(self, user_id):
+        SQL = "SELECT * FROM  \"GMan\".\"data\" WHERE user_id=%s AND grade IS NOT NULL ORDER BY year, term"
+        DATA = (user_id,)
+        self.query.execute(SQL, DATA)
+        resultset = self.query.fetchall()
+        return resultset
+
+    def getCurrentCourse(self, user_id, year, term):
+        SQL = "SELECT * FROM  \"GMan\".\"data\" WHERE user_id=%s AND \"year\"=%s AND term =%s ORDER BY \"courseID\""
+        DATA = (user_id,year, term)
         self.query.execute(SQL, DATA)
         resultset = self.query.fetchall()
         return resultset

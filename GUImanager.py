@@ -61,7 +61,7 @@ class GUImanager(QMainWindow):
         if signal == "grade":
             print("grade")
             self.centralWidget().setCurrentWidget(self.view_grade_widget)
-            #self.centralWidget().setCurrentWidget(self.student_course_widget)
+            #self.view_grade_widget.updateInformation()
         if signal == "course":
             print("course")
             self.centralWidget().setCurrentWidget(self.student_course_widget)

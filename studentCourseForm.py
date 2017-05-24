@@ -94,19 +94,23 @@ class StudentCourseUI(QMainWindow):
                         tempID = item.text()
                     if(colCount == 4):
                         pre = item.text()
+                    if(colCount == 6):
+                        limit = item.text()
+                        limit = int(limit)
                     colCount+=1
                 self.available_course.removeRow(temp[0].row())
                 self.rowUP -= 1
-                self.rowDN += 1
-            print(len(pre))
-            print(self.allTakenCourse)
-            if(pre in self.allTakenCourse or len(pre) < 5):
-                if (self.db.addCourseUser(self.data.getID(), self.data.getYear(), self.data.getTerm(), tempID, datetime.now().year)):
+            if (tempID in self.allTakenCourse):
+                self.parent.showERROR("Course Error", "You have already taken the course. Therefore, you cannot add this course.")
+            elif(limit == 0):
+                self.parent.showERROR("Course Full", "This course is now filled. Therefore, you cannot add this course.")
+            elif(pre in self.allTakenCourse or len(pre) < 5):
+                if (self.db.addCourseUser(self.data.getID(), self.data.getYear(), self.data.getTerm(), tempID, datetime.now().year, limit)):
                     self.parent.showOK("Course Added", "Your course " + tempID + " has been added to the system.")
             else:
                 self.parent.showERROR("Pre-requisite Course Error", "You have not taken the required course required for this course.\
                                                                     Please complete that course before adding this course.")
-                self.updateCourse()
+            self.updateCourse()
         
     def deleteClick(self):
         colCount = 0
@@ -120,12 +124,16 @@ class StudentCourseUI(QMainWindow):
                     self.available_course.setItem(self.rowUP,colCount,QTableWidgetItem(item.text()))
                     if(colCount == 0):
                         tempID = item.text()
+                    if (colCount == 6):
+                        limit = item.text()
+                        limit = int(limit)
                     colCount+=1
                 self.your_course.removeRow(temp[0].row())
                 self.rowUP += 1
                 self.rowDN -= 1
-                if(self.db.dropCourseUser(self.data.getID() ,tempID, datetime.now().year)):
+                if(self.db.dropCourseUser(self.data.getID() ,tempID, datetime.now().year, limit)):
                     self.parent.showOK("Course Removed", "Your course " + tempID + " has been removed from the system." )
+            self.updateCourse()
 
     def updateCourse(self):
         currentID = []
@@ -139,13 +147,17 @@ class StudentCourseUI(QMainWindow):
 
         #Check Pre-requisite IF 'F' not counted
         temp = self.db.allUserCourse(self.data.getID())
+        print(temp)
         self.allTakenCourse = []
         for elements in temp:
-            if(int(elements.allowRepeat) < 2):
+            if(int(elements.allowRepeat) < 2 and elements.grade != None):
                 self.allTakenCourse.append(elements.courseID)
 
+        print(self.allTakenCourse
+              )
         for course in self.currentCourse:
             currentID.append(course.getCourseID())
+
 
         self.available_course.setRowCount(len(self.courseAvailable))
         self.rowUP = len(self.courseAvailable)
