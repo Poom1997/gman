@@ -1,6 +1,7 @@
 from PySide.QtGui import *
 from PySide.QtUiTools import *
 from EditProfileStudent import editProfileUI
+import plugin.image as imageHandle
 
 class profileUI(QMainWindow):
     def __init__(self,parent = None):
@@ -41,6 +42,7 @@ class profileUI(QMainWindow):
         self.year = form.findChild(QLabel,"year")
         self.student_status = form.findChild(QLabel,"sstatus")
         self.address = form.findChild(QLabel,"address")
+        self.profile_pic = form.findChild(QLabel, "profile_pic")
 
         #Upper Bar pressed
         self.home_button.clicked.connect(self.goHome)
@@ -67,19 +69,23 @@ class profileUI(QMainWindow):
         self.parent.changePageLoginSection("addcourse")
 
     def editProfile(self):
-        self.edit = editProfileUI()
+        self.edit = editProfileUI(parent = self.parent)
+        self.edit.updatePage()
         self.edit.show()
 
     def updatePage(self):
         data = self.parent.getCurrentUser()
-        self.id.setText(data.getID())
-        self.name.setText(data.getName())
-        self.surname.setText(data.getSurname())
-        self.email.setText(data.getEmail())
-        self.faculty.setText(data.getFacultyName())
-        self.major.setText(data.getMajorName())
-        self.year.setText(data.year)
-        self.address.setText(data.getAddress())
+        if(data.type() == "STUDENT"):
+            self.id.setText(data.getID())
+            self.name.setText(data.getName())
+            self.surname.setText(data.getSurname())
+            self.email.setText(data.getEmail())
+            self.faculty.setText(data.getFacultyName())
+            self.major.setText(data.getMajorName())
+            self.year.setText(data.year)
+            self.address.setText(data.getAddress())
+        self.profile_pic.setPixmap(QPixmap(data.pictureGen()))
+        data.pictureDataProtect()
 
         #Status
         status = data.getStatus()

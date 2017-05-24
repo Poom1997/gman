@@ -47,8 +47,7 @@ class GUImanager(QMainWindow):
         
         if signal == "login":
             print("login")
-            self.centralWidget().setCurrentWidget(self.main_widget)
-            self.profile_widget.updatePage()
+            self.centralWidget().setCurrentWidget(self.login_widget)
         if signal == "forget":
             print("forget")
             self.centralWidget().setCurrentWidget(self.pw_widget)
@@ -58,6 +57,7 @@ class GUImanager(QMainWindow):
         if signal == "profile":
             print("profile")
             self.centralWidget().setCurrentWidget(self.profile_widget)
+            self.profile_widget.updatePage()
         if signal == "grade":
             print("grade")
             self.centralWidget().setCurrentWidget(self.view_grade_widget)
