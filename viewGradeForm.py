@@ -32,7 +32,11 @@ class viewGradeUI(QMainWindow):
         #page properties
         self.print_button = form.findChild(QPushButton, "printButton")
         self.this_term = form.findChild(QTableWidget,"thisTerm")
-        self.overAll = form.findChild(QTableWidget,"overall")
+        self.all_term = form.findChild(QTableWidget,"alLTerm")
+        self.gpa_input = form.findChild(QLabel,"gpaInp")
+        self.gps_input = form.findChild(QLabel,"gpaInp")
+        self.crs_input = form.findChild(QLabel,"gpaInp")
+        self.status_input = form.findChild(QLabel,"gpaInp")
 
         #Upper Bar pressed
         self.home_button.clicked.connect(self.goHome)

@@ -14,7 +14,7 @@ class editProfileUI(QMainWindow):
 
     def UIinit(self):
         loader = QUiLoader()
-        form = loader.load("resources/UI/editProfileStudent.ui",None)
+        form = loader.load("resources/UI/EditProfileStudent.ui",None)
         self.setCentralWidget(form)
 
         #QPushButton
