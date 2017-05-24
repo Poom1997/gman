@@ -1,10 +1,14 @@
+import plugin.image as imageHandle
+
 class user:
-    def __init__(self, data, address):
+    def __init__(self, data, username, address):
         self.id = data.user_id
         self.firstname = data.name
         self.surname = data.surname
         self.email = data.email
         self.address = address
+        self.picture = data.picture
+        self.username = username
 
     def getID(self):
         return self.id
@@ -23,9 +27,23 @@ class user:
                + " " + self.address.district + "\n" + self.address.province + " " + self.address.zipCode
         return temp
 
+    def getAddressRecord(self):
+        return self.address
+
+    def pictureGen(self):
+        self.image = imageHandle.imageHandler(self.id)
+        self.image.createImageFile()
+        return self.image.getPath()
+
+    def pictureDataProtect(self):
+        self.image.deleteData()
+
+    def getUsername(self):
+        return self.username
+
 class student(user):
-    def __init__(self, data, address, faculty, major):
-        super().__init__(data,address)
+    def __init__(self, data, username, address, faculty, major):
+        super().__init__(data,username, address)
         self.status = data.status
         self.faculty = faculty
         self.major = major
@@ -60,4 +78,7 @@ class student(user):
 
     def getStatus(self):
         return self.status
+
+    def type(self):
+        return "STUDENT"
 

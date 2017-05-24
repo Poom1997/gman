@@ -20,18 +20,13 @@ class database:
     def disconnect(self):
         self.connection.close()
 
-    def execute(self, command):
-        self.query.execute(command)
-        resultset = cur.fetchall()
-        return resultset
-
 class databaseLogin(database):
     def __init__(self):
         super().__init__()
 
     def userLogin(self, username, password):
         password = bytes(password, encoding="ascii")
-        SQL = "SELECT password, user_id, user_type FROM \"GMan\".user_login WHERE username = %s"
+        SQL = "SELECT password, user_id, user_type, username FROM \"GMan\".user_login WHERE username = %s"
         DATA = (username,)
         self.query.execute(SQL,DATA)
         resultset = self.query.fetchone()
@@ -39,7 +34,7 @@ class databaseLogin(database):
             raise invalidQueryException("Either Username or Password is Incorrect")
         hashed = bytes(resultset.password, encoding="ascii")
         if (bcrypt.hashpw(password, hashed) == hashed):
-            return True, resultset.user_id, resultset.user_type 
+            return True, resultset.user_id, resultset.user_type , resultset.username
         else:
             print('invalid')
             raise invalidQueryException("Either Username or Password is Incorrect")
@@ -57,10 +52,11 @@ class databaseLogin(database):
             raise invalidQueryException("UserID or Username already exists")
         
     def editLogin(self, username, email, userStatus=0):
-        SQL = "UPDATE \"GMan\".user_login SET username=%s,email=%s,status=%s WHERE username=%s"
-        DATA = (username, email, str(userStatus),username)
+        SQL = "UPDATE \"GMan\".user_login SET email=%s,status=%s WHERE username=%s"
+        DATA = (email, str(userStatus),username)
         self.query.execute(SQL, DATA)
         self.connection.commit()
+        return 1
 
     def changePassword(self, username, oldPassword, newPassword):
         password = bytes(oldPassword, encoding="ascii")
@@ -125,6 +121,27 @@ class databaseUser(database):
         self.query.execute(SQL, DATA)
         resultset = self.query.fetchone()
         return resultset
+
+    def updateAddress(self, user_id, homeNum, street, sDistrict, district, province, zip):
+        SQL = "UPDATE \"GMan\".address SET \"houseNumber\"=%s, street=%s, \"subDistrict\"=%s, district=%s, province=%s, \"zipCode\"=%s WHERE user_id=%s"
+        DATA = (homeNum, street, sDistrict, district, province, zip, user_id)
+        self.query.execute(SQL, DATA)
+        self.connection.commit()
+        return 1
+
+    def editProfilePicture(self, blob, user_id):
+        SQL = "UPDATE \"GMan\".user_login SET picture=%s WHERE user_id=%s"
+        DATA = (blob, user_id)
+        self.query.execute(SQL, DATA)
+        self.connection.commit()
+        return 1
+
+    def getProfilePicture(self, user_id):
+        SQL = "SELECT picture FROM \"GMan\".user_login WHERE user_id =%s"
+        DATA = (user_id,)
+        self.query.execute(SQL, DATA)
+        resultset = self.query.fetchone()
+        return resultset, 1
 
 class databaseCourse(database):
     def __init__(self):

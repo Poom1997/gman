@@ -88,3 +88,4 @@ class addCourseUI(QMainWindow):
             self.parent.showERROR("Data Consistency Error" + status[0], "Either Professor ID, FacultyID, or Major ID is incorrect.")
 
         db.disconnect()
+        self.close()

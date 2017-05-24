@@ -101,7 +101,7 @@
      <property name="title">
       <string/>
      </property>
-     <widget class="QLabel" name="label_2">
+     <widget class="QLabel" name="profile_pic">
       <property name="geometry">
        <rect>
         <x>0</x>

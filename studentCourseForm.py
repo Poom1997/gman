@@ -193,15 +193,19 @@ class StudentCourseUI(QMainWindow):
 
     def goHome(self):
         self.parent.changePageLoginSection("home")
+        self.db.disconnect()
 
     def goProfile(self):
         self.parent.changePageLoginSection("profile")
+        self.db.disconnect()
 
     def goGrade(self):
         self.parent.changePageLoginSection("grade")
+        self.db.disconnect()
 
     def goCourse(self):
         self.parent.changePageLoginSection("course")
+        self.db.disconnect()
 
     def createBulk(self, data):
         temp = []

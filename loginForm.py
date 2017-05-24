@@ -58,9 +58,9 @@ class LoginUI(QMainWindow):
                 faculty = self.data.getFaculty(user_data.facultyID)
                 major = self.data.getMajor(user_data.majorID)
                 if(status[2] == 0):
-                    student = curUser.student(user_data, user_address, faculty, major)
+                    student = curUser.student(user_data, status[3], user_address, faculty, major)
                     self.parent.setCurrentUser(student)
-                self.parent.changePageLoginSection("login")
+                self.parent.changePageLoginSection("home")
         except database.invalidQueryException as e:
             self.wronglabel.setText(str(e))
             self.user_id.setText("")
