@@ -22,11 +22,12 @@ class editProfileUI(QMainWindow):
         
 
         #LineEdit
-        self.course_name_edit = form.findChild(QLineEdit,"lineEdit")
         self.faculty_name_edit = form.findChild(QLineEdit,"lineEdit_3")
         self.year_edit = form.findChild(QLineEdit,"lineEdit_4")
         self.semester_edit = form.findChild(QLineEdit,"lineEdit_5")
-        self.course_id_edit = form.findChild(QLineEdit,"lineEdit_2")
+
+       #Tabel
+        self.course_table = form.findChild(QTableWidget,"tableWidget")
 
         
         #Connect
