@@ -22,8 +22,15 @@ class editProfileUI(QMainWindow):
         self.upload_button = form.findChild(QPushButton,"uploadButton")
 
         #LineEdit
-        self.address_edit = form.findChild(QLineEdit,"addressEdit")
-        self.email_edit = form.findChild(QLineEdit,"emailEdit")
+        self.house_number_edit = form.findChild(QLineEdit,"lineEdit_9")
+        self.email_edit = form.findChild(QLineEdit,"lineEdit_4")
+        self.province_edit = form.findChild(QLineEdit,"lineEdit_3")
+        self.district_edit = form.findChild(QLineEdit,"lineEdit")
+        self.sub_district_edit = form.findChild(QLineEdit,"lineEdit_8")
+        self.street_edit = form.findChild(QLineEdit,"alineEdit_7")
+        self.zip_code_edit = form.findChild(QLineEdit,"lineEdit_2")
+        
+        
 
         #Connect
         self.confirm_button.clicked.connect(self.editSuccess)
