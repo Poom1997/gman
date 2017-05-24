@@ -43,15 +43,9 @@
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-<<<<<<< HEAD
-       <x>30</x>
-       <y>30</y>
-       <width>241</width>
-=======
-       <x>10</x>
-       <y>20</y>
+       <x>50</x>
+       <y>100</y>
        <width>221</width>
->>>>>>> refs/remotes/origin/master
        <height>31</height>
       </rect>
      </property>
@@ -93,13 +87,8 @@
     <widget class="QLabel" name="label_9">
      <property name="geometry">
       <rect>
-<<<<<<< HEAD
-       <x>390</x>
-       <y>410</y>
-=======
        <x>360</x>
-       <y>370</y>
->>>>>>> refs/remotes/origin/master
+       <y>250</y>
        <width>81</width>
        <height>31</height>
       </rect>
@@ -116,15 +105,10 @@
     <widget class="QLabel" name="label_12">
      <property name="geometry">
       <rect>
-       <x>310</x>
-       <y>90</y>
-<<<<<<< HEAD
-       <width>171</width>
+       <x>350</x>
+       <y>160</y>
+       <width>91</width>
        <height>31</height>
-=======
-       <width>141</width>
-       <height>21</height>
->>>>>>> refs/remotes/origin/master
       </rect>
      </property>
      <property name="font">
@@ -133,7 +117,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Village/Building :</string>
+      <string>Address :</string>
      </property>
     </widget>
     <widget class="QPushButton" name="confirmButton">
@@ -188,8 +172,8 @@
     <widget class="QPushButton" name="uploadButton">
      <property name="geometry">
       <rect>
-       <x>110</x>
-       <y>450</y>
+       <x>100</x>
+       <y>440</y>
        <width>111</width>
        <height>31</height>
       </rect>
@@ -201,427 +185,21 @@
     <widget class="QLineEdit" name="lineEdit">
      <property name="geometry">
       <rect>
-<<<<<<< HEAD
-       <x>490</x>
-       <y>90</y>
+       <x>460</x>
+       <y>160</y>
        <width>261</width>
-       <height>31</height>
-=======
-       <x>440</x>
-       <y>90</y>
-       <width>261</width>
-       <height>21</height>
->>>>>>> refs/remotes/origin/master
+       <height>81</height>
       </rect>
      </property>
     </widget>
     <widget class="QLineEdit" name="lineEdit_2">
      <property name="geometry">
       <rect>
-<<<<<<< HEAD
-       <x>490</x>
-       <y>130</y>
-       <width>261</width>
-       <height>31</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_3">
-     <property name="geometry">
-      <rect>
-       <x>430</x>
-       <y>130</y>
-       <width>41</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>13</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Soi :</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_4">
-     <property name="geometry">
-      <rect>
-       <x>410</x>
-       <y>180</y>
-       <width>71</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>13</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Road :</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_5">
-     <property name="geometry">
-      <rect>
-       <x>370</x>
-       <y>340</y>
-       <width>111</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>13</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string> Province :</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_6">
-     <property name="geometry">
-      <rect>
-       <x>350</x>
-       <y>260</y>
-       <width>131</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>13</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Sub-District :</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_7">
-     <property name="geometry">
-      <rect>
-       <x>390</x>
-       <y>220</y>
-       <width>91</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>13</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string> District :</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_8">
-     <property name="geometry">
-      <rect>
-       <x>370</x>
-       <y>380</y>
-       <width>111</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>13</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Zip-Code :</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_10">
-     <property name="geometry">
-      <rect>
-       <x>380</x>
-       <y>300</y>
-       <width>91</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>13</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string> Country :</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit_3">
-     <property name="geometry">
-      <rect>
-       <x>490</x>
-       <y>170</y>
-=======
-       <x>440</x>
-       <y>130</y>
->>>>>>> refs/remotes/origin/master
-       <width>261</width>
-       <height>31</height>
-      </rect>
-     </property>
-    </widget>
-<<<<<<< HEAD
-    <widget class="QLineEdit" name="lineEdit_4">
-     <property name="geometry">
-      <rect>
-       <x>490</x>
-       <y>210</y>
-       <width>261</width>
-       <height>31</height>
-=======
-    <widget class="QLabel" name="label_3">
-     <property name="geometry">
-      <rect>
-       <x>400</x>
-       <y>120</y>
-       <width>41</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>13</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Soi :</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_4">
-     <property name="geometry">
-      <rect>
-       <x>380</x>
-       <y>160</y>
-       <width>51</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>13</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Road :</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_5">
-     <property name="geometry">
-      <rect>
-       <x>350</x>
-       <y>300</y>
-       <width>81</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>13</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Province :</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_6">
-     <property name="geometry">
-      <rect>
-       <x>330</x>
-       <y>230</y>
-       <width>101</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>13</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Sub-District :</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_7">
-     <property name="geometry">
-      <rect>
-       <x>360</x>
-       <y>200</y>
-       <width>71</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>13</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>District :</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_8">
-     <property name="geometry">
-      <rect>
-       <x>350</x>
-       <y>340</y>
-       <width>81</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>13</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Zip-Code :</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_10">
-     <property name="geometry">
-      <rect>
-       <x>360</x>
-       <y>260</y>
-       <width>71</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>13</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Country :</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit_3">
-     <property name="geometry">
-      <rect>
-       <x>440</x>
-       <y>160</y>
-       <width>261</width>
-       <height>21</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit_4">
-     <property name="geometry">
-      <rect>
-       <x>440</x>
-       <y>200</y>
-       <width>261</width>
-       <height>21</height>
->>>>>>> refs/remotes/origin/master
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit_5">
-     <property name="geometry">
-      <rect>
-<<<<<<< HEAD
-       <x>490</x>
-       <y>250</y>
-       <width>261</width>
-       <height>31</height>
-=======
-       <x>440</x>
-       <y>230</y>
-       <width>261</width>
-       <height>21</height>
->>>>>>> refs/remotes/origin/master
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit_6">
-     <property name="geometry">
-      <rect>
-<<<<<<< HEAD
-       <x>490</x>
-       <y>290</y>
-       <width>261</width>
-       <height>31</height>
-=======
-       <x>440</x>
+       <x>460</x>
        <y>260</y>
        <width>261</width>
-       <height>21</height>
->>>>>>> refs/remotes/origin/master
+       <height>20</height>
       </rect>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit_7">
-     <property name="geometry">
-      <rect>
-<<<<<<< HEAD
-       <x>490</x>
-       <y>330</y>
-       <width>261</width>
-       <height>31</height>
-=======
-       <x>440</x>
-       <y>300</y>
-       <width>261</width>
-       <height>21</height>
->>>>>>> refs/remotes/origin/master
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit_8">
-     <property name="geometry">
-      <rect>
-<<<<<<< HEAD
-       <x>490</x>
-       <y>370</y>
-       <width>261</width>
-       <height>31</height>
-=======
-       <x>440</x>
-       <y>340</y>
-       <width>261</width>
-       <height>21</height>
->>>>>>> refs/remotes/origin/master
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit_9">
-     <property name="geometry">
-      <rect>
-<<<<<<< HEAD
-       <x>490</x>
-       <y>410</y>
-       <width>261</width>
-       <height>31</height>
-=======
-       <x>440</x>
-       <y>370</y>
-       <width>261</width>
-       <height>21</height>
->>>>>>> refs/remotes/origin/master
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_11">
-     <property name="geometry">
-      <rect>
-       <x>340</x>
-<<<<<<< HEAD
-       <y>450</y>
-=======
-       <y>430</y>
->>>>>>> refs/remotes/origin/master
-       <width>351</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>(Note) ถ้าคุนไม่มีตรงไหนให้เขียน - ไว้ ปล ใครเก่งอังกิดเขียนตรงนี้ให้หน่อย</string>
      </property>
     </widget>
     <zorder>groupBox</zorder>
@@ -634,21 +212,6 @@
     <zorder>uploadButton</zorder>
     <zorder>lineEdit</zorder>
     <zorder>lineEdit_2</zorder>
-    <zorder>label_3</zorder>
-    <zorder>label_4</zorder>
-    <zorder>label_5</zorder>
-    <zorder>label_6</zorder>
-    <zorder>label_7</zorder>
-    <zorder>label_8</zorder>
-    <zorder>label_10</zorder>
-    <zorder>lineEdit_3</zorder>
-    <zorder>lineEdit_4</zorder>
-    <zorder>lineEdit_5</zorder>
-    <zorder>lineEdit_6</zorder>
-    <zorder>lineEdit_7</zorder>
-    <zorder>lineEdit_8</zorder>
-    <zorder>lineEdit_9</zorder>
-    <zorder>label_11</zorder>
    </widget>
   </widget>
  </widget>
