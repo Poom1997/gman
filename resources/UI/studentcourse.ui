@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>899</width>
+    <width>900</width>
     <height>600</height>
    </rect>
   </property>
@@ -16,10 +16,10 @@
   <widget class="QScrollArea" name="scrollArea">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
+     <x>-1</x>
+     <y>-1</y>
      <width>901</width>
-     <height>600</height>
+     <height>601</height>
     </rect>
    </property>
    <property name="horizontalScrollBarPolicy">
