@@ -7,7 +7,6 @@ class user:
         self.surname = data.surname
         self.email = data.email
         self.address = address
-        self.picture = data.picture
         self.username = username
 
     def getID(self):
