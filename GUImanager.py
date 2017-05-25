@@ -4,6 +4,7 @@ from pwForm import *
 from profileForm import *
 from studentCourseForm import *
 from addMajorAdmin import *
+from addFacultyAdmin import *
 from viewGradeForm import *
 from addCourseForm import *
 from PySide.QtCore import *
@@ -35,6 +36,7 @@ class GUImanager(QMainWindow):
         self.view_grade_widget = viewGradeUI(self)
         self.addCourse_widget = addCourseUI(self)
         self.student_course_widget = StudentCourseUI(self)
+        self.add_faculties_for_admin = AddFacultyUI(self)
         self.profile_widget = profileUI(self)
         self.central_widget.addWidget(self.login_widget)
         self.central_widget.addWidget(self.view_grade_widget)
@@ -45,6 +47,7 @@ class GUImanager(QMainWindow):
         self.central_widget.addWidget(self.addCourse_widget)
         self.central_widget.addWidget(self.profile_widget)
         self.central_widget.addWidget(self.add_major_for_admin_widget)
+        self.central_widget.addWidget(self.add_faculties_for_admin)
 
     def changePageLoginSection(self,signal = None):
         
@@ -71,7 +74,7 @@ class GUImanager(QMainWindow):
             self.student_course_widget.updateCourse()
         if signal == "addcourse":
             print("addcourse")
-            self.centralWidget().setCurrentWidget(self.add_major_for_admin_widget)
+            self.centralWidget().setCurrentWidget(self.add_faculties_for_admin)
 
     def setCurrentUser(self, user):
         self.user = user

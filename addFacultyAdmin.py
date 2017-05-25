@@ -2,7 +2,7 @@ from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
 
-class AddMajorUI(QMainWindow):
+class AddFacultyUI(QMainWindow):
     def __init__(self,parent = None):
         QMainWindow.__init__(self,None)
         self.setMinimumSize(900,600)
@@ -16,7 +16,7 @@ class AddMajorUI(QMainWindow):
 
     def UIinit(self):
         loader = QUiLoader()
-        form = loader.load("resources/UI/addMajor.ui",None)
+        form = loader.load("resources/UI/addFaculty.ui",None)
         self.setCentralWidget(form)
 
         #Upper Bar
@@ -29,22 +29,20 @@ class AddMajorUI(QMainWindow):
         self.other_button = form.findChild(QPushButton, "othersButton")
 
         #page properties
-        self.majorTable = form.findChild(QTableWidget,"majorTable")
-        self.faculty_id = form.findChild(QLineEdit,"facultyID")
-        self.major_id = form.findChild(QLineEdit,"majorID")
-        self.major_name = form.findChild(QLineEdit,"majorName")
-        self.add_button = form.findChild(QPushButton,"addButton")
+        self.faculty_table = form.findChild(QTableWidget,"facultyTable")
+        self.faculty_id = form.findChild(QLineEdit,"FacultyID")
+        self.faculty_name = form.findChild(QLineEdit,"facultyName")
+        self.add_button = form.findChild(QPushButton,"addFacButton")
         self.del_button = form.findChild(QPushButton,"deleteButton")
-        self.search_button = form.findChild(QPushButton,"searchButton")
 
 
-        self.header = self.majorTable.horizontalHeader()
+        self.header = self.faculty_table.horizontalHeader()
         self.header.setResizeMode(0,QHeaderView.ResizeToContents)
         self.header.setResizeMode(1,QHeaderView.Stretch)
 
-        self.majorTable.setSelectionBehavior(QAbstractItemView.SelectRows)
-        self.majorTable.setSelectionMode(QAbstractItemView.SingleSelection)
-        self.majorTable.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.faculty_table.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.faculty_table.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.faculty_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
 
         #Upper Bar pressed
@@ -56,8 +54,7 @@ class AddMajorUI(QMainWindow):
         self.home_button.clicked.connect(self.goHome)
 
         self.add_button.clicked.connect(self.add)
-        self.search_button.clicked.connect(self.searchMajor)
-        self.del_button.clicked.connect(self.deleteMajor)
+        self.del_button.clicked.connect(self.deletefac)
         
 
 
@@ -78,12 +75,10 @@ class AddMajorUI(QMainWindow):
 
     def add(self):
         temp = {}
-        temp["majorID"] = self.major_id.text()
-        temp["majorName"] = self.major_name.text()
+        temp["facultyID"] = self.faculty_id.text()
+        temp["facultyName"] = self.faculty_name.text()
         
-    def deleteMajor(self):
+    def deletefac(self):
         pass
 
-    def searchMajor(self):
-        pass
-        
+             
