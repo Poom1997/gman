@@ -476,42 +476,6 @@
       <string/>
      </property>
     </widget>
-    <widget class="QLabel" name="status_2">
-     <property name="geometry">
-      <rect>
-       <x>810</x>
-       <y>20</y>
-       <width>53</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>OffLine</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_5">
-     <property name="geometry">
-      <rect>
-       <x>740</x>
-       <y>20</y>
-       <width>61</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Status:</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_15">
      <property name="geometry">
       <rect>
@@ -557,8 +521,6 @@
     <zorder>logoutButton</zorder>
     <zorder>changePasswordButton</zorder>
     <zorder>barLabel</zorder>
-    <zorder>status_2</zorder>
-    <zorder>label_5</zorder>
     <zorder>label_15</zorder>
    </widget>
   </widget>
