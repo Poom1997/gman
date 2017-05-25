@@ -45,30 +45,30 @@ class StudentCourseUI(QMainWindow):
         self.add_button = form.findChild(QPushButton,"addButton")
         self.delete_button = form.findChild(QPushButton,"deleteButton")
 
-        self.header = self.available_course.horizontalHeader()
-        self.header.setResizeMode(0,QHeaderView.ResizeToContents)
-        self.header.setResizeMode(1,QHeaderView.Stretch)
-        self.header.setResizeMode(2,QHeaderView.ResizeToContents)
-        self.header.setResizeMode(3,QHeaderView.ResizeToContents)
-        self.header.setResizeMode(4,QHeaderView.Stretch)
-        self.header.setResizeMode(5,QHeaderView.ResizeToContents)
-        self.header.setResizeMode(6,QHeaderView.ResizeToContents)
+        self.available_course_header = self.available_course.horizontalHeader()
+        self.available_course_header.setResizeMode(0,QHeaderView.ResizeToContents)
+        self.available_course_header.setResizeMode(1,QHeaderView.Stretch)
+        self.available_course_header.setResizeMode(2,QHeaderView.ResizeToContents)
+        self.available_course_header.setResizeMode(3,QHeaderView.ResizeToContents)
+        self.available_course_header.setResizeMode(4,QHeaderView.Stretch)
+        self.available_course_header.setResizeMode(5,QHeaderView.ResizeToContents)
+        self.available_course_header.setResizeMode(6,QHeaderView.ResizeToContents)
 
-        self.header2 = self.your_course.horizontalHeader()
-        self.header2.setResizeMode(0,QHeaderView.ResizeToContents)
-        self.header2.setResizeMode(1,QHeaderView.Stretch)
-        self.header2.setResizeMode(2,QHeaderView.ResizeToContents)
-        self.header2.setResizeMode(3,QHeaderView.ResizeToContents)
-        self.header2.setResizeMode(4,QHeaderView.Stretch)
-        self.header2.setResizeMode(5,QHeaderView.ResizeToContents)
-        self.header2.setResizeMode(6,QHeaderView.ResizeToContents)
+        self.your_course_header = self.your_course.horizontalHeader()
+        self.your_course_header.setResizeMode(0,QHeaderView.ResizeToContents)
+        self.your_course_header.setResizeMode(1,QHeaderView.Stretch)
+        self.your_course_header.setResizeMode(2,QHeaderView.ResizeToContents)
+        self.your_course_header.setResizeMode(3,QHeaderView.ResizeToContents)
+        self.your_course_header.setResizeMode(4,QHeaderView.Stretch)
+        self.your_course_header.setResizeMode(5,QHeaderView.ResizeToContents)
+        self.your_course_header.setResizeMode(6,QHeaderView.ResizeToContents)
 
-        self.available_course.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.available_course.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.available_course.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.available_course.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
-        self.your_course.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.your_course.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.your_course.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.your_course.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
         #Upper Bar pressed
@@ -153,11 +153,9 @@ class StudentCourseUI(QMainWindow):
             if(int(elements.allowRepeat) < 2 and elements.grade != None):
                 self.allTakenCourse.append(elements.courseID)
 
-        print(self.allTakenCourse
-              )
+        print(self.allTakenCourse)
         for course in self.currentCourse:
             currentID.append(course.getCourseID())
-
 
         self.available_course.setRowCount(len(self.courseAvailable))
         self.rowUP = len(self.courseAvailable)
