@@ -32,7 +32,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>-394</y>
+      <y>0</y>
       <width>898</width>
       <height>999</height>
      </rect>
@@ -234,42 +234,6 @@
      <property name="title">
       <string/>
      </property>
-     <widget class="QLabel" name="status_3">
-      <property name="geometry">
-       <rect>
-        <x>810</x>
-        <y>30</y>
-        <width>53</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>OffLine</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_6">
-      <property name="geometry">
-       <rect>
-        <x>740</x>
-        <y>30</y>
-        <width>61</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Status:</string>
-      </property>
-     </widget>
      <widget class="QLabel" name="barLabel_2">
       <property name="geometry">
        <rect>
