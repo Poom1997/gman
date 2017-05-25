@@ -1,6 +1,7 @@
 from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
+import plugin.databaseConn as database
 
 class AddMajorUI(QMainWindow):
     def __init__(self,parent = None):
@@ -34,16 +35,15 @@ class AddMajorUI(QMainWindow):
         self.major_id = form.findChild(QLineEdit,"majorID")
         self.major_name = form.findChild(QLineEdit,"majorName")
         self.add_button = form.findChild(QPushButton,"addButton")
-        self.del_button = form.findChild(QPushButton,"deleteButton")
         self.search_button = form.findChild(QPushButton,"searchButton")
 
+        self.add_button.setEnabled(False)
 
         self.header = self.majorTable.horizontalHeader()
         self.header.setResizeMode(0,QHeaderView.ResizeToContents)
         self.header.setResizeMode(1,QHeaderView.Stretch)
 
-        self.majorTable.setSelectionBehavior(QAbstractItemView.SelectRows)
-        self.majorTable.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.majorTable.setSelectionMode(QAbstractItemView.NoSelection)
         self.majorTable.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
 
@@ -57,9 +57,8 @@ class AddMajorUI(QMainWindow):
 
         self.add_button.clicked.connect(self.add)
         self.search_button.clicked.connect(self.searchMajor)
-        self.del_button.clicked.connect(self.deleteMajor)
-        
 
+        self.db = database.databaseAdmin()
 
     def goHome(self):
         self.parent.changePageLoginSection("home")
@@ -77,13 +76,26 @@ class AddMajorUI(QMainWindow):
         self.parent.changePageLoginSection("addcourse")
 
     def add(self):
-        temp = {}
-        temp["majorID"] = self.major_id.text()
-        temp["majorName"] = self.major_name.text()
-        
-    def deleteMajor(self):
-        pass
+        temp = None
+        if(self.parent.showCONFIRM("Are you sure?", "Are you sure you want to add a major for this faculty? Once added, it cannot be deleted.")):
+            if(self.major_id.text() == "" or self.major_name.text() == ""):
+                self.parent.showERROR("Fields cannot be Empty", "Fields cannot be Empty. Please Try Again.")
+            else:
+                temp = self.db.addMajors(self.faculty_id.text(), self.major_id.text(), self.major_name.text())
+            if (temp == 1):
+                self.searchMajor()
+                self.parent.showOK("Major Added", "Major " + self.major_name.text() + " has been added to the system.")
+            elif (temp == "DUPLICATE"):
+                self.parent.showERROR("Major ID Duplication Error", "The ID you entered already exists. Please Try Again.")
 
     def searchMajor(self):
-        pass
-        
+        data = self.db.getallMajors(self.faculty_id.text())
+        if (len(data[0]) > 0):
+            self.add_button.setEnabled(True)
+            self.majorTable.setRowCount(len(data[0]))
+            for i in range(0, len(data[0])):
+                self.majorTable.setItem(i, 0, QTableWidgetItem(data[0][i].majorID))
+                self.majorTable.setItem(i, 1, QTableWidgetItem(data[0][i].degree))
+                self.majorTable.setItem(i, 2, QTableWidgetItem(str(data[1][i])))
+        else:
+            self.add_button.setEnabled(False)
