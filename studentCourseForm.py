@@ -43,7 +43,9 @@ class StudentCourseUI(QMainWindow):
         self.your_course = form.findChild(QTableWidget,"mycourse")
         self.save_button = form.findChild(QPushButton,"saveButton")
         self.add_button = form.findChild(QPushButton,"addButton")
+        self.add_button.setEnabled(False)
         self.delete_button = form.findChild(QPushButton,"deleteButton")
+        self.delete_button.setEnabled(False)
 
         self.available_course_header = self.available_course.horizontalHeader()
         self.available_course_header.setResizeMode(0,QHeaderView.ResizeToContents)
@@ -162,6 +164,16 @@ class StudentCourseUI(QMainWindow):
 
         self.your_course.setRowCount(len(self.currentCourse))
         self.rowDN = len(self.currentCourse)
+
+        if(len(self.courseAvailable) > 0):
+            self.add_button.setEnabled(True)
+        else:
+            self.add_button.setEnabled(False)
+
+        if (len(self.currentCourse) > 0):
+            self.delete_button.setEnabled(True)
+        else:
+            self.delete_button.setEnabled(False)
 
         i = 0
         for course in self.currentCourse:

@@ -1,6 +1,7 @@
 from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
+import plugin.databaseConn as database
 
 class AddMajorUI(QMainWindow):
     def __init__(self,parent = None):
@@ -35,7 +36,7 @@ class AddMajorUI(QMainWindow):
         self.major_name = form.findChild(QLineEdit,"majorName")
         self.add_button = form.findChild(QPushButton,"addButton")
         self.search_button = form.findChild(QPushButton,"searchButton")
-
+        self.add_button.setEnabled(False)
 
         self.header = self.majorTable.horizontalHeader()
         self.header.setResizeMode(0,QHeaderView.ResizeToContents)
@@ -56,8 +57,8 @@ class AddMajorUI(QMainWindow):
 
         self.add_button.clicked.connect(self.add)
         self.search_button.clicked.connect(self.searchMajor)
-        
 
+        self.db = database.databaseAdmin()
 
     def goHome(self):
         self.parent.changePageLoginSection("home")
@@ -75,10 +76,21 @@ class AddMajorUI(QMainWindow):
         self.parent.changePageLoginSection("addcourse")
 
     def add(self):
-        temp = {}
-        temp["majorID"] = self.major_id.text()
-        temp["majorName"] = self.major_name.text()
+        temp = self.db.addMajors(self.faculty_id.text(), self.major_id.text(), self.major_name.text())
+        if(temp == 1):
+            self.searchMajor()
+            self.parent.showOK("Major Added", "Major " + self.major_name + " has been added to the system.")
+        elif(temp == "DUPLICATE"):
+            self.parent.showERROR("Major ID Duplication Error", "The ID you entered already exists. Please Try Again.")
 
     def searchMajor(self):
-        pass
-        
+        data = self.db.getallMajors(self.faculty_id.text())
+        if(len(data[0]) > 0):
+            self.add_button.setEnabled(True)
+            self.majorTable.setRowCount(len(data[0]))
+            for i in range(0, len(data[0])):
+                self.majorTable.setItem(i, 0, QTableWidgetItem(data[0][i].majorID))
+                self.majorTable.setItem(i, 1, QTableWidgetItem(data[0][i].degree))
+                self.majorTable.setItem(i, 2, QTableWidgetItem(str(data[1][i])))
+        else:
+            self.add_button.setEnabled(False)

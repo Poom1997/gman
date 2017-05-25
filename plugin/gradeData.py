@@ -1,6 +1,5 @@
 class gradeData:
     def __init__(self, data ,courseData):
-        print(courseData)
         self.course_id = data.courseID
         self.grade = data.grade
         self.year = data.year

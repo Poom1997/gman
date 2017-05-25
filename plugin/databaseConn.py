@@ -21,9 +21,6 @@ class database:
         self.connection.close()
 
 class databaseLogin(database):
-    def __init__(self):
-        super().__init__()
-
     def userLogin(self, username, password):
         password = bytes(password, encoding="ascii")
         SQL = "SELECT password, user_id, user_type, username FROM \"GMan\".user_login WHERE username = %s"
@@ -89,9 +86,6 @@ class databaseLogin(database):
         self.disconnect()
 
 class databaseUser(database):
-    def __init__(self):
-        super().__init__()
-
     def getInfo(self, inp_data):
         if(inp_data[2] == 0):
             SQL = "SELECT * FROM \"GMan\".student WHERE user_id =%s"
@@ -144,9 +138,6 @@ class databaseUser(database):
         return resultset, 1
 
 class databaseCourse(database):
-    def __init__(self):
-        super().__init__()
-
     def getCourseName(self, courseID):
         SQL = "SELECT \"courseName\" FROM \"GMan\".course WHERE \"courseID\"=%s"
         DATA = (courseID,)
@@ -255,3 +246,33 @@ class databaseGrade(database):
             self.query.execute(SQL, DATA)
             resultsetCourse.append(self.query.fetchone())
         return resultsetData, resultsetCourse
+
+class databaseAdmin(database):
+    def getallMajors(self, faculty_id):
+        SQL = "SELECT * FROM  \"GMan\".majors WHERE \"facultyID\"=%s ORDER BY \"majorID\""
+        DATA = (faculty_id,)
+        self.query.execute(SQL, DATA)
+        resultsetData = self.query.fetchall()
+        resultsetAmt = []
+        for elements in resultsetData:
+            SQL = "SELECT count(*) FROM \"GMan\".student WHERE \"majorID\"=%s"
+            DATA = (elements.majorID,)
+            self.query.execute(SQL, DATA)
+            amt = self.query.fetchone()
+            resultsetAmt.append(amt.count)
+            if(amt.count != elements.studentAmt):
+                SQL = "UPDATE \"GMan\".majors SET \"studentAmt\"=%s WHERE \"majorID\"=%s"
+                DATA = (amt.count,elements.majorID)
+                self.query.execute(SQL, DATA)
+                self.connection.commit()
+        return resultsetData, resultsetAmt
+
+    def addMajors(self, faculty_id, major_id, degree):
+        try:
+            SQL = "INSERT INTO \"GMan\".majors (\"majorID\", \"facultyID\", \"degree\", \"studentAmt\") VALUES(%s, %s, %s, 0)"
+            DATA = (major_id, faculty_id, degree)
+            self.query.execute(SQL, DATA)
+            self.connection.commit()
+            return 1
+        except psycopg2.IntegrityError:
+            return "DUPLICATE"
