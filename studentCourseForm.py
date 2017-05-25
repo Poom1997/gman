@@ -45,6 +45,8 @@ class StudentCourseUI(QMainWindow):
         self.your_course = form.findChild(QTableWidget,"mycourse")
         self.save_button = form.findChild(QPushButton,"saveButton")
         self.add_button = form.findChild(QPushButton,"addButton")
+        self.add_other_course = form.findChild(QPushButton,"addOtherButton")
+        self.search_course = form.findChild(QPushButton,"searchCourseButton")
         self.add_button.setEnabled(False)
         self.delete_button = form.findChild(QPushButton,"deleteButton")
         self.delete_button.setEnabled(False)
@@ -86,6 +88,8 @@ class StudentCourseUI(QMainWindow):
         #Internal Button Pressed
         self.add_button.clicked.connect(self.addClick)
         self.delete_button.clicked.connect(self.deleteClick)
+        self.add_other_course.clicked.connect(self.addOtherCourse)
+        self.search_course.clicked.connect(self.searchCourse)
 
     def addClick(self):
         colCount = 0
@@ -204,6 +208,12 @@ class StudentCourseUI(QMainWindow):
                 self.available_course.setItem(i,5,QTableWidgetItem(course.getTime()))
                 self.available_course.setItem(i,6,QTableWidgetItem(course.getMaxStud()))
                 i = i + 1
+
+    def addOtherCourse(self):
+        pass
+    
+    def searchCourse(self):
+        pass
 
     def goHome(self):
         self.parent.changePageLoginSection("home")
