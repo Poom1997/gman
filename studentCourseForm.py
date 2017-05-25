@@ -157,7 +157,6 @@ class StudentCourseUI(QMainWindow):
 
         #Check Pre-requisite IF 'F' not counted
         temp = self.db.allUserCourse(self.data.getID())
-        print(temp)
         self.allTakenCourse = []
         for elements in temp:
             if(int(elements.allowRepeat) < 2 and elements.grade != None):

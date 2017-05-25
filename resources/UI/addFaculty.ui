@@ -37,8 +37,8 @@
     <widget class="QPushButton" name="addFacButton">
      <property name="geometry">
       <rect>
-       <x>70</x>
-       <y>480</y>
+       <x>40</x>
+       <y>430</y>
        <width>111</width>
        <height>31</height>
       </rect>
@@ -206,7 +206,7 @@
        <string>Faculty ID</string>
       </property>
       <property name="textAlignment">
-       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+       <set>AlignCenter</set>
       </property>
      </column>
      <column>
@@ -214,7 +214,15 @@
        <string>Faculty Name</string>
       </property>
       <property name="textAlignment">
-       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+       <set>AlignCenter</set>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Student Enrolled</string>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
       </property>
      </column>
     </widget>
@@ -257,19 +265,6 @@
       <string>Other Option</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="deleteButton">
-     <property name="geometry">
-      <rect>
-       <x>210</x>
-       <y>480</y>
-       <width>111</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Delete</string>
-     </property>
-    </widget>
     <zorder>barLabel_2</zorder>
     <zorder>addFacButton</zorder>
     <zorder>profileButton</zorder>
@@ -285,7 +280,6 @@
     <zorder>facultyTable</zorder>
     <zorder>logoutButton</zorder>
     <zorder>othersButton</zorder>
-    <zorder>deleteButton</zorder>
    </widget>
   </widget>
  </widget>

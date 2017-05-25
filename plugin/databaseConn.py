@@ -276,3 +276,32 @@ class databaseAdmin(database):
             return 1
         except psycopg2.IntegrityError:
             return "DUPLICATE"
+
+    def getallFaculty(self):
+        SQL = "SELECT * FROM  \"GMan\".faculty ORDER BY \"facultyID\""
+        self.query.execute(SQL)
+        resultsetData = self.query.fetchall()
+        resultsetAmt = []
+        for elements in resultsetData:
+            SQL = "SELECT count(*) FROM \"GMan\".student WHERE \"facultyID\"=%s"
+            DATA = (elements.facultyID,)
+            self.query.execute(SQL, DATA)
+            amt = self.query.fetchone()
+            resultsetAmt.append(amt.count)
+            if (amt.count != elements.studentAmt):
+                SQL = "UPDATE \"GMan\".faculty SET \"studentAmt\"=%s WHERE \"facultyID\"=%s"
+                DATA = (amt.count, elements.facultyID)
+                self.query.execute(SQL, DATA)
+                self.connection.commit()
+        return resultsetData, resultsetAmt
+
+    def addFaculty(self, faculty_id, faculty_name):
+        try:
+            SQL = "INSERT INTO \"GMan\".faculty (\"facultyID\", \"facultyName\", \"userAmt\", \"studentAmt\") VALUES(%s, %s, 0, 0)"
+            DATA = (faculty_id, faculty_name)
+            self.query.execute(SQL, DATA)
+            self.connection.commit()
+            return 1
+        except psycopg2.IntegrityError:
+            return "DUPLICATE"
+
