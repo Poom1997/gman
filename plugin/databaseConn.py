@@ -234,12 +234,24 @@ class databaseGrade(database):
         SQL = "SELECT * FROM  \"GMan\".\"data\" WHERE user_id=%s AND grade IS NOT NULL ORDER BY year, term"
         DATA = (user_id,)
         self.query.execute(SQL, DATA)
-        resultset = self.query.fetchall()
-        return resultset
+        resultsetData = self.query.fetchall()
+        resultsetCourse = []
+        for elements in resultsetData:
+            SQL = "SELECT * FROM \"GMan\".course WHERE \"courseID\"=%s"
+            DATA = (elements.courseID,)
+            self.query.execute(SQL, DATA)
+            resultsetCourse.append(self.query.fetchone())
+        return resultsetData, resultsetCourse
 
     def getCurrentCourse(self, user_id, year, term):
         SQL = "SELECT * FROM  \"GMan\".\"data\" WHERE user_id=%s AND \"year\"=%s AND term =%s ORDER BY \"courseID\""
         DATA = (user_id,year, term)
         self.query.execute(SQL, DATA)
-        resultset = self.query.fetchall()
-        return resultset
+        resultsetData = self.query.fetchall()
+        resultsetCourse = []
+        for elements in resultsetData:
+            SQL = "SELECT * FROM \"GMan\".course WHERE \"courseID\"=%s"
+            DATA = (elements.courseID,)
+            self.query.execute(SQL, DATA)
+            resultsetCourse.append(self.query.fetchone())
+        return resultsetData, resultsetCourse

@@ -1,7 +1,8 @@
 from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
-from EditProfileStudent import editProfileUI
+import plugin.databaseConn as database
+import plugin.gradeData as grade
 
 class viewGradeUI(QMainWindow):
     def __init__(self,parent = None):
@@ -32,11 +33,11 @@ class viewGradeUI(QMainWindow):
         #page properties
         self.print_button = form.findChild(QPushButton, "printButton")
         self.this_term = form.findChild(QTableWidget,"thisTerm")
-        self.all_term = form.findChild(QTableWidget,"alLTerm")
+        self.all_term = form.findChild(QTableWidget,"allTerm")
         self.gpa_input = form.findChild(QLabel,"gpaInp")
-        self.gps_input = form.findChild(QLabel,"gpaInp")
-        self.crs_input = form.findChild(QLabel,"gpaInp")
-        self.status_input = form.findChild(QLabel,"gpaInp")
+        self.gps_input = form.findChild(QLabel,"gpsInp")
+        self.crs_input = form.findChild(QLabel,"crsInp")
+        self.status_input = form.findChild(QLabel,"statusInp")
 
         #Upper Bar pressed
         self.home_button.clicked.connect(self.goHome)
@@ -45,6 +46,25 @@ class viewGradeUI(QMainWindow):
         self.course_button.clicked.connect(self.goCourse)
         self.temp.clicked.connect(self.goTemp)
         self.home_button.clicked.connect(self.goHome)
+
+        #Table Properties
+        self.all_term_header = self.all_term.horizontalHeader()
+        self.all_term_header.setResizeMode(0, QHeaderView.ResizeToContents)
+        self.all_term_header.setResizeMode(1, QHeaderView.Stretch)
+        self.all_term_header.setResizeMode(2, QHeaderView.ResizeToContents)
+        self.all_term_header.setResizeMode(3, QHeaderView.ResizeToContents)
+
+        self.this_term_header = self.this_term.horizontalHeader()
+        self.this_term_header.setResizeMode(0, QHeaderView.ResizeToContents)
+        self.this_term_header.setResizeMode(1, QHeaderView.Stretch)
+        self.this_term_header.setResizeMode(2, QHeaderView.ResizeToContents)
+        self.this_term_header.setResizeMode(3, QHeaderView.ResizeToContents)
+
+        self.all_term.setSelectionMode(QAbstractItemView.NoSelection)
+        self.all_term.setEditTriggers(QAbstractItemView.NoEditTriggers)
+
+        self.this_term.setSelectionMode(QAbstractItemView.NoSelection)
+        self.this_term.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
     def goHome(self):
         self.parent.changePageLoginSection("home")
@@ -64,26 +84,103 @@ class viewGradeUI(QMainWindow):
 
     def updatePage(self):
         data = self.parent.getCurrentUser()
-        self.id.setText(data.getID())
-        self.name.setText(data.getName())
-        self.surname.setText(data.getSurname())
-        self.email.setText(data.getEmail())
-        self.faculty.setText(data.getFacultyName())
-        self.major.setText(data.getMajorName())
-        self.year.setText(data.year)
-        self.address.setText(data.getAddress())
+        db = database.databaseGrade()
+        temp = db.getPastCourse(data.getID())
+        all_course = self.createBulk(temp[0], temp[1])
+        temp = db.getCurrentCourse(data.getID(), data.getYear(), data.getTerm())
+        cur_course = self.createBulk(temp[0], temp[1])
+        currentID = []
 
-        #Status
-        status = data.getStatus()
-        if(status == 0):
-            self.student_status.setText("Learning")
-        elif(status==1):
-            self.student_status.setText("Probation")
-        elif (status == 2):
-            self.student_status.setText("Retired")
-        elif (status == 3):
-            self.student_status.setText("Withdrawn")
-        elif (status == 4):
-            self.student_status.setText("Suspended")
+        #Calculating GPA/GPS Variable
+        sumGPA = 0
+        crsGPA = 0
+        sumGPS = 0
+        crsGPS = 0
+
+        #Add Items in All Terms and Insert GPA Data
+        i = 0
+        self.all_term.setRowCount(len(all_course))
+        for grade in all_course:
+            self.all_term.setItem(i, 0, QTableWidgetItem(grade.getCourseID()))
+            self.all_term.setItem(i, 1, QTableWidgetItem(grade.getCourseName()))
+            self.all_term.setItem(i, 2, QTableWidgetItem(grade.getCredit()))
+            self.all_term.setItem(i, 3, QTableWidgetItem(grade.getGrade()))
+            currentID.append(grade.getCourseID())
+            curCrs = int(grade.getCredit())
+            crsGPA = crsGPA + curCrs
+            if(grade.getGrade() == "A"):
+                sumGPA = sumGPA + 4.00 * curCrs
+            elif(grade.getGrade() == "B+"):
+                sumGPA = sumGPA + 3.50 * curCrs
+            elif(grade.getGrade() == "B"):
+                sumGPA = sumGPA + 3.00 * curCrs
+            elif(grade.getGrade() == "C+"):
+                sumGPA = sumGPA + 2.50 * curCrs
+            elif(grade.getGrade() == "C"):
+                sumGPA = sumGPA + 2.00 * curCrs
+            elif(grade.getGrade() == "D+"):
+                sumGPA = sumGPA + 1.50 * curCrs
+            elif(grade.getGrade() == "D"):
+                sumGPA = sumGPA + 1.00 * curCrs
+            else:
+                sumGPA = sumGPA + 0
+            i = i + 1
+
+            # Add Items in Current Terms and Insert GPA Data
+        i = 0
+        self.this_term.setRowCount(len(cur_course))
+        for grade in cur_course:
+            if (grade.getCourseID() not in currentID):
+                self.this_term.setItem(i, 0, QTableWidgetItem(grade.getCourseID()))
+                self.this_term.setItem(i, 1, QTableWidgetItem(grade.getCourseName()))
+                self.this_term.setItem(i, 2, QTableWidgetItem(grade.getCredit()))
+                self.this_term.setItem(i, 3, QTableWidgetItem(grade.getGrade()))
+                curCrs = int(grade.getCredit())
+                if(grade.getGrade() == None):
+                    curCrs = 0
+                crsGPS = crsGPS + curCrs
+                if(grade.getGrade() == "A"):
+                    sumGPS = sumGPS + 4.00 * curCrs
+                elif(grade.getGrade() == "B+"):
+                    sumGPS = sumGPS + 3.50 * curCrs
+                elif(grade.getGrade() == "B"):
+                    sumGPS = sumGPS + 3.00 * curCrs
+                elif(grade.getGrade() == "C+"):
+                    sumGPS = sumGPS + 2.50 * curCrs
+                elif(grade.getGrade() == "C"):
+                    sumGPS = sumGPS + 2.00 * curCrs
+                elif(grade.getGrade() == "D+"):
+                    sumGPS = sumGPS + 1.50 * curCrs
+                elif(grade.getGrade() == "D"):
+                    sumGPS = sumGPS + 1.00 * curCrs
+                else:
+                    sumGPS = sumGPS + 0
+                i = i + 1
+            else:
+                self.this_term.setRowCount(len(cur_course)-1)
+
+    #Calculate GPA/GPS
+        gpa = sumGPA / crsGPA
+        gps = 0
+        if(sumGPS != 0):
+            gps = sumGPS / crsGPS
+        self.gpa_input.setText(str("{:0.2f}".format(gpa)))
+        self.gps_input.setText(str("{:0.2f}".format(gps)))
+        self.crs_input.setText(str(crsGPA))
+        if(gpa >= 2.00):
+            self.status_input.setText("PASS")
+        elif(gpa < 2.00):
+            self.status_input.setText("PROBATION")
+        elif(gpa < 1.00):
+            self.status_input.setText("RETIRE")
         else:
-            self.student_status.setText("Unknown")
+            self.status_input.setText("ERROR")
+
+        db.disconnect()
+
+    def createBulk(self, data, courseData):
+        temp = []
+        for i in range(0, len(data)):
+            temp.append(grade.gradeData(data[i], courseData[i]))
+        return temp
+
