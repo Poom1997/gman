@@ -37,6 +37,8 @@ class StudentCourseUI(QMainWindow):
         self.profile_button = form.findChild(QPushButton,"profileButton")
         self.grade_button = form.findChild(QPushButton,"gradeButton")
         self.course_button = form.findChild(QPushButton,"courseButton")
+        self.temp = form.findChild(QPushButton, "temp")
+
 
         #page properties
         self.available_course = form.findChild(QTableWidget,"available")
@@ -78,6 +80,8 @@ class StudentCourseUI(QMainWindow):
         self.profile_button.clicked.connect(self.goProfile)
         self.grade_button.clicked.connect(self.goGrade)
         self.course_button.clicked.connect(self.goCourse)
+        self.temp.clicked.connect(self.goTemp)
+
 
         #Internal Button Pressed
         self.add_button.clicked.connect(self.addClick)
@@ -212,6 +216,9 @@ class StudentCourseUI(QMainWindow):
 
     def goCourse(self):
         self.parent.changePageLoginSection("course")
+        
+    def goTemp(self):
+        self.parent.changePageLoginSection("addcourse")
 
     def createBulk(self, data):
         temp = []
