@@ -21,7 +21,7 @@ class GUImanager(QMainWindow):
         QMainWindow.__init__(self, None)
         self.setMinimumSize(900, 600)
         self.setFixedSize(900,600)
-        self.setWindowTitle("G-Man version 0.6.1 (Alpha)")
+        self.setWindowTitle("G-Man version 0.7.3 (Alpha)")
         
         palette = QPalette()
         palette.setBrush(QPalette.Background, QBrush(QPixmap("resources/images/background.png")))
@@ -75,6 +75,8 @@ class GUImanager(QMainWindow):
         if signal == "addcourse":
             print("addcourse")
             self.centralWidget().setCurrentWidget(self.add_faculties_for_admin)
+            self.add_faculties_for_admin.updatePage()
+
 
     def setCurrentUser(self, user):
         self.user = user
