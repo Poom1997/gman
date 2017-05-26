@@ -26,6 +26,7 @@ class selectCourseUI(QMainWindow):
         self.profile_button = form.findChild(QPushButton,"profileButton")
         self.grade_button = form.findChild(QPushButton,"gradeButton")
         self.course_button = form.findChild(QPushButton,"courseButton")
+        self.other_button = form.findChild(QPushButton, "othersButton")
 
         #page properties
         self.course_table = form.findChild(QTableWidget,"courseTable")
@@ -45,10 +46,26 @@ class selectCourseUI(QMainWindow):
         self.home_button.clicked.connect(self.goHome)
         self.profile_button.clicked.connect(self.goProfile)
         self.grade_button.clicked.connect(self.goGrade)
+        self.other_button.clicked.connect(self.goTemp)
         self.course_button.clicked.connect(self.goCourse)
 
         #Internal Button Pressed
         self.addGrade_button.clicked.connect(self.addGradeClick)
+
+    def goHome(self):
+        self.parent.changePageLoginSection("home")
+
+    def goProfile(self):
+        self.parent.changePageLoginSection("profile")
+
+    def goGrade(self):
+        self.parent.changePageLoginSection("grade")
+
+    def goCourse(self):
+        self.parent.changePageLoginSection("course")
+
+    def goTemp(self):
+        self.parent.changePageLoginSection("addcourse")
 
         def addGradeClick(self):
             pass

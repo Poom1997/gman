@@ -21,13 +21,13 @@ class findCourseUI(QMainWindow):
         self.setCentralWidget(form)
 
         #QPushButton
-        self.search_button = form.findChild(QPushButton,"pushButton")
-        self.cancel_button = form.findChild(QPushButton,"pushButton_2")
+        self.search_button = form.findChild(QPushButton,"searchButton")
+        self.cancel_button = form.findChild(QPushButton,"closeButton")
         self.addSelected_button = form.findChild(QPushButton, "add_selected")
         self.addSelected_button.setEnabled(False)
 
         #LineEdit
-        self.faculty_name = form.findChild(QLineEdit,"lineEdit_3")
+        self.faculty_name = form.findChild(QLineEdit,"facultyID")
 
         #Table
         self.course_table = form.findChild(QTableWidget,"tableWidget")
