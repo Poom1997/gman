@@ -21,7 +21,7 @@ class GUImanager(QMainWindow):
         QMainWindow.__init__(self, None)
         self.setMinimumSize(900, 600)
         self.setFixedSize(900,600)
-        self.setWindowTitle("G-Man version 0.7.3 (Alpha)")
+        self.setWindowTitle("G-Man version 0.7.9 (Alpha)")
         
         palette = QPalette()
         palette.setBrush(QPalette.Background, QBrush(QPixmap("resources/images/background.png")))

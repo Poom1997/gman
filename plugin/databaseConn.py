@@ -36,7 +36,7 @@ class databaseLogin(database):
             print('invalid')
             raise invalidQueryException("Either Username or Password is Incorrect")
         
-    def createLogin(self,userid,username,password,email,userStatus= 0, userType = 0):
+    def createLogin(self,userid,username,email,password = "DEFAULTPASS123456",userStatus= 0, userType = 0):
         passwd_enc = bytes(password,encoding ="ascii")
         passwd_hashed = bcrypt.hashpw(passwd_enc, bcrypt.gensalt(14))
         passwd_hashed_dec = passwd_hashed.decode(encoding = "ascii")
@@ -45,8 +45,13 @@ class databaseLogin(database):
         try:
             self.query.execute(SQL, DATA)
             self.connection.commit()
+            SQL = "INSERT INTO \"GMan\".address (user_id, \"houseNumber\", street, \"subDistrict\", district, province, \"zipCode\") VALUES(%s, '', '', '', '', '', '')"
+            DATA = (userid,)
+            self.query.execute(SQL, DATA)
+            self.connection.commit()
+            return (1,1)
         except psycopg2.IntegrityError as e:
-            raise invalidQueryException("UserID or Username already exists")
+            return ("EXISTS",0)
         
     def editLogin(self, username, email, userStatus=0):
         SQL = "UPDATE \"GMan\".user_login SET email=%s,status=%s WHERE username=%s"
@@ -82,8 +87,19 @@ class databaseLogin(database):
         self.query.execute(SQL, DATA)
         self.connection.commit()
 
-    def terminate(self):
-        self.disconnect()
+    def getInformationUser(self, userid):
+        SQL = "SELECT user_type, username, user_id FROM \"GMan\".user_login WHERE user_id = %s"
+        DATA = (userid,)
+        self.query.execute(SQL, DATA)
+        resultset = self.query.fetchone()
+        if(resultset is not None):
+            if(resultset.user_type == 0):
+                SQL = "SELECT * FROM \"GMan\".student WHERE user_id = %s"
+                DATA = (userid,)
+                self.query.execute(SQL, DATA)
+                resultsetData = self.query.fetchone()
+            return (resultset,resultsetData)
+        return(None, None)
 
 class databaseUser(database):
     def getInfo(self, inp_data):
@@ -136,6 +152,21 @@ class databaseUser(database):
         self.query.execute(SQL, DATA)
         resultset = self.query.fetchone()
         return resultset, 1
+
+    def createStudent(self, userid, name, surname, email, faculty, major):
+        try:
+            SQL = "INSERT INTO \"GMan\".student (user_id, \"name\", surname, email, \"year\", status, gpa, \"facultyID\", \"majorID\", term) \
+                  VALUES(%s, %s, %s, %s, 1, 0, 0.00, %s, %s, 1)"
+            DATA = (userid, name, surname, email, faculty, major)
+            self.query.execute(SQL, DATA)
+            self.connection.commit()
+            return (1,1)
+        except psycopg2.IntegrityError as e:
+            print(e.pgcode, e.pgerror)
+            return (str(e.pgcode), e.pgerror)
+        except psycopg2.DataError as e:
+            print(e.pgcode, e.pgerror)
+            return (str(e.pgcode), e.pgerror)
 
 class databaseCourse(database):
     def getCourseName(self, courseID):
