@@ -81,3 +81,30 @@ class student(user):
     def type(self):
         return "STUDENT"
 
+class professor(user):
+    def __init__(self, data, username, address, faculty, major):
+        super().__init__(data,username, address)
+        self.status = data.status
+        self.faculty = faculty
+
+    def getFacultyName(self):
+        temp = self.faculty.facultyName
+        return temp
+
+    def getMajorName(self):
+        return "-"
+
+    def getFacultyID(self):
+        temp = self.faculty.facultyID
+        return temp
+
+    def getMajorID(self):
+        temp = self.major.majorID
+        return temp
+
+    def getStatus(self):
+        return self.status
+
+    def type(self):
+        return "PROFESSOR"
+

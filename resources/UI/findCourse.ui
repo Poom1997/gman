@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>900</width>
-    <height>600</height>
+    <height>597</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <x>0</x>
      <y>0</y>
      <width>900</width>
-     <height>600</height>
+     <height>581</height>
     </rect>
    </property>
    <property name="font">
@@ -42,7 +42,7 @@
       <x>0</x>
       <y>0</y>
       <width>898</width>
-      <height>598</height>
+      <height>579</height>
      </rect>
     </property>
     <widget class="QLabel" name="barLabel">
@@ -73,7 +73,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Find course</string>
+      <string>Find All Course</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_4">
@@ -99,57 +99,11 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLabel" name="label_5">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>90</y>
-       <width>46</width>
-       <height>13</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Year :</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_6">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>120</y>
-       <width>81</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Semester :</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit_4">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>90</y>
-       <width>113</width>
-       <height>20</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit_5">
-     <property name="geometry">
-      <rect>
-       <x>110</x>
-       <y>120</y>
-       <width>113</width>
-       <height>20</height>
-      </rect>
-     </property>
-    </widget>
     <widget class="QPushButton" name="pushButton">
      <property name="geometry">
       <rect>
-       <x>230</x>
-       <y>120</y>
+       <x>600</x>
+       <y>60</y>
        <width>75</width>
        <height>23</height>
       </rect>
@@ -161,8 +115,8 @@
     <widget class="QPushButton" name="pushButton_2">
      <property name="geometry">
       <rect>
-       <x>420</x>
-       <y>540</y>
+       <x>800</x>
+       <y>60</y>
        <width>75</width>
        <height>23</height>
       </rect>
@@ -174,77 +128,97 @@
     <widget class="QTableWidget" name="tableWidget">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>170</y>
+       <x>20</x>
+       <y>100</y>
        <width>851</width>
-       <height>341</height>
+       <height>461</height>
       </rect>
      </property>
      <column>
       <property name="text">
        <string>Course ID</string>
       </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
+      </property>
      </column>
      <column>
       <property name="text">
        <string>Course name</string>
       </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Faculty ID</string>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Major ID</string>
+       <string>Major</string>
       </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Prof.id</string>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
       </property>
      </column>
      <column>
       <property name="text">
        <string>Year</string>
       </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Semester</string>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
       </property>
      </column>
      <column>
       <property name="text">
        <string>Time</string>
       </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Building</string>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Room</string>
+       <string>Location</string>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Credits</string>
+       <string>CRS</string>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Max stud.</string>
+       <string>Seats Remaining</string>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Pre</string>
+       <string>Pre-Requisite</string>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
       </property>
      </column>
+    </widget>
+    <widget class="QPushButton" name="add_selected">
+     <property name="geometry">
+      <rect>
+       <x>680</x>
+       <y>60</y>
+       <width>111</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Add Selected</string>
+     </property>
     </widget>
    </widget>
   </widget>

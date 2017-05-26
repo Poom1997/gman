@@ -1,6 +1,7 @@
 from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
+from findCourse import findCourseUI
 from datetime import datetime
 import plugin.databaseConn as database
 import plugin.course as courseItem
@@ -45,10 +46,9 @@ class StudentCourseUI(QMainWindow):
         self.your_course = form.findChild(QTableWidget,"mycourse")
         self.save_button = form.findChild(QPushButton,"saveButton")
         self.add_button = form.findChild(QPushButton,"addButton")
-        self.add_other_course = form.findChild(QPushButton,"addOtherButton")
         self.search_course = form.findChild(QPushButton,"searchCourseButton")
+        self.delete_button = form.findChild(QPushButton, "deleteButton")
         self.add_button.setEnabled(False)
-        self.delete_button = form.findChild(QPushButton,"deleteButton")
         self.delete_button.setEnabled(False)
 
         self.available_course_header = self.available_course.horizontalHeader()
@@ -88,7 +88,6 @@ class StudentCourseUI(QMainWindow):
         #Internal Button Pressed
         self.add_button.clicked.connect(self.addClick)
         self.delete_button.clicked.connect(self.deleteClick)
-        self.add_other_course.clicked.connect(self.addOtherCourse)
         self.search_course.clicked.connect(self.searchCourse)
 
     def addClick(self):
@@ -162,7 +161,6 @@ class StudentCourseUI(QMainWindow):
             if(int(elements.allowRepeat) < 2 and elements.grade != None):
                 self.allTakenCourse.append(elements.courseID)
 
-        print(self.allTakenCourse)
         for course in self.currentCourse:
             currentID.append(course.getCourseID())
 
@@ -207,12 +205,13 @@ class StudentCourseUI(QMainWindow):
                 self.available_course.setItem(i,5,QTableWidgetItem(course.getTime()))
                 self.available_course.setItem(i,6,QTableWidgetItem(course.getMaxStud()))
                 i = i + 1
-
-    def addOtherCourse(self):
-        pass
     
     def searchCourse(self):
-        pass
+        currentCourse = []
+        for items in self.currentCourse:
+            currentCourse.append(items.getCourseID())
+        self.edit = findCourseUI(self.allTakenCourse, currentCourse, parent=self)
+        self.edit.show()
 
     def goHome(self):
         self.parent.changePageLoginSection("home")
