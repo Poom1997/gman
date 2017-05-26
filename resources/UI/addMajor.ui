@@ -155,7 +155,7 @@
      <string>Major ID</string>
     </property>
     <property name="textAlignment">
-     <set>AlignCenter</set>
+     <set>AlignHCenter|AlignVCenter|AlignCenter</set>
     </property>
    </column>
    <column>
@@ -163,7 +163,7 @@
      <string>Major Name</string>
     </property>
     <property name="textAlignment">
-     <set>AlignCenter</set>
+     <set>AlignHCenter|AlignVCenter|AlignCenter</set>
     </property>
    </column>
    <column>
@@ -171,7 +171,7 @@
      <string>No. of Student</string>
     </property>
     <property name="textAlignment">
-     <set>AlignCenter</set>
+     <set>AlignHCenter|AlignVCenter|AlignCenter</set>
     </property>
    </column>
   </widget>
@@ -262,7 +262,7 @@
   <widget class="QPushButton" name="addButton">
    <property name="geometry">
     <rect>
-     <x>760</x>
+     <x>650</x>
      <y>480</y>
      <width>111</width>
      <height>31</height>

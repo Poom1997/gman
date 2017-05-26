@@ -19,7 +19,7 @@
      <x>0</x>
      <y>0</y>
      <width>900</width>
-     <height>581</height>
+     <height>601</height>
     </rect>
    </property>
    <property name="font">
@@ -42,7 +42,7 @@
       <x>0</x>
       <y>0</y>
       <width>898</width>
-      <height>579</height>
+      <height>599</height>
      </rect>
     </property>
     <widget class="QLabel" name="barLabel">
@@ -63,7 +63,7 @@
       <rect>
        <x>30</x>
        <y>10</y>
-       <width>171</width>
+       <width>191</width>
        <height>31</height>
       </rect>
      </property>
@@ -81,44 +81,44 @@
       <rect>
        <x>30</x>
        <y>60</y>
-       <width>331</width>
-       <height>21</height>
+       <width>101</width>
+       <height>31</height>
       </rect>
      </property>
      <property name="text">
-      <string>Faculty ID : (3rd and 4th Digit of your ID):</string>
+      <string>Faculty ID </string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_3">
+    <widget class="QLineEdit" name="facultyID">
      <property name="geometry">
       <rect>
-       <x>350</x>
-       <y>60</y>
-       <width>241</width>
-       <height>20</height>
+       <x>450</x>
+       <y>65</y>
+       <width>231</width>
+       <height>25</height>
       </rect>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="searchButton">
      <property name="geometry">
       <rect>
-       <x>600</x>
-       <y>60</y>
-       <width>75</width>
-       <height>23</height>
+       <x>710</x>
+       <y>65</y>
+       <width>161</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
       <string>Search</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_2">
+    <widget class="QPushButton" name="closeButton">
      <property name="geometry">
       <rect>
-       <x>800</x>
-       <y>60</y>
-       <width>75</width>
-       <height>23</height>
+       <x>754</x>
+       <y>552</y>
+       <width>121</width>
+       <height>31</height>
       </rect>
      </property>
      <property name="text">
@@ -129,9 +129,9 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>100</y>
+       <y>120</y>
        <width>851</width>
-       <height>461</height>
+       <height>411</height>
       </rect>
      </property>
      <column>
@@ -139,7 +139,7 @@
        <string>Course ID</string>
       </property>
       <property name="textAlignment">
-       <set>AlignCenter</set>
+       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
       </property>
      </column>
      <column>
@@ -147,7 +147,7 @@
        <string>Course name</string>
       </property>
       <property name="textAlignment">
-       <set>AlignCenter</set>
+       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
       </property>
      </column>
      <column>
@@ -155,7 +155,7 @@
        <string>Major</string>
       </property>
       <property name="textAlignment">
-       <set>AlignCenter</set>
+       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
       </property>
      </column>
      <column>
@@ -163,7 +163,7 @@
        <string>Year</string>
       </property>
       <property name="textAlignment">
-       <set>AlignCenter</set>
+       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
       </property>
      </column>
      <column>
@@ -171,7 +171,7 @@
        <string>Time</string>
       </property>
       <property name="textAlignment">
-       <set>AlignCenter</set>
+       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
       </property>
      </column>
      <column>
@@ -179,7 +179,7 @@
        <string>Location</string>
       </property>
       <property name="textAlignment">
-       <set>AlignCenter</set>
+       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
       </property>
      </column>
      <column>
@@ -187,7 +187,7 @@
        <string>CRS</string>
       </property>
       <property name="textAlignment">
-       <set>AlignCenter</set>
+       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
       </property>
      </column>
      <column>
@@ -195,7 +195,7 @@
        <string>Seats Remaining</string>
       </property>
       <property name="textAlignment">
-       <set>AlignCenter</set>
+       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
       </property>
      </column>
      <column>
@@ -203,21 +203,34 @@
        <string>Pre-Requisite</string>
       </property>
       <property name="textAlignment">
-       <set>AlignCenter</set>
+       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
       </property>
      </column>
     </widget>
     <widget class="QPushButton" name="add_selected">
      <property name="geometry">
       <rect>
-       <x>680</x>
-       <y>60</y>
-       <width>111</width>
-       <height>23</height>
+       <x>570</x>
+       <y>550</y>
+       <width>151</width>
+       <height>31</height>
       </rect>
      </property>
      <property name="text">
       <string>Add Selected</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_5">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>60</y>
+       <width>311</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>(3rd and 4th Digit of your ID) :</string>
      </property>
     </widget>
    </widget>

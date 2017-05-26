@@ -52,7 +52,7 @@
       <string>Status:</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="temp">
+    <widget class="QPushButton" name="othersButton">
      <property name="geometry">
       <rect>
        <x>600</x>
@@ -62,7 +62,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Temporary</string>
+      <string>Other Option</string>
      </property>
     </widget>
     <widget class="QPushButton" name="profileButton">
@@ -247,7 +247,7 @@
     </widget>
     <zorder>barLabel_2</zorder>
     <zorder>label_6</zorder>
-    <zorder>temp</zorder>
+    <zorder>othersButton</zorder>
     <zorder>profileButton</zorder>
     <zorder>status_3</zorder>
     <zorder>homeButton</zorder>

@@ -17,21 +17,21 @@ class findUserUI(QMainWindow):
         self.setCentralWidget(form)
 
         #QPushButton
-        self.cancel_button = form.findChild(QPushButton,"pushButton_3")
-        self.search_button = form.findChild(QPushButton,"pushButton")
+        self.cancel_button = form.findChild(QPushButton,"closeButton")
+        self.search_button = form.findChild(QPushButton,"searchButton")
 
         #LineEdit
-        self.search_user_id = form.findChild(QLineEdit,"lineEdit")
+        self.search_user_id = form.findChild(QLineEdit,"enterUser")
 
         #Label
-        self.user_id = form.findChild(QLabel,"label_16")
-        self.user_name = form.findChild(QLabel, "label_20")
-        self.first_name = form.findChild(QLabel,"label_17")
-        self.surname = form.findChild(QLabel,"label_18")
-        self.email = form.findChild(QLabel,"label_19")
-        self.type = form.findChild(QLabel,"label_21")
-        self.faculty_id = form.findChild(QLabel,"label_22")
-        self.major_id = form.findChild(QLabel,"label_23")
+        self.user_id = form.findChild(QLabel,"userID")
+        self.user_name = form.findChild(QLabel, "userName")
+        self.first_name = form.findChild(QLabel,"firstName")
+        self.surname = form.findChild(QLabel,"surName")
+        self.email = form.findChild(QLabel,"eMail")
+        self.type = form.findChild(QLabel,"type")
+        self.faculty_id = form.findChild(QLabel,"facultyID")
+        self.major_id = form.findChild(QLabel,"majorID")
     
         #Connect
         self.search_user_id.returnPressed.connect(self.search)
