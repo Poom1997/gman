@@ -26,14 +26,14 @@ class addUserUI(QMainWindow):
         self.admin_button = form.findChild(QPushButton, "admin")
 
         #LineEdit
-        self.user_id = form.findChild(QLineEdit,"lineEdit")
-        self.first_name = form.findChild(QLineEdit,"lineEdit_2")
-        self.surname = form.findChild(QLineEdit,"lineEdit_3")
-        self.email = form.findChild(QLineEdit,"lineEdit_4")
-        self.username = form.findChild(QLineEdit,"lineEdit_5")
+        self.user_id = form.findChild(QLineEdit,"userID")
+        self.first_name = form.findChild(QLineEdit,"firstName")
+        self.surname = form.findChild(QLineEdit,"surName")
+        self.email = form.findChild(QLineEdit,"eMail")
+        self.username = form.findChild(QLineEdit,"userName")
         self.status = form.findChild(QLineEdit,"type")
-        self.faculty_id = form.findChild(QLineEdit,"lineEdit_7")
-        self.major_id = form.findChild(QLineEdit,"lineEdit_8")
+        self.faculty_id = form.findChild(QLineEdit,"facultyID")
+        self.major_id = form.findChild(QLineEdit,"majorID")
         self.status.setEnabled(False)
     
         #Connect

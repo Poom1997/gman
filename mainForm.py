@@ -29,10 +29,6 @@ class mainUI(QMainWindow):
         self.temp = form.findChild(QPushButton, "temp")
 
 
-        #page properties
-        self.home_button2 = form.findChild(QPushButton, "homeButton2")
-        self.status = form.findChild(QLabel,"status")
-
         #Upper Bar pressed
         self.home_button.clicked.connect(self.goHome)
         self.profile_button.clicked.connect(self.goProfile)
@@ -40,7 +36,6 @@ class mainUI(QMainWindow):
         self.course_button.clicked.connect(self.goCourse)
         self.temp.clicked.connect(self.goTemp)
 
-        self.home_button2.clicked.connect(self.goHome)
 
     def goHome(self):
         self.parent.changePageLoginSection("home")
