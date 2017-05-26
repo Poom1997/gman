@@ -1,6 +1,9 @@
 from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
+
+from addGradeFormAdmin import addGradeAdmin
+
 import plugin.databaseConn as database
 import plugin.gradeData as grade
 
@@ -46,6 +49,7 @@ class viewGradeUI(QMainWindow):
         self.course_button.clicked.connect(self.goCourse)
         self.temp.clicked.connect(self.goTemp)
         self.home_button.clicked.connect(self.goHome)
+        self.print_button.clicked.connect(self.goDummy)
 
         #Table Properties
         self.all_term_header = self.all_term.horizontalHeader()
@@ -65,6 +69,10 @@ class viewGradeUI(QMainWindow):
 
         self.this_term.setSelectionMode(QAbstractItemView.NoSelection)
         self.this_term.setEditTriggers(QAbstractItemView.NoEditTriggers)
+
+    def goDummy(self):
+        self.temp = addGradeAdmin(parent = self.parent)
+        self.temp.show()
 
     def goHome(self):
         self.parent.changePageLoginSection("home")
