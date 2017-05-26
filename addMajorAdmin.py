@@ -57,6 +57,7 @@ class AddMajorUI(QMainWindow):
 
         self.add_button.clicked.connect(self.add)
         self.search_button.clicked.connect(self.searchMajor)
+        self.faculty_id.returnPressed.connect(self.searchMajor)
 
         self.db = database.databaseAdmin()
 
