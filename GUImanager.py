@@ -6,6 +6,7 @@ from studentCourseForm import *
 from addMajorAdmin import *
 from addFacultyAdmin import *
 from viewGradeForm import *
+from addGradeFormAdmin import *
 from addCourseForm import *
 from PySide.QtCore import *
 from PySide.QtGui import *
@@ -38,6 +39,9 @@ class GUImanager(QMainWindow):
         self.student_course_widget = StudentCourseUI(self)
         self.add_faculties_for_admin = AddFacultyUI(self)
         self.profile_widget = profileUI(self)
+
+        self.add_grade_widget = addGradeAdmin(self)
+        
         self.central_widget.addWidget(self.login_widget)
         self.central_widget.addWidget(self.view_grade_widget)
         self.central_widget.addWidget(self.profile_widget)
@@ -48,6 +52,8 @@ class GUImanager(QMainWindow):
         self.central_widget.addWidget(self.profile_widget)
         self.central_widget.addWidget(self.add_major_for_admin_widget)
         self.central_widget.addWidget(self.add_faculties_for_admin)
+
+        self.central_widget.addWidget(self.add_grade_widget)
 
     def changePageLoginSection(self,signal = None):
         if signal == "login":
