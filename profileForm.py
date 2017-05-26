@@ -1,7 +1,6 @@
 from PySide.QtGui import *
 from PySide.QtUiTools import *
 from EditProfileStudent import editProfileUI
-import plugin.image as imageHandle
 
 class profileUI(QMainWindow):
     def __init__(self,parent = None):

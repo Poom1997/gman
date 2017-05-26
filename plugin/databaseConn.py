@@ -145,6 +145,13 @@ class databaseCourse(database):
         resultset = self.query.fetchone()
         return resultset
 
+    def getCourseFaculty(self, facultyID):
+        SQL = "SELECT * FROM \"GMan\".course WHERE \"facultyID\"=%s ORDER BY \"majorID\", \"courseID\""
+        DATA = (facultyID,)
+        self.query.execute(SQL, DATA)
+        resultset = self.query.fetchall()
+        return resultset
+
     def termCourse(self, faculty, major, year, term):
         SQL = "SELECT * FROM \"GMan\".course WHERE \"facultyID\"=%s AND \"majorID\"=%s AND \"year\"=%s AND term =%s \
                 ORDER BY \"courseID\""
@@ -222,7 +229,7 @@ class databaseCourse(database):
 
 class databaseGrade(database):
     def getPastCourse(self, user_id):
-        SQL = "SELECT * FROM  \"GMan\".\"data\" WHERE user_id=%s AND grade IS NOT NULL ORDER BY year, term"
+        SQL = "SELECT * FROM  \"GMan\".\"data\" WHERE user_id=%s AND grade IS NOT NULL ORDER BY \"year\", term"
         DATA = (user_id,)
         self.query.execute(SQL, DATA)
         resultsetData = self.query.fetchall()

@@ -50,7 +50,6 @@ class GUImanager(QMainWindow):
         self.central_widget.addWidget(self.add_faculties_for_admin)
 
     def changePageLoginSection(self,signal = None):
-        
         if signal == "login":
             print("login")
             self.centralWidget().setCurrentWidget(self.login_widget)
@@ -76,7 +75,6 @@ class GUImanager(QMainWindow):
             print("addcourse")
             self.centralWidget().setCurrentWidget(self.add_faculties_for_admin)
             self.add_faculties_for_admin.updatePage()
-
 
     def setCurrentUser(self, user):
         self.user = user
