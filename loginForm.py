@@ -48,18 +48,27 @@ class LoginUI(QMainWindow):
             #if(self.user_id.text() == "" or self.password.text() ==""):
                 #raise database.invalidQueryException("Fields cannot be Empty")
             #status = self.login.userLogin(self.user_id.text(), self.password.text())
-            status = self.login.userLogin("crazypet", "12345")
+            #status = self.login.userLogin("professor", "DEFAULTPASS123456")
+            status = self.login.userLogin("admin", "DEFAULTPASS123456")
+            #status = self.login.userLogin("crazypet", "12345")
             if(status[0]):
                 self.wronglabel.setText("")
                 self.user_id.setText("")
                 self.password.setText("")
                 user_data = self.data.getInfo(status)
                 user_address = self.data.getAddress(status)
-                faculty = self.data.getFaculty(user_data.facultyID)
-                major = self.data.getMajor(user_data.majorID)
                 if(status[2] == 0):
+                    faculty = self.data.getFaculty(user_data.facultyID)
+                    major = self.data.getMajor(user_data.majorID)
                     student = curUser.student(user_data, status[3], user_address, faculty, major)
                     self.parent.setCurrentUser(student)
+                if(status[2] == 1):
+                    faculty = self.data.getFaculty(user_data.facultyID)
+                    professor= curUser.professor(user_data, status[3], user_address, faculty)
+                    self.parent.setCurrentUser(professor)
+                if (status[2] == 2):
+                    admin = curUser.admin(user_data, status[3], user_address)
+                    self.parent.setCurrentUser(admin)
                 self.parent.changePageLoginSection("home")
         except database.invalidQueryException as e:
             self.wronglabel.setText(str(e))

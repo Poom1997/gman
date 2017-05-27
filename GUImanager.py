@@ -3,7 +3,7 @@ from mainForm import *
 from pwForm import *
 from profileForm import *
 from studentCourseForm import *
-from adminSelectCourse import *
+from grading import *
 from addMajorAdmin import *
 from addFacultyAdmin import *
 from viewGradeForm import *

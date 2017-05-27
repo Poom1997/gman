@@ -16,7 +16,7 @@ class database:
             self.query = self.connection.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor)
         except psycopg2.OperationalError:
             raise invalidQueryException("Database Connection Error!")
-        
+
     def disconnect(self):
         self.connection.close()
 
@@ -35,7 +35,7 @@ class databaseLogin(database):
         else:
             print('invalid')
             raise invalidQueryException("Either Username or Password is Incorrect")
-        
+
     def createLogin(self,userid,username,email,password = "DEFAULTPASS123456",userStatus= 0, userType = 0):
         passwd_enc = bytes(password,encoding ="ascii")
         passwd_hashed = bcrypt.hashpw(passwd_enc, bcrypt.gensalt(14))
@@ -45,14 +45,14 @@ class databaseLogin(database):
         try:
             self.query.execute(SQL, DATA)
             self.connection.commit()
-            SQL = "INSERT INTO \"GMan\".address (user_id, \"houseNumber\", street, \"subDistrict\", district, province, \"zipCode\") VALUES(%s, '', '', '', '', '', '')"
+            SQL = "INSERT INTO \"GMan\".address (user_id, \"houseNumber\", street, \"subDistrict\", district, province, \"zipCode\") VALUES(%s, 'PLEASE UPDATE DATA', ' ', ' ', ' ', ' ', ' ')"
             DATA = (userid,)
             self.query.execute(SQL, DATA)
             self.connection.commit()
             return (1,1)
         except psycopg2.IntegrityError as e:
             return ("EXISTS",0)
-        
+
     def editLogin(self, username, email, userStatus=0):
         SQL = "UPDATE \"GMan\".user_login SET email=%s,status=%s WHERE username=%s"
         DATA = (email, str(userStatus),username)
@@ -80,7 +80,7 @@ class databaseLogin(database):
             self.connection.commit()
         else:
             raise invalidQueryException("Either Username or Password is Incorrect")
-        
+
     def deleteLogin(self,userid,username):
         SQL = "DELETE FROM \"GMan\".user_login WHERE user_id=%s AND username =%s";
         DATA = (userid, username)
@@ -98,8 +98,18 @@ class databaseLogin(database):
                 DATA = (userid,)
                 self.query.execute(SQL, DATA)
                 resultsetData = self.query.fetchone()
-            return (resultset,resultsetData)
-        return(None, None)
+            if (resultset.user_type == 1):
+                SQL = "SELECT * FROM \"GMan\".professor WHERE user_id = %s"
+                DATA = (userid,)
+                self.query.execute(SQL, DATA)
+                resultsetData = self.query.fetchone()
+            if (resultset.user_type == 2):
+                SQL = "SELECT * FROM \"GMan\".admin WHERE user_id = %s"
+                DATA = (userid,)
+                self.query.execute(SQL, DATA)
+                resultsetData = self.query.fetchone()
+            return (resultset,resultsetData, resultset.user_type)
+        return(None, None,None)
 
 class databaseUser(database):
     def getInfo(self, inp_data):
@@ -109,14 +119,25 @@ class databaseUser(database):
             self.query.execute(SQL, DATA)
             resultset = self.query.fetchone()
             return resultset
-
-    def getAddress(self, inp_data):
-        if (inp_data[2] == 0):
-            SQL = "SELECT * FROM \"GMan\".address WHERE user_id =%s"
+        if (inp_data[2] == 1):
+            SQL = "SELECT * FROM \"GMan\".professor WHERE user_id =%s"
             DATA = (inp_data[1],)
             self.query.execute(SQL, DATA)
             resultset = self.query.fetchone()
             return resultset
+        if (inp_data[2] == 2):
+            SQL = "SELECT * FROM \"GMan\".admin WHERE user_id =%s"
+            DATA = (inp_data[1],)
+            self.query.execute(SQL, DATA)
+            resultset = self.query.fetchone()
+            return resultset
+
+    def getAddress(self, inp_data):
+        SQL = "SELECT * FROM \"GMan\".address WHERE user_id =%s"
+        DATA = (inp_data[1],)
+        self.query.execute(SQL, DATA)
+        resultset = self.query.fetchone()
+        return resultset
 
     def getFaculty(self, inp_data):
         SQL = "SELECT * FROM \"GMan\".faculty WHERE \"facultyID\" =%s"
@@ -156,11 +177,42 @@ class databaseUser(database):
     def createStudent(self, userid, name, surname, email, faculty, major):
         try:
             SQL = "INSERT INTO \"GMan\".student (user_id, \"name\", surname, email, \"year\", status, gpa, \"facultyID\", \"majorID\", term) \
-                  VALUES(%s, %s, %s, %s, 1, 0, 0.00, %s, %s, 1)"
-            DATA = (userid, name, surname, email, faculty, major)
+                  VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            DATA = (userid, name, surname,1, 0.00, email, faculty, major,1)
+            self.query.execute(SQL, DATA)
+            self.connection.commit()
+            self.connection.commit()
+            return (1,1)
+        except psycopg2.IntegrityError as e:
+            print(e.pgcode, e.pgerror)
+            return (str(e.pgcode), e.pgerror)
+        except psycopg2.DataError as e:
+            print(e.pgcode, e.pgerror)
+            return (str(e.pgcode), e.pgerror)
+
+    def createProfessor(self, userid, name, surname, email, facultyID):
+        try:
+            SQL = "INSERT INTO \"GMan\".professor (user_id, \"name\", surname, email, \"position\", status, \"facultyID\")\
+                   VALUES(%s, %s,%s, %s, %s,%s, %s)"
+            DATA = (userid, name, surname, email, 0, 0, facultyID)
             self.query.execute(SQL, DATA)
             self.connection.commit()
             return (1,1)
+        except psycopg2.IntegrityError as e:
+            print(e.pgcode, e.pgerror)
+            return (str(e.pgcode), e.pgerror)
+        except psycopg2.DataError as e:
+            print(e.pgcode, e.pgerror)
+            return (str(e.pgcode), e.pgerror)
+
+    def createAdmin(self, userid, name, surname, email):
+        try:
+            SQL = "INSERT INTO \"GMan\".admin (user_id, \"name\", surname, email, \"position\", status)\
+                    VALUES(%s, %s,%s, %s, %s,%s)"
+            DATA = (userid, name, surname, email, 0, 0)
+            self.query.execute(SQL, DATA)
+            self.connection.commit()
+            return (1, 1)
         except psycopg2.IntegrityError as e:
             print(e.pgcode, e.pgerror)
             return (str(e.pgcode), e.pgerror)
