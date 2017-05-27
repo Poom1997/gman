@@ -475,7 +475,7 @@
      <string>Pre-Requisite :</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="building_2">
+   <widget class="QLineEdit" name="pre">
     <property name="geometry">
      <rect>
       <x>140</x>

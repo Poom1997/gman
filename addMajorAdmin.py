@@ -91,11 +91,12 @@ class AddMajorUI(QMainWindow):
                 self.searchMajor()
                 self.parent.showOK("Major Added", "Major " + self.major_name.text() + " has been added to the system.")
             elif (temp == "DUPLICATE"):
-                self.parent.showERROR("Major ID Duplication Error", "The ID you entered already exists. Please Try Again.")
+                self.parent.showERROR("Major ID Duplication Error or Faculty not Found", "The ID you entered already exists or the Faculty ID5 is incorrect. Please Try Again.")
 
     def searchMajor(self):
         data = self.db.getallMajors(self.faculty_id.text())
-        if (len(data[0]) > 0):
+        print(data)
+        if (len(data[0]) >= 0):
             self.add_button.setEnabled(True)
             self.majorTable.setRowCount(len(data[0]))
             for i in range(0, len(data[0])):
