@@ -81,13 +81,13 @@ class viewGradeUI(QMainWindow):
         self.parent.changePageLoginSection("profile")
 
     def goGrade(self):
-        self.parent.changePageLoginSection("grade")
+        self.parent.changePageLoginSection("studentGrade")
 
     def goCourse(self):
-        self.parent.changePageLoginSection("course")
+        self.parent.changePageLoginSection("studentCourse")
 
     def goTemp(self):
-        self.parent.changePageLoginSection("addcourse")
+        pass
         
 
     def updatePage(self):
