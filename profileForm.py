@@ -29,6 +29,7 @@ class profileUI(QMainWindow):
         self.grade_button = form.findChild(QPushButton,"gradeButton")
         self.course_button = form.findChild(QPushButton,"courseButton")
         self.temp = form.findChild(QPushButton, "temp")
+        self.temp2 = form.findChild(QPushButton, "temp2")
 
         #page properties
         self.home_button = form.findChild(QPushButton, "homeButton")
@@ -54,9 +55,11 @@ class profileUI(QMainWindow):
         self.course_button.clicked.connect(self.goCourse)
         self.temp.clicked.connect(self.goTemp)
         self.home_button.clicked.connect(self.goHome)
+        self.temp2.clicked.connect(self.goTemp2)
 
         self.edit_button.clicked.connect(self.editProfile)
         self.changepassword_button.clicked.connect(self.changePassword)
+        
 
     def goHome(self):
         self.parent.changePageLoginSection("home")
@@ -65,17 +68,43 @@ class profileUI(QMainWindow):
         self.parent.changePageLoginSection("profile")
 
     def goGrade(self):
-        self.parent.changePageLoginSection("grade")
+        data = self.parent.getCurrentUser()
+        if (data.type() == "STUDENT"):
+            self.parent.changePageLoginSection("studentGrade")
+        elif (data.type() == "PROFESSOR"):
+            self.parent.changePageLoginSection("grade")
+        elif (data.type() == "ADMIN"):
+            self.parent.changePageLoginSection("addfaculties")
 
     def goCourse(self):
-        self.parent.changePageLoginSection("course")
+        data = self.parent.getCurrentUser()
+        if (data.type() == "STUDENT"):
+            self.parent.changePageLoginSection("studentCourse")
+        elif (data.type() == "PROFESSOR"):
+            self.parent.changePageLoginSection("course")
+        elif (data.type() == "ADMIN"):
+            self.parent.changePageLoginSection("addmajor")
+        
 
     def goTemp(self):
-        self.parent.changePageLoginSection("addcourse")
+        data = self.parent.getCurrentUser()
+        if (data.type() == "STUDENT"):
+            self.parent.changePageLoginSection("addcourse")
+        elif (data.type() == "PROFESSOR"):
+            self.parent.changePageLoginSection("addcourse")
+        elif (data.type() == "ADMIN"):
+            self.parent.changePageLoginSection("addmajor")
+
+    def goTemp2(self):
+        data = self.parent.getCurrentUser()
+        if (data.type() == "STUDENT"):
+            self.parent.changePageLoginSection("login")
+        elif (data.type() == "PROFESSOR"):
+            self.parent.changePageLoginSection("login")
+        elif (data.type() == "ADMIN"):
+            self.parent.changePageLoginSection("otherOption")
 
     def editProfile(self):
-        #self.edit = editProfileUI(parent = self.parent)
-        #self.edit.updatePage()
         self.edit = addUserUI(parent = self.parent)
         self.edit.show()
 
@@ -144,6 +173,12 @@ class profileUI(QMainWindow):
             self.major.setText(data.getMajorName())
             self.year.setText(data.getYear())
             self.address.setText(data.getAddress())
+
+            # change Button Name 
+            self.grade_button.setText("Faculties")
+            self.course_button.setText("Majors")
+            self.temp.setText("Courses")
+            self.temp2.setText("Other options")
 
             # Status
             self.student_status.setText("Admin")

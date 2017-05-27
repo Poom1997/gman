@@ -9,6 +9,7 @@ from addFacultyAdmin import *
 from viewGradeForm import *
 from addCourseForm import *
 from seeCourseProf import *
+from otherOptionForm import *
 from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
@@ -40,6 +41,7 @@ class GUImanager(QMainWindow):
         self.student_course_widget = StudentCourseUI(self)
         self.add_faculties_for_admin = AddFacultyUI(self)
         self.profile_widget = profileUI(self)
+        self.other_option_widget = otherOptionUI(self)
         self.select_course = selectCourseUI(self)
         self.see_course_widget = seeCourseProfUI(self)
 
@@ -56,6 +58,7 @@ class GUImanager(QMainWindow):
         self.central_widget.addWidget(self.select_course)
         self.central_widget.addWidget(self.add_faculties_for_admin)
         self.central_widget.addWidget(self.see_course_widget)
+        self.central_widget.addWidget(self.other_option_widget)
 
 
     def changePageLoginSection(self,signal = None):
@@ -70,12 +73,15 @@ class GUImanager(QMainWindow):
         if signal == "home":
             print("home")
             self.centralWidget().setCurrentWidget(self.main_widget)
-############################################## STUDENT signal ################################################ 
+            self.main_widget.updatePage()
+
         if signal == "profile":
             print("profile")
             self.centralWidget().setCurrentWidget(self.profile_widget)
             self.profile_widget.updatePage()
 
+############################################## STUDENT signal ################################################
+            
         if signal == "studentGrade":
             print("studentGrade")
             self.centralWidget().setCurrentWidget(self.view_grade_widget)
@@ -84,10 +90,8 @@ class GUImanager(QMainWindow):
             print("studentCourse")
             self.centralWidget().setCurrentWidget(self.student_course_widget)
 
-        if signal == "studentGrade":
-            print("studentGrade")
-            self.centralWidget().setCurrentWidget(self.view_grade_widget)
 ############################################## Prof signal ################################################ 
+
         if signal == "grade":
             print("grade")
             self.centralWidget().setCurrentWidget(self.select_course)
@@ -112,7 +116,10 @@ class GUImanager(QMainWindow):
         if signal == "addmajor":
             print("addmajor")
             self.centralWidget().setCurrentWidget(self.add_major_for_admin_widget)
-        
+
+        if signal == "otherOption":
+            self.centralWidget().setCurrentWidget(self.other_option_widget)
+            
 
     def setCurrentUser(self, user):
         self.user = user

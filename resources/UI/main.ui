@@ -89,7 +89,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Temporary</string>
+    <string>Message</string>
    </property>
   </widget>
   <widget class="QGroupBox" name="groupBox_2">
@@ -150,7 +150,7 @@
     <string>Grades</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="logoutButton">
+  <widget class="QPushButton" name="temp2">
    <property name="geometry">
     <rect>
      <x>750</x>
@@ -200,6 +200,24 @@
    </property>
    <property name="text">
     <string>Courses</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="logoutButton">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>450</y>
+     <width>149</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Logout</string>
    </property>
   </widget>
  </widget>

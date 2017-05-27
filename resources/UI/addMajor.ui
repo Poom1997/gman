@@ -13,19 +13,6 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QPushButton" name="profileButton">
-   <property name="geometry">
-    <rect>
-     <x>150</x>
-     <y>40</y>
-     <width>151</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Profile</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_15">
    <property name="geometry">
     <rect>
@@ -58,69 +45,17 @@
     <string>Home</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="logoutButton">
+  <widget class="QPushButton" name="profileButton">
    <property name="geometry">
     <rect>
-     <x>750</x>
+     <x>150</x>
      <y>40</y>
      <width>151</width>
      <height>25</height>
     </rect>
    </property>
    <property name="text">
-    <string>Logout</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="gradeButton">
-   <property name="geometry">
-    <rect>
-     <x>300</x>
-     <y>40</y>
-     <width>151</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Grades</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="courseButton">
-   <property name="geometry">
-    <rect>
-     <x>450</x>
-     <y>40</y>
-     <width>151</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Courses</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="othersButton">
-   <property name="geometry">
-    <rect>
-     <x>600</x>
-     <y>40</y>
-     <width>151</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Other Option</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="barLabel_2">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>-10</y>
-     <width>901</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
+    <string>Profile</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_3">
@@ -285,14 +220,95 @@
     <string>Search</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="majorsButton">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>40</y>
+     <width>151</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>8</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Majors</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="facultiesButton">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>40</y>
+     <width>151</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>8</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Faculties</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="othersButton">
+   <property name="geometry">
+    <rect>
+     <x>750</x>
+     <y>40</y>
+     <width>151</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>8</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Other options</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="courseButton">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>40</y>
+     <width>151</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>8</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Courses</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="barLabel_2">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>901</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
   <zorder>barLabel_2</zorder>
-  <zorder>profileButton</zorder>
   <zorder>label_15</zorder>
   <zorder>homeButton</zorder>
-  <zorder>logoutButton</zorder>
-  <zorder>gradeButton</zorder>
-  <zorder>courseButton</zorder>
-  <zorder>othersButton</zorder>
+  <zorder>profileButton</zorder>
   <zorder>label_3</zorder>
   <zorder>majorTable</zorder>
   <zorder>label</zorder>
@@ -303,6 +319,10 @@
   <zorder>facultyID</zorder>
   <zorder>addButton</zorder>
   <zorder>searchButton</zorder>
+  <zorder>majorsButton</zorder>
+  <zorder>facultiesButton</zorder>
+  <zorder>othersButton</zorder>
+  <zorder>courseButton</zorder>
  </widget>
  <resources/>
  <connections/>

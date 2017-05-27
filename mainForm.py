@@ -27,6 +27,10 @@ class mainUI(QMainWindow):
         self.grade_button = form.findChild(QPushButton,"gradeButton")
         self.course_button = form.findChild(QPushButton,"courseButton")
         self.temp = form.findChild(QPushButton, "temp")
+        self.temp2 = form.findChild(QPushButton, "temp2")
+
+        #page properties
+        self.logout_button = form.findChild(QPushButton,"logoutButton")
 
 
         #Upper Bar pressed
@@ -35,6 +39,9 @@ class mainUI(QMainWindow):
         self.grade_button.clicked.connect(self.goGrade)
         self.course_button.clicked.connect(self.goCourse)
         self.temp.clicked.connect(self.goTemp)
+        self.temp2.clicked.connect(self.goTemp2)
+
+        self.logout_button.clicked.connect(self.goLogout)
 
 
     def goHome(self):
@@ -44,10 +51,55 @@ class mainUI(QMainWindow):
         self.parent.changePageLoginSection("profile")
 
     def goGrade(self):
-        self.parent.changePageLoginSection("grade")
+        data = self.parent.getCurrentUser()
+        if (data.type() == "STUDENT"):
+            self.parent.changePageLoginSection("studentGrade")
+        elif (data.type() == "PROFESSOR"):
+            self.parent.changePageLoginSection("grade")
+        elif (data.type() == "ADMIN"):
+            self.parent.changePageLoginSection("addfaculties")
 
     def goCourse(self):
-        self.parent.changePageLoginSection("course")
+        data = self.parent.getCurrentUser()
+        if (data.type() == "STUDENT"):
+            self.parent.changePageLoginSection("studentCourse")
+        elif (data.type() == "PROFESSOR"):
+            self.parent.changePageLoginSection("course")
+        elif (data.type() == "ADMIN"):
+            self.parent.changePageLoginSection("addmajor")
+        
 
     def goTemp(self):
+        data = self.parent.getCurrentUser()
+        if (data.type() == "STUDENT"):
+            self.parent.changePageLoginSection("addcourse")
+        elif (data.type() == "PROFESSOR"):
+            self.parent.changePageLoginSection("addcourse")
+        elif (data.type() == "ADMIN"):
+            self.parent.changePageLoginSection("addcourse")
         self.parent.changePageLoginSection("addcourse")
+    
+
+    def goTemp2(self):
+        data = self.parent.getCurrentUser()
+        if (data.type() == "STUDENT"):
+            self.parent.changePageLoginSection("login")
+        elif (data.type() == "PROFESSOR"):
+            self.parent.changePageLoginSection("login")
+        elif (data.type() == "ADMIN"):
+            self.parent.changePageLoginSection("otherOption")
+
+    def goLogout(self):
+        self.parent.changePageLoginSection("login")
+
+    def updatePage(self):
+        data = self.parent.getCurrentUser()
+        if (data.type() == "ADMIN"):
+            self.grade_button.setText("Faculties")
+            self.course_button.setText("Majors")
+            self.temp.setText("Courses")
+            self.temp2.setText("Other options")
+
+    
+        
+        

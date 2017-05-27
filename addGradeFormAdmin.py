@@ -42,6 +42,8 @@ class addGradeAdmin(QMainWindow):
         self.grade_table = form.findChild(QTableWidget,"addGradeTable")
         self.save_button = form.findChild(QPushButton,"saveButton")
         self.back_button = form.findChild(QPushButton,"backButton")
+        self.import_button = form.findChild(QPushButton,"importButton")
+        self.export_button = form.findChild(QPushButton,"exportButton")
 
 
         self.header = self.grade_table.horizontalHeader()
@@ -59,6 +61,8 @@ class addGradeAdmin(QMainWindow):
         #Internal Button Pressed
         self.save_button.clicked.connect(self.saveData)
         self.back_button.clicked.connect(self.backPage)
+        self.import_button.clicked.connect(self.importFile)
+        self.export_button.clicked.connect(self.exportFile)
 
         self.dummy()
         
@@ -69,6 +73,12 @@ class addGradeAdmin(QMainWindow):
             self.grade_table.setItem(i,0,QTableWidgetItem("121"))
             self.grade_table.setItem(i,1,QTableWidgetItem("EVAFDKJF"))
             self.grade_table.setItem(i,2,QTableWidgetItem("-"))
+
+    def importFile(self):
+        pass
+
+    def exportFile(self):
+        pass
             
         
 
@@ -76,6 +86,6 @@ class addGradeAdmin(QMainWindow):
         pass
 
     def backPage(self):
-        pass
+        self.close()
 
     
