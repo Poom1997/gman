@@ -186,7 +186,7 @@ class viewGradeUI(QMainWindow):
             status = 2
         else:
             self.status_input.setText("ERROR")
-        db.updateData(data.getID, status, gpa)
+        db.updateDataStudent(data.getID, status, gpa)
         db.disconnect()
 
     def createBulk(self, data, courseData):

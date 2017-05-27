@@ -1,6 +1,8 @@
 from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
+import plugin.databaseConn as database
+import plugin.course as courseItem
 
 from giveGrade import addGradeAdmin
 
@@ -69,9 +71,40 @@ class selectCourseUI(QMainWindow):
     def goTemp(self):
         self.parent.changePageLoginSection("addcourse")
 
+    def updatePage(self):
+        data = self.parent.getCurrentUser()
+        db = database.databaseCourse()
+        temp = db.getCourseProfessor(data.getID())
+        self.allCourse = self.createBulk(temp)
+        self.course_table.setRowCount(len(self.allCourse))
+        i = 0
+        for course in self.allCourse:
+            self.course_table.setItem(i, 0, QTableWidgetItem(course.getCourseID()))
+            self.course_table.setItem(i, 1, QTableWidgetItem(course.getCourseName()))
+            self.course_table.setItem(i, 2, QTableWidgetItem(course.getCredit()))
+            i = i + 1
+
     def addGradeClick(self):
-        self.addGradeUI = addGradeAdmin(parent = self.parent)
-        self.addGradeUI.show()
+        colCount = 0
+        temp = self.course_table.selectionModel().selectedRows()
+        if (len(temp) > 0):
+            if (self.parent.showCONFIRM("Are you sure?", "Are you sure you assign grades for this course?")):
+                for item in self.course_table.selectedItems():
+                    if (colCount == 0):
+                        tempID = item.text()
+                    colCount += 1
+        for course in self.allCourse:
+            if(course.getCourseID() == tempID):
+                self.addGradeUI = addGradeAdmin(course, parent = self.parent)
+                self.addGradeUI.updatePage()
+                self.addGradeUI.show()
+                break
+
+    def createBulk(self, data):
+        temp = []
+        for i in data:
+            temp.append(courseItem.course(i))
+        return temp
 
 
 

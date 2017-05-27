@@ -1,6 +1,8 @@
 from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
+import plugin.databaseConn as database
+import plugin.course as courseItem
 
 class seeCourseProfUI(QMainWindow):
     def __init__(self,parent = None):
@@ -62,3 +64,22 @@ class seeCourseProfUI(QMainWindow):
 
     def goTemp(self):
         self.parent.changePageLoginSection("addcourse")
+
+    def updatePage(self):
+        data = self.parent.getCurrentUser()
+        db = database.databaseCourse()
+        temp = db.getCourseProfessor(data.getID())
+        allCourse = self.createBulk(temp)
+        self.course_table.setRowCount(len(allCourse))
+        i = 0
+        for course in allCourse:
+            self.course_table.setItem(i, 0, QTableWidgetItem(course.getCourseID()))
+            self.course_table.setItem(i, 1, QTableWidgetItem(course.getCourseName()))
+            self.course_table.setItem(i, 2, QTableWidgetItem(course.getCredit()))
+            i = i + 1
+
+    def createBulk(self, data):
+        temp = []
+        for i in data:
+            temp.append(courseItem.course(i))
+        return temp
