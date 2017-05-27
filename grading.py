@@ -2,7 +2,7 @@ from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
 
-from addGradeFormAdmin import addGradeAdmin
+from giveGrade import addGradeAdmin
 
 class selectCourseUI(QMainWindow):
     def __init__(self,parent = None):
