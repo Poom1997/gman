@@ -105,7 +105,7 @@
        <string>Course ID</string>
       </property>
       <property name="textAlignment">
-       <set>AlignCenter</set>
+       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
       </property>
      </column>
      <column>
@@ -113,7 +113,7 @@
        <string>Course Name</string>
       </property>
       <property name="textAlignment">
-       <set>AlignCenter</set>
+       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
       </property>
      </column>
      <column>
@@ -121,7 +121,7 @@
        <string>Credits</string>
       </property>
       <property name="textAlignment">
-       <set>AlignCenter</set>
+       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
       </property>
      </column>
      <column>
@@ -129,7 +129,7 @@
        <string>Year Term</string>
       </property>
       <property name="textAlignment">
-       <set>AlignCenter</set>
+       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
       </property>
      </column>
      <column>
@@ -137,7 +137,7 @@
        <string>Pre - Requisite</string>
       </property>
       <property name="textAlignment">
-       <set>AlignCenter</set>
+       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
       </property>
      </column>
      <column>
@@ -145,7 +145,7 @@
        <string>Time</string>
       </property>
       <property name="textAlignment">
-       <set>AlignCenter</set>
+       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
       </property>
      </column>
      <column>
@@ -153,7 +153,7 @@
        <string>Available</string>
       </property>
       <property name="textAlignment">
-       <set>AlignCenter</set>
+       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
       </property>
      </column>
     </widget>
@@ -193,7 +193,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Temporary</string>
+      <string>Message</string>
      </property>
     </widget>
     <widget class="QPushButton" name="courseButton">
@@ -307,7 +307,7 @@
        <string>Course ID</string>
       </property>
       <property name="textAlignment">
-       <set>AlignCenter</set>
+       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
       </property>
      </column>
      <column>
@@ -315,7 +315,7 @@
        <string>Course Name</string>
       </property>
       <property name="textAlignment">
-       <set>AlignCenter</set>
+       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
       </property>
      </column>
      <column>
@@ -323,7 +323,7 @@
        <string>Credits</string>
       </property>
       <property name="textAlignment">
-       <set>AlignCenter</set>
+       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
       </property>
      </column>
      <column>
@@ -331,7 +331,7 @@
        <string>Year Term</string>
       </property>
       <property name="textAlignment">
-       <set>AlignCenter</set>
+       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
       </property>
      </column>
      <column>
@@ -339,7 +339,7 @@
        <string>Pre - Requisite</string>
       </property>
       <property name="textAlignment">
-       <set>AlignCenter</set>
+       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
       </property>
      </column>
      <column>
@@ -347,7 +347,7 @@
        <string>Time</string>
       </property>
       <property name="textAlignment">
-       <set>AlignCenter</set>
+       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
       </property>
      </column>
      <column>
@@ -355,7 +355,7 @@
        <string>Available</string>
       </property>
       <property name="textAlignment">
-       <set>AlignCenter</set>
+       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
       </property>
      </column>
     </widget>
