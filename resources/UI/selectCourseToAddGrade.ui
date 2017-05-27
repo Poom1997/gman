@@ -62,7 +62,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Other Option</string>
+      <string>Message</string>
      </property>
     </widget>
     <widget class="QPushButton" name="profileButton">
