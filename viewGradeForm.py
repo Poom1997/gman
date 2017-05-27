@@ -2,7 +2,7 @@ from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
 
-from addGradeFormAdmin import addGradeAdmin
+from giveGrade import addGradeAdmin
 
 import plugin.databaseConn as database
 import plugin.gradeData as grade
