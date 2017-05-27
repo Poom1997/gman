@@ -3,6 +3,7 @@ from PySide.QtGui import *
 from PySide.QtUiTools import *
 import plugin.databaseConn as database
 import plugin.user as curUser
+from forgetPasswordForm import forgetPasswordUI
 
 class LoginUI(QMainWindow):
     def __init__(self,parent = None):
@@ -48,9 +49,9 @@ class LoginUI(QMainWindow):
             #if(self.user_id.text() == "" or self.password.text() ==""):
                 #raise database.invalidQueryException("Fields cannot be Empty")
             #status = self.login.userLogin(self.user_id.text(), self.password.text())
-            status = self.login.userLogin("professor", "DEFAULTPASS123456")
+            #status = self.login.userLogin("professor", "DEFAULTPASS123456")
             #status = self.login.userLogin("admin", "DEFAULTPASS123456")
-            #status = self.login.userLogin("crazypet", "12345")
+            status = self.login.userLogin("crazypet", "12345")
             if(status[0]):
                 self.wronglabel.setText("")
                 self.user_id.setText("")
@@ -76,6 +77,6 @@ class LoginUI(QMainWindow):
             self.password.setText("")       
 
     def forgetpass(self):
-        self.wronglabel.setText("")
-        self.parent.changePageLoginSection("forget")
+        self.forget = forgetPasswordUI(parent = self.parent)
+        self.forget.show()
         

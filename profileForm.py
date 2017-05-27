@@ -2,7 +2,7 @@ from PySide.QtGui import *
 from PySide.QtUiTools import *
 from EditProfileStudent import editProfileUI
 from addUser import addUserUI
-from findUser import findUserUI
+from changePasswordForm import changePasswordUI
 
 class profileUI(QMainWindow):
     def __init__(self,parent = None):
@@ -109,8 +109,8 @@ class profileUI(QMainWindow):
         self.edit.show()
 
     def changePassword(self):
-        self.edit = findUserUI(parent=self.parent)
-        self.edit.show()
+        self.change = changePasswordUI(parent=self.parent)
+        self.change.show()
 
     def updatePage(self):
         data = self.parent.getCurrentUser()
