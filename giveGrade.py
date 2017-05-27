@@ -1,6 +1,9 @@
 from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
+import plugin.databaseConn as database
+import plugin.gradeData as grade
+
 
 class QTableWidgetDisabledItem(QItemDelegate):
     """
@@ -25,11 +28,12 @@ class QTableWidgetDisabledItem(QItemDelegate):
         model.setData(index, editor.text())
 
 class addGradeAdmin(QMainWindow):
-    def __init__(self,parent = None):
+    def __init__(self, courseData, parent = None):
         QMainWindow.__init__(self,None)
-        self.setMinimumSize(622,838)
+        self.setMinimumSize(622,651)
         self.setWindowTitle("Select Course")
         self.parent = parent
+        self.courseData = courseData
         self.UIinit()
 
     def UIinit(self):
@@ -44,6 +48,8 @@ class addGradeAdmin(QMainWindow):
         self.back_button = form.findChild(QPushButton,"backButton")
         self.import_button = form.findChild(QPushButton,"importButton")
         self.export_button = form.findChild(QPushButton,"exportButton")
+        self.courseName = form.findChild(QLabel, "courseName")
+        self.courseID = form.findChild(QLabel, "courseID")
 
 
         self.header = self.grade_table.horizontalHeader()
@@ -64,28 +70,41 @@ class addGradeAdmin(QMainWindow):
         self.import_button.clicked.connect(self.importFile)
         self.export_button.clicked.connect(self.exportFile)
 
-        self.dummy()
-        
-        
-    def dummy(self):
-        self.grade_table.setRowCount(8)
-        for i in range(8):
-            self.grade_table.setItem(i,0,QTableWidgetItem("121"))
-            self.grade_table.setItem(i,1,QTableWidgetItem("EVAFDKJF"))
-            self.grade_table.setItem(i,2,QTableWidgetItem("-"))
+    def updatePage(self):
+        self.courseName.setText(self.courseData.getCourseName())
+        self.courseID.setText(self.courseData.getCourseID())
+        db = database.databaseGrade()
+        temp = db.getAllUserCourse(self.courseData.getCourseID())
+        grades = self.createBulk(temp)
+        id = db.getUserData(temp)
+        print(temp)
+        print(id)
+        self.grade_table.setRowCount(len(grades))
+        i = 0
+        for items in grades:
+            self.grade_table.setItem(i,0,QTableWidgetItem(items.getUserID()))
+            self.grade_table.setItem(i,1,QTableWidgetItem(id[items.getUserID()]))
+            self.grade_table.setItem(i,2,QTableWidgetItem(items.getGrade()))
+            i = i + 1
 
     def importFile(self):
         pass
 
     def exportFile(self):
         pass
-            
-        
 
     def saveData(self):
         pass
 
     def backPage(self):
         self.close()
+
+    def createBulk(self, data):
+        temp = []
+        for i in data:
+            temp.append(grade.gradeData(i, self.courseData))
+        return temp
+
+
 
     

@@ -228,6 +228,13 @@ class databaseCourse(database):
         resultset = self.query.fetchone()
         return resultset
 
+    def getCourseProfessor(self, professorID):
+        SQL = "SELECT * FROM \"GMan\".course WHERE \"professorID\"=%s"
+        DATA = (professorID,)
+        self.query.execute(SQL, DATA)
+        resultset = self.query.fetchall()
+        return resultset
+
     def getCourseFaculty(self, facultyID):
         SQL = "SELECT * FROM \"GMan\".course WHERE \"facultyID\"=%s ORDER BY \"majorID\", \"courseID\""
         DATA = (facultyID,)
@@ -337,11 +344,30 @@ class databaseGrade(database):
             resultsetCourse.append(self.query.fetchone())
         return resultsetData, resultsetCourse
 
-    def updateData(self, id, status, gpa):
+    def updateDataStudent(self, id, status, gpa):
         SQL = "UPDATE \"GMan\".student SET gpa=%s, status =%s WHERE \"user_id\"=%s"
         DATA = (gpa, status, id)
         self.query.execute(SQL, DATA)
         self.connection.commit()
+
+    def getAllUserCourse(self, courseID):
+        SQL = "SELECT * FROM  \"GMan\".\"data\" WHERE \"courseID\" = %s ORDER BY user_id"
+        DATA = (courseID,)
+        self.query.execute(SQL, DATA)
+        resultset = self.query.fetchall()
+        return resultset
+
+    def getUserData(self, userID):
+        temp = {}
+        for data in userID:
+            SQL = "SELECT user_id, \"name\", surname FROM  \"GMan\".student WHERE \"user_id\" = %s"
+            DATA = (data.user_id,)
+            self.query.execute(SQL, DATA)
+            resultset = self.query.fetchone()
+            print(resultset)
+            temp[data.user_id] = resultset.name + " " + resultset.surname
+        return temp
+
 
 class databaseAdmin(database):
     def getallMajors(self, faculty_id):

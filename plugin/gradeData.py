@@ -1,5 +1,6 @@
 class gradeData:
     def __init__(self, data ,courseData):
+        self.user_id = data.user_id
         self.course_id = data.courseID
         self.grade = data.grade
         self.year = data.year
@@ -32,3 +33,6 @@ class gradeData:
 
     def getCredit(self):
         return str(self.credits)
+
+    def getUserID(self):
+        return self.user_id
