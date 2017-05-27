@@ -337,6 +337,12 @@ class databaseGrade(database):
             resultsetCourse.append(self.query.fetchone())
         return resultsetData, resultsetCourse
 
+    def updateData(self, id, status, gpa):
+        SQL = "UPDATE \"GMan\".student SET gpa=%s, status =%s WHERE \"user_id\"=%s"
+        DATA = (gpa, status, id)
+        self.query.execute(SQL, DATA)
+        self.connection.commit()
+
 class databaseAdmin(database):
     def getallMajors(self, faculty_id):
         SQL = "SELECT * FROM  \"GMan\".majors WHERE \"facultyID\"=%s ORDER BY \"majorID\""

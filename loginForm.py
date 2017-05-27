@@ -49,8 +49,8 @@ class LoginUI(QMainWindow):
                 #raise database.invalidQueryException("Fields cannot be Empty")
             #status = self.login.userLogin(self.user_id.text(), self.password.text())
             #status = self.login.userLogin("professor", "DEFAULTPASS123456")
-            status = self.login.userLogin("admin", "DEFAULTPASS123456")
-            #status = self.login.userLogin("crazypet", "12345")
+            #status = self.login.userLogin("admin", "DEFAULTPASS123456")
+            status = self.login.userLogin("crazypet", "12345")
             if(status[0]):
                 self.wronglabel.setText("")
                 self.user_id.setText("")
