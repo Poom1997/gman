@@ -2,6 +2,8 @@ from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
 
+from addGradeForAdmin import addGradeAdmin
+
 class selectCourseUI(QMainWindow):
     def __init__(self,parent = None):
         QMainWindow.__init__(self,None)
@@ -67,8 +69,9 @@ class selectCourseUI(QMainWindow):
     def goTemp(self):
         self.parent.changePageLoginSection("addcourse")
 
-        def addGradeClick(self):
-            pass
+    def addGradeClick(self):
+        self.addGradeUI = addGradeAdmin(parent = self.parent)
+        self.addGradeUI.show()
 
 
 
