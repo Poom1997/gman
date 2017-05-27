@@ -95,12 +95,12 @@ class GUImanager(QMainWindow):
         if signal == "grade":
             print("grade")
             self.centralWidget().setCurrentWidget(self.select_course)
-            #self.centralWidget().setCurrentWidget(self.view_grade_widget)
-            #self.view_grade_widget.updatePage()
+            self.select_course.updatePage()
 
         if signal == "course":
             print("course")
             self.centralWidget().setCurrentWidget(self.see_course_widget)
+            self.see_course_widget.updatePage()
 
 ############################################## Admin signal ################################################ 
 
