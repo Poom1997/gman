@@ -47,19 +47,6 @@
       <string>ADD</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="profileButton">
-     <property name="geometry">
-      <rect>
-       <x>150</x>
-       <y>40</y>
-       <width>151</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Profile</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
@@ -125,32 +112,6 @@
       <string>G-Man Systems</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="gradeButton">
-     <property name="geometry">
-      <rect>
-       <x>300</x>
-       <y>40</y>
-       <width>151</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Grades</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="courseButton">
-     <property name="geometry">
-      <rect>
-       <x>450</x>
-       <y>40</y>
-       <width>151</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Courses</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_3">
      <property name="geometry">
       <rect>
@@ -206,7 +167,7 @@
        <string>Faculty ID</string>
       </property>
       <property name="textAlignment">
-       <set>AlignCenter</set>
+       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
       </property>
      </column>
      <column>
@@ -214,7 +175,7 @@
        <string>Faculty Name</string>
       </property>
       <property name="textAlignment">
-       <set>AlignCenter</set>
+       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
       </property>
      </column>
      <column>
@@ -222,21 +183,21 @@
        <string>Student Enrolled</string>
       </property>
       <property name="textAlignment">
-       <set>AlignCenter</set>
+       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
       </property>
      </column>
     </widget>
-    <widget class="QPushButton" name="logoutButton">
+    <widget class="QPushButton" name="profileButton">
      <property name="geometry">
       <rect>
-       <x>750</x>
+       <x>150</x>
        <y>40</y>
        <width>151</width>
        <height>25</height>
       </rect>
      </property>
      <property name="text">
-      <string>Logout</string>
+      <string>Profile</string>
      </property>
     </widget>
     <widget class="QLabel" name="barLabel_2">
@@ -252,7 +213,7 @@
       <string/>
      </property>
     </widget>
-    <widget class="QPushButton" name="othersButton">
+    <widget class="QPushButton" name="courseButton">
      <property name="geometry">
       <rect>
        <x>600</x>
@@ -261,25 +222,98 @@
        <height>25</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
      <property name="text">
-      <string>Other Option</string>
+      <string>Courses</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="othersButton">
+     <property name="geometry">
+      <rect>
+       <x>750</x>
+       <y>40</y>
+       <width>151</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Other options</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="facultiesButton">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>40</y>
+       <width>151</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Faculties</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="majorsButton">
+     <property name="geometry">
+      <rect>
+       <x>450</x>
+       <y>40</y>
+       <width>151</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Majors</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="barLabel_3">
+     <property name="geometry">
+      <rect>
+       <x>-10</x>
+       <y>0</y>
+       <width>901</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
      </property>
     </widget>
     <zorder>barLabel_2</zorder>
     <zorder>addFacButton</zorder>
-    <zorder>profileButton</zorder>
     <zorder>label_2</zorder>
     <zorder>label_4</zorder>
     <zorder>facultyName</zorder>
     <zorder>label_15</zorder>
-    <zorder>gradeButton</zorder>
-    <zorder>courseButton</zorder>
     <zorder>label_3</zorder>
     <zorder>FacultyID</zorder>
     <zorder>homeButton</zorder>
     <zorder>facultyTable</zorder>
-    <zorder>logoutButton</zorder>
+    <zorder>profileButton</zorder>
+    <zorder>courseButton</zorder>
     <zorder>othersButton</zorder>
+    <zorder>facultiesButton</zorder>
+    <zorder>majorsButton</zorder>
+    <zorder>barLabel_3</zorder>
    </widget>
   </widget>
  </widget>

@@ -273,7 +273,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Temporary</string>
+      <string>Message</string>
      </property>
     </widget>
     <widget class="QLabel" name="barLabel_2">

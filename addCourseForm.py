@@ -12,6 +12,7 @@ class addCourseUI(QMainWindow):
         palette.setBrush(QPalette.Background,QBrush(QPixmap("resources/imagess/background.png")))
         self.edu_logo = QPixmap("resources/images/educationLogo.png")
         self.setPalette(palette)
+        self.bar = QPixmap("resources/images/bar.png")
         self.parent = parent
         self.UIinit()
 
@@ -19,6 +20,18 @@ class addCourseUI(QMainWindow):
         loader = QUiLoader()
         form = loader.load("resources/UI/addCourse.ui",None)
         self.setCentralWidget(form)
+        
+        #Upper Bar
+        self.bar_group = form.findChild(QLabel,"barLabel")
+        self.bar_group.setPixmap(self.bar)
+        self.home_button = form.findChild(QPushButton,"homeButton")
+        self.profile_button = form.findChild(QPushButton,"profileButton")
+        self.faculties_button = form.findChild(QPushButton,"facultiesButton")
+        self.majors_button = form.findChild(QPushButton,"majorsButton")
+        self.course_button = form.findChild(QPushButton,"courseButton")
+        self.other_button = form.findChild(QPushButton, "othersButton")
+
+        #page properties
         self.home_button = form.findChild(QPushButton, "homeButton")
         self.status = form.findChild(QLabel,"status")
         self.course_code = form.findChild(QLineEdit,"courseCode")
@@ -38,13 +51,36 @@ class addCourseUI(QMainWindow):
 
         self.save_button = form.findChild(QPushButton,"saveButton")
         self.clear_button = form.findChild(QPushButton,"clearButton")
-        
+
+        #Upper Bar pressed
         self.home_button.clicked.connect(self.goHome)
+        self.faculties_button.clicked.connect(self.goFac)
+        self.majors_button.clicked.connect(self.goMaj)
+        self.other_button.clicked.connect(self.goOther)
+        self.course_button.clicked.connect(self.goCourse)
+        self.profile_button.clicked.connect(self.goProfile)
+
+        #Internal Button Pressed
         self.save_button.clicked.connect(self.saveCourse)
         self.clear_button.clicked.connect(self.clearField)
 
     def goHome(self):
         self.parent.changePageLoginSection("home")
+
+    def goProfile(self):
+        self.parent.changePageLoginSection("profile")
+
+    def goFac(self):
+        self.parent.changePageLoginSection("addfaculties")
+
+    def goMaj(self):
+        self.parent.changePageLoginSection("addmajor")
+
+    def goCourse(self):
+        self.parent.changePageLoginSection("addcourse")
+
+    def goOther(self):
+        self.parent.changePageLoginSection("otherOption")
 
     def clearField(self):
         self.course_code.setText("")
