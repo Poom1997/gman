@@ -2,6 +2,8 @@ from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
 
+from addGradeFormAdmin import addGradeAdmin
+
 class selectCourseUI(QMainWindow):
     def __init__(self,parent = None):
         QMainWindow.__init__(self,None)
@@ -9,8 +11,8 @@ class selectCourseUI(QMainWindow):
         self.setWindowTitle("Select Course")
         palette = QPalette()
         palette.setBrush(QPalette.Background,QBrush(QPixmap("resources/imagess/background.png")))
-        self.edu_logo = QPixmap("resources/images/educationLogo.png")
         self.setPalette(palette)
+        self.bar = QPixmap("resources/images/bar.png")
         self.parent = parent
         self.UIinit()
 
@@ -67,8 +69,9 @@ class selectCourseUI(QMainWindow):
     def goTemp(self):
         self.parent.changePageLoginSection("addcourse")
 
-        def addGradeClick(self):
-            pass
+    def addGradeClick(self):
+        self.addGradeUI = addGradeAdmin(parent = self.parent)
+        self.addGradeUI.show()
 
 
 
