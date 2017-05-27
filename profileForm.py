@@ -94,20 +94,61 @@ class profileUI(QMainWindow):
             self.major.setText(data.getMajorName())
             self.year.setText(data.year)
             self.address.setText(data.getAddress())
+
+            # Status
+            status = data.getStatus()
+            if (status == 0):
+                self.student_status.setText("Learning")
+            elif (status == 1):
+                self.student_status.setText("Probation")
+            elif (status == 2):
+                self.student_status.setText("Retired")
+            elif (status == 3):
+                self.student_status.setText("Withdrawn")
+            elif (status == 4):
+                self.student_status.setText("Suspended")
+            else:
+                self.student_status.setText("Unknown")
+
+        elif (data.type() == "PROFESSOR"):
+            self.id.setText(data.getID())
+            self.name.setText(data.getName())
+            self.surname.setText(data.getSurname())
+            self.email.setText(data.getEmail())
+            self.faculty.setText(data.getFacultyName())
+            self.major.setText(data.getMajorName())
+            self.year.setText(data.getYear())
+            self.address.setText(data.getAddress())
+
+            # Status
+            status = data.getStatus()
+            if (status == 0):
+                self.student_status.setText("Lecturer")
+            elif (status == 1):
+                self.student_status.setText("Assist. Prof.")
+            elif (status == 2):
+                self.student_status.setText("Assoc. Prof.")
+            elif (status == 3):
+                self.student_status.setText("Professor.")
+            elif (status == 4):
+                self.student_status.setText("Retired")
+            else:
+                self.student_status.setText("Unknown")
+
+        elif (data.type() == "ADMIN"):
+            self.id.setText(data.getID())
+            self.name.setText(data.getName())
+            self.surname.setText(data.getSurname())
+            self.email.setText(data.getEmail())
+            self.faculty.setText(data.getFacultyName())
+            self.major.setText(data.getMajorName())
+            self.year.setText(data.getYear())
+            self.address.setText(data.getAddress())
+
+            # Status
+            self.student_status.setText("Admin")
+
         self.profile_pic.setPixmap(QPixmap(data.pictureGen()))
         data.pictureDataProtect()
 
-        #Status
-        status = data.getStatus()
-        if(status == 0):
-            self.student_status.setText("Learning")
-        elif(status==1):
-            self.student_status.setText("Probation")
-        elif (status == 2):
-            self.student_status.setText("Retired")
-        elif (status == 3):
-            self.student_status.setText("Withdrawn")
-        elif (status == 4):
-            self.student_status.setText("Suspended")
-        else:
-            self.student_status.setText("Unknown")
+

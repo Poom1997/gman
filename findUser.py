@@ -50,12 +50,16 @@ class findUserUI(QMainWindow):
             self.first_name.setText(data[1].name)
             self.surname.setText(data[1].surname)
             self.email.setText(data[1].email)
-            self.faculty_id.setText(str(data[1].facultyID))
-            self.major_id.setText(str(data[1].majorID))
             status = int(data[0].user_type)
             if (status == 0):
                 self.type.setText("STUDENT")
+                self.faculty_id.setText(str(data[1].facultyID))
+                self.major_id.setText(str(data[1].majorID))
             elif (status == 1):
                 self.type.setText("PROFESSOR")
+                self.faculty_id.setText(str(data[1].facultyID))
+                self.major_id.setText("N/A")
             elif (status == 2):
                 self.type.setText("ADMINISTRATOR")
+                self.faculty_id.setText("N/A")
+                self.major_id.setText("N/A")

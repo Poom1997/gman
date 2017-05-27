@@ -71,6 +71,11 @@ class addUserUI(QMainWindow):
         self.dbUser = database.databaseUser()
         if(self.status_set == 0):
             status = self.dbUser.createStudent(self.user_id.text(),self.first_name.text(), self.surname.text(), self.email.text(),self.faculty_id.text(), self.major_id.text())
+        elif(self.status_set == 1):
+            status = self.dbUser.createProfessor(self.user_id.text(),self.first_name.text(), self.surname.text(), self.email.text(),self.faculty_id.text())
+        elif (self.status_set == 2):
+            status = self.dbUser.createAdmin(self.user_id.text(), self.first_name.text(), self.surname.text(),
+                                                 self.email.text())
         if (status[0] == 1):
             self.parent.showOK("User Saved", "The User has been added successfully")
             self.dbUser.disconnect()

@@ -177,13 +177,16 @@ class viewGradeUI(QMainWindow):
         self.crs_input.setText(str(crsGPA))
         if(gpa >= 2.00):
             self.status_input.setText("PASS")
+            status = 0
         elif(gpa < 2.00):
             self.status_input.setText("PROBATION")
+            status = 1
         elif(gpa < 1.00):
             self.status_input.setText("RETIRE")
+            status = 2
         else:
             self.status_input.setText("ERROR")
-
+        db.updateData(data.getID, status, gpa)
         db.disconnect()
 
     def createBulk(self, data, courseData):

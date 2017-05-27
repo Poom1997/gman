@@ -82,7 +82,7 @@ class student(user):
         return "STUDENT"
 
 class professor(user):
-    def __init__(self, data, username, address, faculty, major):
+    def __init__(self, data, username, address, faculty):
         super().__init__(data,username, address)
         self.status = data.status
         self.faculty = faculty
@@ -92,19 +92,52 @@ class professor(user):
         return temp
 
     def getMajorName(self):
-        return "-"
+        return "N/A"
+
+    def getMajorID(self):
+        temp = "N/A"
+        return temp
 
     def getFacultyID(self):
         temp = self.faculty.facultyID
         return temp
 
-    def getMajorID(self):
-        temp = self.major.majorID
-        return temp
+    def getStatus(self):
+        return self.status
+
+    def getYear(self):
+        return "N/A"
+
+    def type(self):
+        return "PROFESSOR"
+
+class admin(user):
+    def __init__(self, data, username, address):
+        super().__init__(data, username, address)
+        self.status = data.status
 
     def getStatus(self):
         return self.status
 
+    def getYear(self):
+        return "N/A"
+
+    def getFacultyName(self):
+        temp = "N/A"
+        return temp
+
+    def getMajorName(self):
+        temp = "N/A"
+        return temp
+
+    def getFacultyID(self):
+        temp = "N/A"
+        return temp
+
+    def getMajorID(self):
+        temp = "N/A"
+        return temp
+
     def type(self):
-        return "PROFESSOR"
+        return "ADMIN"
 
