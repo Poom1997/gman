@@ -1,6 +1,7 @@
 from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
+from datetime import datetime
 import plugin.databaseConn as database
 import plugin.gradeData as grade
 
@@ -34,6 +35,7 @@ class addGradeAdmin(QMainWindow):
         self.setWindowTitle("Select Course")
         self.parent = parent
         self.courseData = courseData
+        self.userDataCheck = {}
         self.UIinit()
 
     def UIinit(self):
@@ -74,18 +76,19 @@ class addGradeAdmin(QMainWindow):
         self.courseName.setText(self.courseData.getCourseName())
         self.courseID.setText(self.courseData.getCourseID())
         db = database.databaseGrade()
-        temp = db.getAllUserCourse(self.courseData.getCourseID())
+        temp = db.getAllUserCourse(self.courseData.getCourseID(),datetime.now().year)
         grades = self.createBulk(temp)
         id = db.getUserData(temp)
-        print(temp)
-        print(id)
-        self.grade_table.setRowCount(len(grades))
+        self.size = len(grades)
+        self.grade_table.setRowCount(self.size)
         i = 0
         for items in grades:
             self.grade_table.setItem(i,0,QTableWidgetItem(items.getUserID()))
             self.grade_table.setItem(i,1,QTableWidgetItem(id[items.getUserID()]))
             self.grade_table.setItem(i,2,QTableWidgetItem(items.getGrade()))
+            self.userDataCheck[items.getUserID()] = id[items.getUserID()]
             i = i + 1
+        print(self.userDataCheck)
 
     def importFile(self):
         pass
@@ -94,7 +97,28 @@ class addGradeAdmin(QMainWindow):
         pass
 
     def saveData(self):
-        pass
+        tempData = []
+        for i in range(0, self.size):
+            tempData.append([])
+            tempData[i].append(self.grade_table.item(i,0).text())
+            tempGrade = self.grade_table.item(i,2).text().upper()
+            if(self.checkData(tempGrade)):
+                tempData[i].append(tempGrade)
+                db = database.databaseGrade()
+                if (db.updateUserGrade(tempData, self.courseData.getCourseID(), datetime.now().year)):
+                    self.parent.parent.showOK("Grade Successfully Saved",
+                                              "The data entered has been successfully saved in the system.")
+                    db.disconnect()
+                    self.close()
+            else:
+                self.parent.parent.showERROR("Error","The Grade you entered for " + self.grade_table.item(i,0).text() + " is invalid. Please Check." )
+
+
+    def checkData(self, grade):
+        data = ["A", "B+", "B", "C+", "C", "D+", "D", "F"]
+        if(grade in data):
+            return True
+        return False
 
     def backPage(self):
         self.close()

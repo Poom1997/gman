@@ -6,7 +6,7 @@ import plugin.databaseConn as database
 import plugin.course as courseItem
 
 class findCourseUI(QMainWindow):
-    def __init__(self,takenCourse, currentCourse, parent = None ):
+    def __init__(self,takenCourse,allTakenCourseNORE,allTakenCourseNOOPEN, currentCourse, parent = None ):
         QMainWindow.__init__(self,None)
         self.setMinimumSize(900,581)
         self.setWindowTitle("Find_Course")
@@ -14,6 +14,8 @@ class findCourseUI(QMainWindow):
         self.UIinit()
         self.allTakenCourse = takenCourse
         self.currentCourse = currentCourse
+        self.allTakenCourseNORE = allTakenCourseNORE
+        self.allTakenCourseNOOPEN = allTakenCourseNOOPEN
 
     def UIinit(self):
         loader = QUiLoader()
@@ -58,6 +60,7 @@ class findCourseUI(QMainWindow):
         self.close()
 
     def search(self):
+        print(self.allTakenCourseNOOPEN)
         data = self.db.getCourseFaculty(self.faculty_name.text())
         allCourse = self.createBulk(data)
         self.course_table.setRowCount(len(allCourse))
@@ -92,12 +95,17 @@ class findCourseUI(QMainWindow):
                         limit = item.text()
                         limit = int(limit)
                     colCount += 1
-            if (tempID in self.allTakenCourse or tempID in self.currentCourse):
+
+            if (tempID in self.allTakenCourseNOOPEN):
+                self.parent.parent.showERROR("Course Not Avaliable",
+                                      "This course is not open for this term. You cannot add this course.")
+            elif (tempID in self.allTakenCourse and tempID in self.allTakenCourseNORE or tempID in self.currentCourse):
                 self.parent.parent.showERROR("Course Error",
                                       "You have already taken the course. Therefore, you cannot add this course.")
             elif (limit == 0):
                 self.parent.parent.showERROR("Course Full",
                                       "This course is now filled. Therefore, you cannot add this course.")
+
             elif (pre in self.allTakenCourse or len(pre) < 5):
                 if (self.db.addCourseUser(self.data.getID(), self.data.getYear(), self.data.getTerm(), tempID,
                                           datetime.now().year, limit)):
@@ -106,7 +114,7 @@ class findCourseUI(QMainWindow):
             else:
                 self.parent.parent.showERROR("Pre-requisite Course Error", "You have not taken the required course required for this course.\
                                                                                 Please complete that course before adding this course.")
-            self.parent.updateCourse()
+            self.parent.updatePage()
 
     def createBulk(self, data):
         temp = []
