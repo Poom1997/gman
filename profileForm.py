@@ -147,7 +147,7 @@ class profileUI(QMainWindow):
 
             # Status
             self.student_status.setText("Admin")
-            
+
         self.profile_pic.setPixmap(QPixmap(data.pictureGen()))
         data.pictureDataProtect()
 
