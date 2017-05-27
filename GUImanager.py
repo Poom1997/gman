@@ -3,10 +3,10 @@ from mainForm import *
 from pwForm import *
 from profileForm import *
 from studentCourseForm import *
+from adminSelectCourse import *
 from addMajorAdmin import *
 from addFacultyAdmin import *
 from viewGradeForm import *
-from addGradeFormAdmin import *
 from addCourseForm import *
 from PySide.QtCore import *
 from PySide.QtGui import *
@@ -39,8 +39,8 @@ class GUImanager(QMainWindow):
         self.student_course_widget = StudentCourseUI(self)
         self.add_faculties_for_admin = AddFacultyUI(self)
         self.profile_widget = profileUI(self)
+        self.select_course = selectCourseUI(self)
 
-        self.add_grade_widget = addGradeAdmin(self)
         
         self.central_widget.addWidget(self.login_widget)
         self.central_widget.addWidget(self.view_grade_widget)
@@ -51,34 +51,45 @@ class GUImanager(QMainWindow):
         self.central_widget.addWidget(self.addCourse_widget)
         self.central_widget.addWidget(self.profile_widget)
         self.central_widget.addWidget(self.add_major_for_admin_widget)
+        self.central_widget.addWidget(self.select_course)
         self.central_widget.addWidget(self.add_faculties_for_admin)
 
-        self.central_widget.addWidget(self.add_grade_widget)
 
     def changePageLoginSection(self,signal = None):
         if signal == "login":
             print("login")
             self.centralWidget().setCurrentWidget(self.login_widget)
+
         if signal == "forget":
             print("forget")
             self.centralWidget().setCurrentWidget(self.pw_widget)
+
         if signal == "home":
             print("home")
             self.centralWidget().setCurrentWidget(self.main_widget)
+
         if signal == "profile":
             print("profile")
             self.centralWidget().setCurrentWidget(self.profile_widget)
             self.profile_widget.updatePage()
+
         if signal == "grade":
             print("grade")
-            self.centralWidget().setCurrentWidget(self.view_grade_widget)
-            self.view_grade_widget.updatePage()
+            self.centralWidget().setCurrentWidget(self.select_course)
+            #self.centralWidget().setCurrentWidget(self.view_grade_widget)
+            #self.view_grade_widget.updatePage()
+
         if signal == "course":
             print("course")
             self.centralWidget().setCurrentWidget(self.student_course_widget)
             self.student_course_widget.updateCourse()
+
         if signal == "addcourse":
             print("addcourse")
+            self.centralWidget().setCurrentWidget(self.addCourse_widget)
+
+        if signal == "addfaculties":
+            print("addfaculties")
             self.centralWidget().setCurrentWidget(self.add_faculties_for_admin)
             self.add_faculties_for_admin.updatePage()
 
