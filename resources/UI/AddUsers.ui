@@ -63,13 +63,13 @@
       <rect>
        <x>20</x>
        <y>20</y>
-       <width>111</width>
+       <width>121</width>
        <height>31</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <pointsize>15</pointsize>
+       <pointsize>17</pointsize>
       </font>
      </property>
      <property name="text">
@@ -265,6 +265,14 @@
        <height>25</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
     </widget>
     <widget class="QLineEdit" name="firstName">
      <property name="geometry">
@@ -274,6 +282,11 @@
        <width>211</width>
        <height>25</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
      </property>
     </widget>
     <widget class="QLineEdit" name="surName">
@@ -285,6 +298,11 @@
        <height>25</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
     </widget>
     <widget class="QLineEdit" name="eMail">
      <property name="geometry">
@@ -294,6 +312,11 @@
        <width>211</width>
        <height>25</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
      </property>
     </widget>
     <widget class="QLineEdit" name="userName">
@@ -305,6 +328,14 @@
        <height>25</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
     </widget>
     <widget class="QLineEdit" name="type">
      <property name="geometry">
@@ -314,6 +345,11 @@
        <width>211</width>
        <height>25</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
      </property>
     </widget>
     <widget class="QLineEdit" name="facultyID">
@@ -325,6 +361,11 @@
        <height>25</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
     </widget>
     <widget class="QLineEdit" name="majorID">
      <property name="geometry">
@@ -334,6 +375,11 @@
        <width>211</width>
        <height>25</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
      </property>
     </widget>
     <widget class="QPushButton" name="add">
@@ -358,7 +404,7 @@
      <property name="geometry">
       <rect>
        <x>760</x>
-       <y>120</y>
+       <y>130</y>
        <width>111</width>
        <height>31</height>
       </rect>

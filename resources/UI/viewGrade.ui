@@ -98,11 +98,16 @@
     <widget class="QPushButton" name="printButton">
      <property name="geometry">
       <rect>
-       <x>750</x>
+       <x>740</x>
        <y>530</y>
-       <width>121</width>
+       <width>131</width>
        <height>31</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>Print Grade</string>

@@ -4,6 +4,7 @@ from PySide.QtUiTools import *
 from datetime import datetime
 import plugin.databaseConn as database
 import plugin.gradeData as grade
+from sendMessageForm import sendMessageUI
 
 
 class QTableWidgetDisabledItem(QItemDelegate):
@@ -31,7 +32,7 @@ class QTableWidgetDisabledItem(QItemDelegate):
 class addGradeAdmin(QMainWindow):
     def __init__(self, courseData, parent = None):
         QMainWindow.__init__(self,None)
-        self.setMinimumSize(622,651)
+        self.setMinimumSize(622,738)
         self.setWindowTitle("Select Course")
         self.parent = parent
         self.courseData = courseData
@@ -52,6 +53,7 @@ class addGradeAdmin(QMainWindow):
         self.export_button = form.findChild(QPushButton,"exportButton")
         self.courseName = form.findChild(QLabel, "courseName")
         self.courseID = form.findChild(QLabel, "courseID")
+        self.message = form.findChild(QPushButton, "messageButton")
 
 
         self.header = self.grade_table.horizontalHeader()
@@ -71,6 +73,7 @@ class addGradeAdmin(QMainWindow):
         self.back_button.clicked.connect(self.backPage)
         self.import_button.clicked.connect(self.importFile)
         self.export_button.clicked.connect(self.exportFile)
+        self.message.clicked.connect(self.createMessage)
 
     def updatePage(self):
         self.courseName.setText(self.courseData.getCourseName())
@@ -89,6 +92,10 @@ class addGradeAdmin(QMainWindow):
             self.userDataCheck[items.getUserID()] = id[items.getUserID()]
             i = i + 1
         print(self.userDataCheck)
+
+    def createMessage(self):
+        self.createM = sendMessageUI(parent = self.parent)
+        self.createM.show()
 
     def importFile(self):
         pass

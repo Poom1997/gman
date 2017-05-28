@@ -98,6 +98,11 @@
        <height>25</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
     </widget>
     <widget class="QPushButton" name="searchButton">
      <property name="geometry">
@@ -107,6 +112,11 @@
        <width>161</width>
        <height>25</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>Search</string>
@@ -120,6 +130,11 @@
        <width>121</width>
        <height>31</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>Close</string>
@@ -215,6 +230,11 @@
        <width>151</width>
        <height>31</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>Add Selected</string>
