@@ -60,7 +60,6 @@ class findCourseUI(QMainWindow):
         self.close()
 
     def search(self):
-        print(self.allTakenCourseNOOPEN)
         data = self.db.getCourseFaculty(self.faculty_name.text())
         allCourse = self.createBulk(data)
         self.course_table.setRowCount(len(allCourse))

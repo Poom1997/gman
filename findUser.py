@@ -2,6 +2,7 @@ from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
 import plugin.databaseConn as database
+from sendMessageForm import sendMessageUI
 
 class findUserUI(QMainWindow):
     def __init__(self,parent = None):
@@ -19,6 +20,13 @@ class findUserUI(QMainWindow):
         #QPushButton
         self.cancel_button = form.findChild(QPushButton,"closeButton")
         self.search_button = form.findChild(QPushButton,"searchButton")
+        self.sendMessage = form.findChild(QPushButton, "sendMessage")
+        self.suspend = form.findChild(QPushButton, "suspend")
+        self.block = form.findChild(QPushButton, "blockAccess")
+        self.graduate = form.findChild(QPushButton, "graduate")
+        self.suspend.setEnabled(False)
+        self.graduate.setEnabled(False)
+        self.block.setEnabled(False)
 
         #LineEdit
         self.search_user_id = form.findChild(QLineEdit,"enterUser")
@@ -37,6 +45,10 @@ class findUserUI(QMainWindow):
         self.search_user_id.returnPressed.connect(self.search)
         self.cancel_button.clicked.connect(self.cancel)
         self.search_button.clicked.connect(self.search)
+        self.sendMessage.clicked.connect(self.sendMessageUser)
+        self.suspend.clicked.connect(self.suspend)
+        self.graduate.clicked.connect(self.graduate)
+        self.block.clicked.connect(self.block)
 
     def cancel(self):
         self.close()
@@ -50,16 +62,40 @@ class findUserUI(QMainWindow):
             self.first_name.setText(data[1].name)
             self.surname.setText(data[1].surname)
             self.email.setText(data[1].email)
-            status = int(data[0].user_type)
-            if (status == 0):
+            self.status = int(data[0].user_type)
+            if (self.status == 0):
                 self.type.setText("STUDENT")
+                self.suspend.setEnabled(True)
+                self.graduate.setEnabled(True)
+                self.block.setEnabled(True)
                 self.faculty_id.setText(str(data[1].facultyID))
                 self.major_id.setText(str(data[1].majorID))
-            elif (status == 1):
+            elif (self.status == 1):
                 self.type.setText("PROFESSOR")
+                self.suspend.setEnabled(True)
+                self.graduate.setText("Retire")
+                self.graduate.setEnabled(True)
+                self.block.setEnabled(False)
                 self.faculty_id.setText(str(data[1].facultyID))
                 self.major_id.setText("N/A")
-            elif (status == 2):
+            elif (self.status == 2):
                 self.type.setText("ADMINISTRATOR")
+                self.suspend.setEnabled(False)
+                self.graduate.setEnabled(False)
+                self.block.setEnabled(False)
                 self.faculty_id.setText("N/A")
                 self.major_id.setText("N/A")
+
+    def sendMessageUser(self):
+        self.createM = sendMessageUI(self.search_user_id.text(),parent=self.parent)
+        self.createM.show()
+
+    def suspend(self):
+        pass
+
+    def graduate(self):
+        pass
+
+    def block(self):
+        pass
+

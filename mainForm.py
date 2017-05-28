@@ -2,6 +2,7 @@ from sendMessageForm import sendMessageUI
 from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
+import plugin.databaseConn as database
 
 class mainUI(QMainWindow):
     def __init__(self,parent = None):
@@ -13,6 +14,7 @@ class mainUI(QMainWindow):
         self.setPalette(palette)
         self.bar = QPixmap("resources/images/bar.png")
         self.parent = parent
+        self.db = database.databaseMessage()
         self.UIinit()
 
     def UIinit(self):
@@ -48,8 +50,6 @@ class mainUI(QMainWindow):
         self.dismiss_button.clicked.connect(self.clearMessage)
         self.message_box.setReadOnly(True)
                                              
-                                            
-
 
     def goHome(self):
         self.parent.changePageLoginSection("home")
@@ -102,15 +102,22 @@ class mainUI(QMainWindow):
         self.parent.changePageLoginSection("login")
 
     def updatePage(self):
-        data = self.parent.getCurrentUser()
-        if (data.type() == "ADMIN"):
+        self.data = self.parent.getCurrentUser()
+        if (self.data.type() == "ADMIN"):
             self.grade_button.setText("Faculties")
             self.course_button.setText("Majors")
             self.temp.setText("Courses")
             self.temp2.setText("Other options")
+        msg = self.db.getMessage(self.data.getID())
+        temp = ""
+        for messages in msg:
+            temp = "<<" + temp + messages.time + ">> - MESSAGE FROM: "+ messages.fromUser+ " : " + messages.message + "\n"
+        self.message_box.setText(temp)
 
     def clearMessage(self):
+        self.db.dismissMessage(self.data.getID())
         self.message_box.setText("")
+
 
     
         

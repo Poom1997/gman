@@ -23,12 +23,11 @@ class searchCourseByProfIDUI(QMainWindow):
         self.cancel_button = form.findChild(QPushButton,"closeButton")
         
         #LineEdit
-        self.course_ID = form.findChild(QLineEdit,"profID")
+        self.professor_ID = form.findChild(QLineEdit,"profID")
 
         #Table
         self.course_table = form.findChild(QTableWidget,"tableWidget")
-        self.course_table.setSelectionMode(QAbstractItemView.SingleSelection)
-        self.course_table.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.course_table.setSelectionMode(QAbstractItemView.NoSelection)
         self.course_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
         self.course_table_header = self.course_table.horizontalHeader()
@@ -48,17 +47,33 @@ class searchCourseByProfIDUI(QMainWindow):
 
 
     def cancel(self):
+        self.db.disconnect()
         self.close()
 
     def search(self):
-        pass
+        self.db = database.databaseCourse()
+        data = self.db.getCourseProfessor(self.professor_ID.text())
+        allCourse = self.createBulk(data)
+        self.course_table.setRowCount(len(allCourse))
+        i = 0
+        for course in allCourse:
+            self.course_table.setItem(i, 0, QTableWidgetItem(course.getCourseID()))
+            self.course_table.setItem(i, 1, QTableWidgetItem(course.getCourseName()))
+            self.course_table.setItem(i, 2, QTableWidgetItem(course.getMajorID()))
+            self.course_table.setItem(i, 3, QTableWidgetItem(course.getYear()))
+            self.course_table.setItem(i, 4, QTableWidgetItem(course.getTime()))
+            self.course_table.setItem(i, 5, QTableWidgetItem(course.getLocation()))
+            self.course_table.setItem(i, 6, QTableWidgetItem(course.getCredit()))
+            self.course_table.setItem(i, 7, QTableWidgetItem(course.getMaxStud()))
+            self.course_table.setItem(i, 8, QTableWidgetItem(course.getPre()))
+            i = i + 1
 
-    
+    def createBulk(self, data):
+        temp = []
+        for i in data:
+            temp.append(courseItem.course(i))
+        return temp
+
         
 
-    
-    
-
-    
-        
     
