@@ -1,26 +1,33 @@
+import bcrypt
 import psycopg2
 import psycopg2.extras
-import bcrypt
 
+##Database Exceptional Class##
 class invalidQueryException(Exception): pass
 
+##Basic Connection Class for Database##
 class database:
     def __init__(self):
         self.__HOST = "myawsdatabase.c7mfxxgrjakk.ap-southeast-1.rds.amazonaws.com"
-        #self.__HOST = "localhost" #**EMERGENCY_DEBUG**
+        #self.__HOST = "localhost" ##**For Local Database**##
         self.__DATABASE = "crazypetData"
         self.__DBUSER = "app"
         self.__DBPASS = "2rG3RSfTZ1"
         try:
+            ##Opening Database Connection##
             self.connection = psycopg2.connect(host=self.__HOST,database=self.__DATABASE, user=self.__DBUSER, password=self.__DBPASS)
             self.query = self.connection.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor)
+        ##Cannot Connect to Database##
         except psycopg2.OperationalError:
             raise invalidQueryException("Database Connection Error!")
 
     def disconnect(self):
         self.connection.close()
 
+##Database Class for Login-Related Functions##
 class databaseLogin(database):
+
+    ##Basic Login use to Login User##
     def userLogin(self, username, password):
         password = bytes(password, encoding="ascii")
         SQL = "SELECT password, user_id, user_type, username, status FROM \"GMan\".user_login WHERE username = %s"
@@ -35,6 +42,7 @@ class databaseLogin(database):
         else:
             raise invalidQueryException("Either Username or Password is Incorrect")
 
+    ##Create New Login for new Users##
     def createLogin(self,userid,username,email,password = "DEFAULTPASS123456",userStatus= 0, userType = 0):
         passwd_enc = bytes(password,encoding ="ascii")
         passwd_hashed = bcrypt.hashpw(passwd_enc, bcrypt.gensalt(14))
@@ -52,6 +60,7 @@ class databaseLogin(database):
         except psycopg2.IntegrityError as e:
             return ("EXISTS",0)
 
+    ##Edit Login Data##
     def editLogin(self, username, email, userStatus=0):
         SQL = "UPDATE \"GMan\".user_login SET email=%s,status=%s WHERE username=%s"
         DATA = (email, str(userStatus),username)
@@ -59,6 +68,7 @@ class databaseLogin(database):
         self.connection.commit()
         return 1
 
+    ##Edit Login Password##
     def changePassword(self, username, oldPassword, newPassword):
         password = bytes(oldPassword, encoding="ascii")
         SQL = "SELECT password FROM \"GMan\".user_login WHERE username = %s"
@@ -79,6 +89,7 @@ class databaseLogin(database):
         else:
             raise invalidQueryException("Either Username or Password is Incorrect")
 
+    ##Reset User Password##
     def resetPassword(self, user_id, username, email, new_pw):
         passwd_enc = bytes(new_pw, encoding="ascii")
         passwd_hashed = bcrypt.hashpw(passwd_enc, bcrypt.gensalt(14))
@@ -88,6 +99,7 @@ class databaseLogin(database):
         self.query.execute(SQL, DATA)
         self.connection.commit()
 
+    ##Block and Un-Block Users##
     def blockUser(self, command, status, userid):
         if (command == "BLOCK" and status == 0):
             SQL = "UPDATE \"GMan\".user_login SET status=1 WHERE user_id=%s"
@@ -118,6 +130,7 @@ class databaseLogin(database):
         self.connection.commit()
         return 1
 
+    ##Suspend and Un-Suspend Users##
     def suspendUser(self, command, type, userid):
         if(command == "SUSP" and type == "STUDENT"):
             SQL = "UPDATE \"GMan\".student SET status=4 WHERE user_id=%s"
@@ -132,6 +145,7 @@ class databaseLogin(database):
         self.connection.commit()
         return 1
 
+    ##Retire Users##
     def retireUser(self, type, userid):
         if(type == "STUDENT"):
             SQL = "UPDATE \"GMan\".student SET status=5 WHERE user_id=%s"
@@ -142,12 +156,14 @@ class databaseLogin(database):
         self.connection.commit()
         return 1
 
+    ##Delete Login Data##
     def deleteLogin(self,userid,username):
         SQL = "DELETE FROM \"GMan\".user_login WHERE user_id=%s AND username =%s";
         DATA = (userid, username)
         self.query.execute(SQL, DATA)
         self.connection.commit()
 
+    ##Get User Information##
     def getInformationUser(self, userid):
         SQL = "SELECT user_type, username, user_id FROM \"GMan\".user_login WHERE user_id = %s"
         DATA = (userid,)
@@ -172,7 +188,10 @@ class databaseLogin(database):
             return (resultset,resultsetData, resultset.user_type)
         return(None, None,None)
 
+##Database Class for User-Related Functions##
 class databaseUser(database):
+
+    ##Get User Information##
     def getInfo(self, inp_data):
         if(inp_data[2] == 0):
             SQL = "SELECT * FROM \"GMan\".student WHERE user_id =%s"
@@ -194,6 +213,7 @@ class databaseUser(database):
             resultset = self.query.fetchone()
             return resultset
 
+    ##Get User Address##
     def getAddress(self, inp_data):
         SQL = "SELECT * FROM \"GMan\".address WHERE user_id =%s"
         DATA = (inp_data[1],)
@@ -201,6 +221,7 @@ class databaseUser(database):
         resultset = self.query.fetchone()
         return resultset
 
+    ##Get Faculty Information##
     def getFaculty(self, inp_data):
         SQL = "SELECT * FROM \"GMan\".faculty WHERE \"facultyID\" =%s"
         DATA = (inp_data,)
@@ -208,6 +229,7 @@ class databaseUser(database):
         resultset = self.query.fetchone()
         return resultset
 
+    ##Get Major Information##
     def getMajor(self, inp_data):
         SQL = "SELECT * FROM \"GMan\".majors WHERE \"majorID\" =%s"
         DATA = (inp_data,)
@@ -215,6 +237,7 @@ class databaseUser(database):
         resultset = self.query.fetchone()
         return resultset
 
+    ##Update User Address##
     def updateAddress(self, user_id, homeNum, street, sDistrict, district, province, zip):
         SQL = "UPDATE \"GMan\".address SET \"houseNumber\"=%s, street=%s, \"subDistrict\"=%s, district=%s, province=%s, \"zipCode\"=%s WHERE user_id=%s"
         DATA = (homeNum, street, sDistrict, district, province, zip, user_id)
@@ -222,6 +245,7 @@ class databaseUser(database):
         self.connection.commit()
         return 1
 
+    ##Update User Profile Picture as blobs##
     def editProfilePicture(self, blob, user_id):
         SQL = "UPDATE \"GMan\".user_login SET picture=%s WHERE user_id=%s"
         DATA = (blob, user_id)
@@ -229,6 +253,7 @@ class databaseUser(database):
         self.connection.commit()
         return 1
 
+    ##Get User Profile Picture##
     def getProfilePicture(self, user_id):
         SQL = "SELECT picture FROM \"GMan\".user_login WHERE user_id =%s"
         DATA = (user_id,)
@@ -236,6 +261,7 @@ class databaseUser(database):
         resultset = self.query.fetchone()
         return resultset, 1
 
+    ##Create New User Student##
     def createStudent(self, userid, name, surname, email, faculty, major):
         SQL = "SELECT term FROM \"GMan\".student"
         self.query.execute(SQL)
@@ -256,6 +282,7 @@ class databaseUser(database):
             print(e.pgcode, e.pgerror)
             return (str(e.pgcode), e.pgerror)
 
+    ##Create New User Professor##
     def createProfessor(self, userid, name, surname, email, facultyID):
         try:
             SQL = "INSERT INTO \"GMan\".professor (user_id, \"name\", surname, email, \"position\", status, \"facultyID\")\
@@ -271,6 +298,7 @@ class databaseUser(database):
             print(e.pgcode, e.pgerror)
             return (str(e.pgcode), e.pgerror)
 
+    ##Create New User Administrator##
     def createAdmin(self, userid, name, surname, email):
         try:
             SQL = "INSERT INTO \"GMan\".admin (user_id, \"name\", surname, email, \"position\", status)\
@@ -286,7 +314,10 @@ class databaseUser(database):
             print(e.pgcode, e.pgerror)
             return (str(e.pgcode), e.pgerror)
 
+##Database Class for Course-Related Functions##
 class databaseCourse(database):
+
+    ##Get Course Name##
     def getCourseName(self, courseID):
         SQL = "SELECT \"courseName\" FROM \"GMan\".course WHERE \"courseID\"=%s"
         DATA = (courseID,)
@@ -294,6 +325,7 @@ class databaseCourse(database):
         resultset = self.query.fetchone()
         return resultset
 
+    ##Get Course Information by Professor ID##
     def getCourseProfessor(self, professorID):
         SQL = "SELECT * FROM \"GMan\".course WHERE \"professorID\"=%s"
         DATA = (professorID,)
@@ -301,6 +333,7 @@ class databaseCourse(database):
         resultset = self.query.fetchall()
         return resultset
 
+    ##Get Course Information by Faculty ID##
     def getCourseFaculty(self, facultyID):
         SQL = "SELECT * FROM \"GMan\".course WHERE \"facultyID\"=%s ORDER BY \"majorID\", \"courseID\""
         DATA = (facultyID,)
@@ -308,6 +341,7 @@ class databaseCourse(database):
         resultset = self.query.fetchall()
         return resultset
 
+    ##Get Course in the current Term by Faculty and Major##
     def termCourse(self, faculty, major, year, term):
         SQL = "SELECT * FROM \"GMan\".course WHERE \"facultyID\"=%s AND \"majorID\"=%s AND \"year\"=%s AND term =%s \
                 ORDER BY \"courseID\""
@@ -316,6 +350,7 @@ class databaseCourse(database):
         resultset = self.query.fetchall()
         return resultset
 
+    ##Get the Course of a user which the grades have not been given yet.##
     def currentCourse(self, user_id):
         SQL = "SELECT course.* FROM \"GMan\".\"data\" data,\"GMan\".course  WHERE data.user_id=%s AND \
                 data.grade IS NULL AND data.\"courseID\" = course.\"courseID\" ORDER BY \"data\".\"courseID\""
@@ -324,6 +359,7 @@ class databaseCourse(database):
         resultset = self.query.fetchall()
         return resultset
 
+    ##Creates a new course##
     def addCourse(self, information):
         try:
             SQL = "INSERT INTO \"GMan\".course (\"courseID\", \"courseName\", \"facultyID\",\
@@ -343,6 +379,7 @@ class databaseCourse(database):
             print(e.pgcode, e.pgerror)
             return (str(e.pgcode), e.pgerror)
 
+    ##Drop a user from a course##
     def dropCourseUser(self, user_id, courseID, year_taken, limit):
         SQL = "DELETE FROM  \"GMan\".\"data\" WHERE user_id=%s AND \"courseID\"=%s AND year_taken=%s"
         DATA = (user_id, courseID, year_taken)
@@ -351,6 +388,7 @@ class databaseCourse(database):
         self.increaseLimitOne(courseID, limit)
         return 1
 
+    ##Add a user to a course##
     def addCourseUser(self, user_id, year, term, courseID, year_taken, limit):
         try:
             SQL = "INSERT INTO \"GMan\".\"data\" (user_id, \"courseID\", year_taken, \"year\", term) \
@@ -364,18 +402,21 @@ class databaseCourse(database):
             print(e.pgcode, e.pgerror)
             return (str(e.pgcode), e.pgerror)
 
+    ##Increase user amount in a course by one##
     def increaseLimitOne(self, courseID, oldLimit):
         SQL = "UPDATE \"GMan\".course SET \"maxStud\"=%s WHERE \"courseID\"=%s"
         DATA = (oldLimit+1, courseID)
         self.query.execute(SQL, DATA)
         self.connection.commit()
 
+    ##Decrease user amount in a course by one##
     def decreaseLimitOne(self, courseID, oldLimit):
         SQL = "UPDATE \"GMan\".course SET \"maxStud\"=%s WHERE \"courseID\"=%s"
         DATA = (oldLimit - 1, courseID)
         self.query.execute(SQL, DATA)
         self.connection.commit()
 
+    ##Select all Course where a user has taken or is taking##
     def allUserCourse(self, user_id):
         SQL = "SELECT * FROM  \"GMan\".\"data\" WHERE user_id=%s ORDER BY \"courseID\""
         DATA = (user_id,)
@@ -383,12 +424,14 @@ class databaseCourse(database):
         resultset = self.query.fetchall()
         return resultset
 
+    ##Get All Course information##
     def getAllCourseINFO(self):
         SQL = "SELECT * FROM  \"GMan\".\"course\" ORDER BY \"courseID\""
         self.query.execute(SQL)
         resultset = self.query.fetchall()
         return resultset
 
+    ##Get Professor Information by Course##
     def findProfessorbyCourseID(self, courseID):
         SQL = "SELECT \"professorID\" FROM  \"GMan\".\"course\" WHERE \"courseID\" = %s"
         DATA = (courseID,)
@@ -402,6 +445,7 @@ class databaseCourse(database):
             return resultset
         return None
 
+    ##Get Course Information by courseID##
     def getCoursebyID(self, courseID):
         SQL = "SELECT * FROM  \"GMan\".\"course\" WHERE \"courseID\" = %s"
         DATA = (courseID,)
@@ -409,6 +453,7 @@ class databaseCourse(database):
         resultset = self.query.fetchone()
         return resultset
 
+    ##Assign a professor to a course##
     def setProfessor(self, courseID, professorID):
         try:
             SQL = "UPDATE \"GMan\".course SET \"professorID\"=%s WHERE \"courseID\"=%s"
@@ -495,8 +540,14 @@ class databaseAdmin(database):
             SQL = "UPDATE \"GMan\".student SET term=2 WHERE term = 1"
             self.query.execute(SQL)
             self.connection.commit()
+            SQL = "UPDATE \"GMan\".course SET \"maxStud\" = amt"
+            self.query.execute(SQL)
+            self.connection.commit()
         if(term == 2):
             SQL = "UPDATE \"GMan\".student SET term=1 WHERE term = 2"
+            self.query.execute(SQL)
+            self.connection.commit()
+            SQL = "UPDATE \"GMan\".course SET \"maxStud\" = amt"
             self.query.execute(SQL)
             self.connection.commit()
             for i in range(10,0,-1):

@@ -1,7 +1,7 @@
 from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
-import plugin.databaseConn as database
+import plugin.databaseConnect as database
 import plugin.course as courseItem
 from sendMessageForm import sendMessageUI
 
@@ -12,9 +12,9 @@ class seeCourseProfUI(QMainWindow):
         self.setMinimumSize(900,600)
         self.setWindowTitle("Select Course")
         palette = QPalette()
-        palette.setBrush(QPalette.Background,QBrush(QPixmap("resources/imagess/background.png")))
+        palette.setBrush(QPalette.Background,QBrush(QPixmap("resources/imagess/programBackground.png")))
         self.setPalette(palette)
-        self.bar = QPixmap("resources/images/bar.png")
+        self.bar = QPixmap("resources/images/topBarBackground.png")
         self.parent = parent
         self.UIinit()
 

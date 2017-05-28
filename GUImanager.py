@@ -27,7 +27,7 @@ class GUImanager(QMainWindow):
         self.setWindowTitle("G-Man version 1.0.0 (Beta)")
         
         palette = QPalette()
-        palette.setBrush(QPalette.Background, QBrush(QPixmap("resources/images/background.png")))
+        palette.setBrush(QPalette.Background, QBrush(QPixmap("resources/images/programBackground.png")))
         self.setPalette(palette)
 
         self.central_widget = QStackedWidget()

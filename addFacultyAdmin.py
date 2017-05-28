@@ -1,7 +1,7 @@
 from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
-import plugin.databaseConn as database
+import plugin.databaseConnect as database
 
 class AddFacultyUI(QMainWindow):
     def __init__(self,parent = None):
@@ -9,9 +9,9 @@ class AddFacultyUI(QMainWindow):
         self.setMinimumSize(900,600)
         self.setWindowTitle("Profile")
         palette = QPalette()
-        palette.setBrush(QPalette.Background,QBrush(QPixmap("resources/images/background.png")))
+        palette.setBrush(QPalette.Background,QBrush(QPixmap("resources/images/programBackground.png")))
         self.setPalette(palette)
-        self.bar = QPixmap("resources/images/bar.png")
+        self.bar = QPixmap("resources/images/topBarBackground.png")
         self.parent = parent
         self.UIinit()
 

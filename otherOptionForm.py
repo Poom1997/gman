@@ -10,7 +10,7 @@ from searchCourseByIDForm import searchCourseByIDUI
 from searchProfByCourseID import findProfByCourseIDUI
 from searchCourseByProfIDForm import searchCourseByProfIDUI
 from findCourse import findCourseUI
-import plugin.databaseConn as database
+import plugin.databaseConnect as database
 
 class otherOptionUI(QMainWindow):
     def __init__(self,parent = None):
@@ -18,10 +18,10 @@ class otherOptionUI(QMainWindow):
         self.setMinimumSize(900,600)
         self.setWindowTitle("Class Course")
         palette = QPalette()
-        palette.setBrush(QPalette.Background,QBrush(QPixmap("resources/imagess/background.png")))
+        palette.setBrush(QPalette.Background,QBrush(QPixmap("resources/imagess/programBackground.png")))
         self.edu_logo = QPixmap("resources/images/educationLogo.png")
         self.setPalette(palette)
-        self.bar = QPixmap("resources/images/bar.png")
+        self.bar = QPixmap("resources/images/topBarBackground.png")
         self.parent = parent
         self.UIinit()
 

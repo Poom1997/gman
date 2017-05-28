@@ -10,9 +10,9 @@ class profileUI(QMainWindow):
         self.setMinimumSize(900,600)
         self.setWindowTitle("Profile")
         palette = QPalette()
-        palette.setBrush(QPalette.Background,QBrush(QPixmap("resources/images/background.png")))
+        palette.setBrush(QPalette.Background,QBrush(QPixmap("resources/images/programBackground.png")))
         self.setPalette(palette)
-        self.bar = QPixmap("resources/images/bar.png")
+        self.bar = QPixmap("resources/images/topBarBackground.png")
         self.parent = parent
         self.UIinit()
 

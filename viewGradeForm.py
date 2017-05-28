@@ -5,8 +5,8 @@ from PySide.QtUiTools import *
 from giveGrade import addGradeAdmin
 from sendMessageForm import sendMessageUI
 
-import plugin.databaseConn as database
-import plugin.gradeData as grade
+import plugin.databaseConnect as database
+import plugin.grades as grade
 
 class viewGradeUI(QMainWindow):
     def __init__(self,parent = None):
@@ -14,9 +14,9 @@ class viewGradeUI(QMainWindow):
         self.setMinimumSize(900,600)
         self.setWindowTitle("Grades")
         palette = QPalette()
-        palette.setBrush(QPalette.Background,QBrush(QPixmap("resources/imagess/background.png")))
+        palette.setBrush(QPalette.Background,QBrush(QPixmap("resources/imagess/programBackground.png")))
         self.setPalette(palette)
-        self.bar = QPixmap("resources/images/bar.png")
+        self.bar = QPixmap("resources/images/topBarBackground.png")
         self.parent = parent
         self.UIinit()
 

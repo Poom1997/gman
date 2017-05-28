@@ -2,8 +2,8 @@ from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
 from datetime import datetime
-import plugin.databaseConn as database
-import plugin.gradeData as grade
+import plugin.databaseConnect as database
+import plugin.grades as grade
 from sendMessageForm import sendMessageUI
 import csv
 
