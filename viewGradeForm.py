@@ -3,6 +3,7 @@ from PySide.QtGui import *
 from PySide.QtUiTools import *
 
 from giveGrade import addGradeAdmin
+from sendMessageForm import sendMessageUI
 
 import plugin.databaseConn as database
 import plugin.gradeData as grade
@@ -32,6 +33,7 @@ class viewGradeUI(QMainWindow):
         self.grade_button = form.findChild(QPushButton,"gradeButton")
         self.course_button = form.findChild(QPushButton,"courseButton")
         self.temp = form.findChild(QPushButton, "temp")
+        self.temp2 = form.findChild(QPushButton, "temp2")
 
         #page properties
         self.print_button = form.findChild(QPushButton, "printButton")
@@ -48,7 +50,7 @@ class viewGradeUI(QMainWindow):
         self.grade_button.clicked.connect(self.goGrade)
         self.course_button.clicked.connect(self.goCourse)
         self.temp.clicked.connect(self.goTemp)
-        self.home_button.clicked.connect(self.goHome)
+        self.temp2.clicked.connect(self.goTemp2)
         self.print_button.clicked.connect(self.goDummy)
 
         #Table Properties
@@ -88,7 +90,11 @@ class viewGradeUI(QMainWindow):
         self.parent.changePageLoginSection("studentCourse")
 
     def goTemp(self):
-        pass
+        self.createM = sendMessageUI(parent = self.parent)
+        self.createM.show()
+
+    def goTemp2(self):
+        self.parent.changePageLoginSection("login")
 
     def updatePage(self):
         data = self.parent.getCurrentUser()

@@ -5,26 +5,25 @@ from datetime import datetime
 import plugin.databaseConn as database
 import plugin.course as courseItem
 
-class addCourseToProfUI(QMainWindow):
-    def __init__(self, parent = None ):
+class searchCourseByIDUI(QMainWindow):
+    def __init__(self,parent = None ):
         QMainWindow.__init__(self,None)
         self.setMinimumSize(900,600)
-        self.setWindowTitle("Find_Course")
+        self.setWindowTitle("searchCourseByID")
         self.parent = parent
         self.UIinit()
 
     def UIinit(self):
         loader = QUiLoader()
-        form = loader.load("resources/UI/assignCourseToProf.ui",None)
+        form = loader.load("resources/UI/searchCourseByID.ui",None)
         self.setCentralWidget(form)
 
         #QPushButton
         self.search_button = form.findChild(QPushButton,"searchButton")
         self.cancel_button = form.findChild(QPushButton,"closeButton")
-        self.assign_button = form.findChild(QPushButton, "assignButton")
-
+        
         #LineEdit
-        self.courseID = form.findChild(QLineEdit,"courseID")
+        self.course_ID = form.findChild(QLineEdit,"courseID")
 
         #Table
         self.course_table = form.findChild(QTableWidget,"tableWidget")
@@ -45,21 +44,15 @@ class addCourseToProfUI(QMainWindow):
         #Connect
         self.search_button.clicked.connect(self.search)
         self.cancel_button.clicked.connect(self.close)
-        self.assign_button.clicked.connect(self.assignProf)
 
-        self.db = database.databaseCourse()
 
     def cancel(self):
-        self.db.disconnect()
         self.close()
 
     def search(self):
-       pass
-
-    def assignProf(self):
         pass
-    
 
+    
         
 
     
