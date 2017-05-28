@@ -135,7 +135,7 @@
        <string>Course ID</string>
       </property>
       <property name="textAlignment">
-       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+       <set>AlignCenter</set>
       </property>
      </column>
      <column>
@@ -143,7 +143,7 @@
        <string>Course Name</string>
       </property>
       <property name="textAlignment">
-       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+       <set>AlignCenter</set>
       </property>
      </column>
      <column>
@@ -151,7 +151,7 @@
        <string>Credits</string>
       </property>
       <property name="textAlignment">
-       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+       <set>AlignCenter</set>
       </property>
      </column>
      <column>
@@ -159,7 +159,7 @@
        <string>Year/Term</string>
       </property>
       <property name="textAlignment">
-       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+       <set>AlignCenter</set>
       </property>
      </column>
      <column>
@@ -167,11 +167,11 @@
        <string>Grades</string>
       </property>
       <property name="textAlignment">
-       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+       <set>AlignCenter</set>
       </property>
      </column>
     </widget>
-    <widget class="QPushButton" name="temp2">
+    <widget class="QPushButton" name="logoutButton">
      <property name="geometry">
       <rect>
        <x>750</x>
@@ -230,7 +230,7 @@
        <string>Course ID</string>
       </property>
       <property name="textAlignment">
-       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+       <set>AlignCenter</set>
       </property>
      </column>
      <column>
@@ -238,7 +238,7 @@
        <string>Course Name</string>
       </property>
       <property name="textAlignment">
-       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+       <set>AlignCenter</set>
       </property>
      </column>
      <column>
@@ -246,7 +246,7 @@
        <string>Credits</string>
       </property>
       <property name="textAlignment">
-       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+       <set>AlignCenter</set>
       </property>
      </column>
      <column>
@@ -254,7 +254,7 @@
        <string>Grades</string>
       </property>
       <property name="textAlignment">
-       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+       <set>AlignCenter</set>
       </property>
      </column>
     </widget>
@@ -484,7 +484,7 @@
     <zorder>printButton</zorder>
     <zorder>homeButton</zorder>
     <zorder>allTerm</zorder>
-    <zorder>temp2</zorder>
+    <zorder>logoutButton</zorder>
     <zorder>gradeButton</zorder>
     <zorder>label_15</zorder>
     <zorder>thisTerm</zorder>

@@ -2,7 +2,6 @@ from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
 from findCourse import findCourseUI
-from sendMessageForm import sendMessageUI
 from datetime import datetime
 import plugin.databaseConn as database
 import plugin.course as courseItem
@@ -40,12 +39,12 @@ class StudentCourseUI(QMainWindow):
         self.grade_button = form.findChild(QPushButton,"gradeButton")
         self.course_button = form.findChild(QPushButton,"courseButton")
         self.temp = form.findChild(QPushButton, "temp")
-        self.temp2 = form.findChild(QPushButton, "temp2")
 
 
         #page properties
         self.available_course = form.findChild(QTableWidget,"available")
         self.your_course = form.findChild(QTableWidget,"mycourse")
+        self.save_button = form.findChild(QPushButton,"saveButton")
         self.add_button = form.findChild(QPushButton,"addButton")
         self.search_course = form.findChild(QPushButton,"searchCourseButton")
         self.delete_button = form.findChild(QPushButton, "deleteButton")
@@ -84,7 +83,6 @@ class StudentCourseUI(QMainWindow):
         self.grade_button.clicked.connect(self.goGrade)
         self.course_button.clicked.connect(self.goCourse)
         self.temp.clicked.connect(self.goTemp)
-        self.temp2.clicked.connect(self.goTemp2)
 
 
         #Internal Button Pressed
@@ -247,11 +245,7 @@ class StudentCourseUI(QMainWindow):
         self.parent.changePageLoginSection("studentCourse")
         
     def goTemp(self):
-        self.createM = sendMessageUI(parent = self.parent)
-        self.createM.show()
-
-    def goTemp2(self):
-        self.parent.changePageLoginSection("login")
+        pass
 
     def createBulk(self, data):
         temp = []

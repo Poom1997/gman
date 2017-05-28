@@ -1,4 +1,3 @@
-from sendMessageForm import sendMessageUI
 from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
@@ -32,8 +31,6 @@ class mainUI(QMainWindow):
 
         #page properties
         self.logout_button = form.findChild(QPushButton,"logoutButton")
-        self.message_box = form.findChild(QTextEdit,"messageBox")
-        self.dismiss_button = form.findChild(QPushButton,"dismissButton")
 
 
         #Upper Bar pressed
@@ -45,10 +42,6 @@ class mainUI(QMainWindow):
         self.temp2.clicked.connect(self.goTemp2)
 
         self.logout_button.clicked.connect(self.goLogout)
-        self.dismiss_button.clicked.connect(self.clearMessage)
-        self.message_box.setReadOnly(True)
-                                             
-                                            
 
 
     def goHome(self):
@@ -79,14 +72,12 @@ class mainUI(QMainWindow):
     def goTemp(self):
         data = self.parent.getCurrentUser()
         if (data.type() == "STUDENT"):
-            self.createM = sendMessageUI(parent = self.parent)
-            self.createM.show()
+            self.parent.changePageLoginSection("addcourse")
         elif (data.type() == "PROFESSOR"):
-            self.createM = sendMessageUI(parent = self.parent)
-            self.createM.show()
+            self.parent.changePageLoginSection("addcourse")
         elif (data.type() == "ADMIN"):
             self.parent.changePageLoginSection("addcourse")
-        
+        self.parent.changePageLoginSection("addcourse")
     
 
     def goTemp2(self):
@@ -108,9 +99,6 @@ class mainUI(QMainWindow):
             self.course_button.setText("Majors")
             self.temp.setText("Courses")
             self.temp2.setText("Other options")
-
-    def clearMessage(self):
-        self.message_box.setText("")
 
     
         

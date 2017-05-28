@@ -6,12 +6,14 @@ import plugin.databaseConn as database
 import plugin.course as courseItem
 
 class addCourseToProfUI(QMainWindow):
-    def __init__(self, parent = None ):
+    def __init__(self,takenCourse, currentCourse, parent = None ):
         QMainWindow.__init__(self,None)
-        self.setMinimumSize(900,600)
+        self.setMinimumSize(900,581)
         self.setWindowTitle("Find_Course")
         self.parent = parent
         self.UIinit()
+        self.allTakenCourse = takenCourse
+        self.currentCourse = currentCourse
 
     def UIinit(self):
         loader = QUiLoader()
@@ -43,6 +45,7 @@ class addCourseToProfUI(QMainWindow):
         self.course_table_header.setResizeMode(8, QHeaderView.ResizeToContents)
 
         #Connect
+        self.faculty_name.returnPressed.connect(self.search)
         self.search_button.clicked.connect(self.search)
         self.cancel_button.clicked.connect(self.close)
         self.assign_button.clicked.connect(self.assignProf)
