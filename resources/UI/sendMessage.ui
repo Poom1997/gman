@@ -54,7 +54,7 @@
     <string>To :</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="toID">
+  <widget class="QLineEdit" name="to">
    <property name="geometry">
     <rect>
      <x>80</x>

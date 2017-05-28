@@ -53,7 +53,7 @@ class LoginUI(QMainWindow):
             #status = self.login.userLogin("professor3", "DEFAULTPASS123456")
             status = self.login.userLogin("admin", "DEFAULTPASS123456")
             #status = self.login.userLogin("crazypet", "12345")
-            #status = self.login.userLogin("mekboltz", "DEFAULTPASS123456")
+            #status = self.login.userLogin("mekboltz", "12345")
             if(status[0]):
                 self.wronglabel.setText("")
                 self.user_id.setText("")
