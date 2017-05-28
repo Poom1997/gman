@@ -1,9 +1,14 @@
 from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
+from sendMessageForm import sendMessageUI
 from addUser import addUserUI
 from findUser import findUserUI
+from searchProfByCourseID import findProfByCourseIDUI
 from addCourseToProfForm import addCourseToProfUI
+from searchCourseByIDForm import searchCourseByIDUI
+from searchProfByCourseID import findProfByCourseIDUI
+from searchCourseByProfIDForm import searchCourseByProfIDUI
 
 class otherOptionUI(QMainWindow):
     def __init__(self,parent = None):
@@ -40,6 +45,7 @@ class otherOptionUI(QMainWindow):
         self.search_course_by_id = form.findChild(QPushButton,"searchCourseByID")
         self.search_prof_by_course = form.findChild(QPushButton,"searchProfByCourseID")
         self.search_course_by_prof = form.findChild(QPushButton, "searchCourseByProfID")
+        self.message = form.findChild(QPushButton, "messageButton")
 
 
         #Upper Bar pressed
@@ -57,8 +63,11 @@ class otherOptionUI(QMainWindow):
         self.search_course_by_id.clicked.connect(self.searchCoursebyID)
         self.search_prof_by_course.clicked.connect(self.searchProfbyCourse)
         self.search_course_by_prof.clicked.connect(self.searchCoursebyProf)
+        self.message.clicked.connect(self.createMessage)
 
-
+    def createMessage(self):
+        self.createM = sendMessageUI(parent = self.parent)
+        self.createM.show()
 
     def goHome(self):
         self.parent.changePageLoginSection("home")
@@ -91,13 +100,16 @@ class otherOptionUI(QMainWindow):
         self.assigning.show()
 
     def searchCoursebyID(self):
-        pass
+        self.searchCourseID = searchCourseByIDUI(parent = self.parent)
+        self.searchCourseID.show()
 
     def searchProfbyCourse(self):
-        pass
+        self.searchCourseID = findProfByCourseIDUI(parent = self.parent)
+        self.searchCourseID.show()
 
     def searchCoursebyProf(self):
-        pass
+        self.searchCourseID = searchCourseByProfIDUI(parent = self.parent)
+        self.searchCourseID.show()
         
 
 

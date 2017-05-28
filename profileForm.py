@@ -1,7 +1,7 @@
 from PySide.QtGui import *
 from PySide.QtUiTools import *
 from EditProfileStudent import editProfileUI
-from addUser import addUserUI
+from sendMessageForm import sendMessageUI
 from changePasswordForm import changePasswordUI
 
 class profileUI(QMainWindow):
@@ -54,7 +54,6 @@ class profileUI(QMainWindow):
         self.grade_button.clicked.connect(self.goGrade)
         self.course_button.clicked.connect(self.goCourse)
         self.temp.clicked.connect(self.goTemp)
-        self.home_button.clicked.connect(self.goHome)
         self.temp2.clicked.connect(self.goTemp2)
 
         self.edit_button.clicked.connect(self.editProfile)
@@ -89,11 +88,13 @@ class profileUI(QMainWindow):
     def goTemp(self):
         data = self.parent.getCurrentUser()
         if (data.type() == "STUDENT"):
-            self.parent.changePageLoginSection("addcourse")
+            self.createM = sendMessageUI(parent = self.parent)
+            self.createM.show()
         elif (data.type() == "PROFESSOR"):
-            self.parent.changePageLoginSection("addcourse")
+            self.createM = sendMessageUI(parent = self.parent)
+            self.createM.show()
         elif (data.type() == "ADMIN"):
-            self.parent.changePageLoginSection("addmajor")
+            self.parent.changePageLoginSection("addcourse")
 
     def goTemp2(self):
         data = self.parent.getCurrentUser()
@@ -105,7 +106,7 @@ class profileUI(QMainWindow):
             self.parent.changePageLoginSection("otherOption")
 
     def editProfile(self):
-        self.edit = addUserUI(parent = self.parent)
+        self.edit = editProfileUI(parent = self.parent)
         self.edit.show()
 
     def changePassword(self):
