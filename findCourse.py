@@ -39,11 +39,11 @@ class findCourseUI(QMainWindow):
 
         self.course_table_header = self.course_table.horizontalHeader()
         self.course_table_header.setResizeMode(0, QHeaderView.ResizeToContents)
-        self.course_table_header.setResizeMode(1, QHeaderView.Stretch)
+        self.course_table_header.setResizeMode(1, QHeaderView.ResizeToContents)
         self.course_table_header.setResizeMode(2, QHeaderView.ResizeToContents)
         self.course_table_header.setResizeMode(3, QHeaderView.ResizeToContents)
         self.course_table_header.setResizeMode(4, QHeaderView.ResizeToContents)
-        self.course_table_header.setResizeMode(5, QHeaderView.ResizeToContents)
+        self.course_table_header.setResizeMode(5, QHeaderView.Stretch)
         self.course_table_header.setResizeMode(7, QHeaderView.ResizeToContents)
         self.course_table_header.setResizeMode(8, QHeaderView.ResizeToContents)
 
@@ -78,6 +78,8 @@ class findCourseUI(QMainWindow):
         self.data = self.parent.parent.getCurrentUser()
         if(self.data.type() == "STUDENT"):
             self.addSelected_button.setEnabled(True)
+        else:
+            self.addSelected_button.setEnabled(False)
 
     def add_selected(self):
         colCount = 0

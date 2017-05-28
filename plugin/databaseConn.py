@@ -23,7 +23,7 @@ class database:
 class databaseLogin(database):
     def userLogin(self, username, password):
         password = bytes(password, encoding="ascii")
-        SQL = "SELECT password, user_id, user_type, username FROM \"GMan\".user_login WHERE username = %s"
+        SQL = "SELECT password, user_id, user_type, username, status FROM \"GMan\".user_login WHERE username = %s"
         DATA = (username,)
         self.query.execute(SQL,DATA)
         resultset = self.query.fetchone()
@@ -31,9 +31,8 @@ class databaseLogin(database):
             raise invalidQueryException("Either Username or Password is Incorrect")
         hashed = bytes(resultset.password, encoding="ascii")
         if (bcrypt.hashpw(password, hashed) == hashed):
-            return True, resultset.user_id, resultset.user_type , resultset.username
+            return True, resultset.user_id, resultset.user_type , resultset.username, resultset.status
         else:
-            print('invalid')
             raise invalidQueryException("Either Username or Password is Incorrect")
 
     def createLogin(self,userid,username,email,password = "DEFAULTPASS123456",userStatus= 0, userType = 0):
@@ -89,6 +88,59 @@ class databaseLogin(database):
         self.query.execute(SQL, DATA)
         self.connection.commit()
 
+    def blockUser(self, command, status, userid):
+        if (command == "BLOCK" and status == 0):
+            SQL = "UPDATE \"GMan\".user_login SET status=1 WHERE user_id=%s"
+            DATA = (userid,)
+            self.query.execute(SQL, DATA)
+            self.connection.commit()
+            SQL = "UPDATE \"GMan\".student SET status=6 WHERE user_id=%s"
+        if (command == "BLOCK" and status == 1):
+            SQL = "UPDATE \"GMan\".user_login SET status=1 WHERE user_id=%s"
+            DATA = (userid,)
+            self.query.execute(SQL, DATA)
+            self.connection.commit()
+            SQL = "UPDATE \"GMan\".professor SET status=6 WHERE user_id=%s"
+        if (command == "UNBLOCK" and status == 0):
+            SQL = "UPDATE \"GMan\".user_login SET status=0 WHERE user_id=%s"
+            DATA = (userid,)
+            self.query.execute(SQL, DATA)
+            self.connection.commit()
+            SQL = "UPDATE \"GMan\".student SET status=0 WHERE user_id=%s"
+        if (command == "UNBLOCK" and status == 1):
+            SQL = "UPDATE \"GMan\".user_login SET status=0 WHERE user_id=%s"
+            DATA = (userid,)
+            self.query.execute(SQL, DATA)
+            self.connection.commit()
+            SQL = "UPDATE \"GMan\".professor SET status=0 WHERE user_id=%s"
+        DATA = (userid,)
+        self.query.execute(SQL, DATA)
+        self.connection.commit()
+        return 1
+
+    def suspendUser(self, command, type, userid):
+        if(command == "SUSP" and type == "STUDENT"):
+            SQL = "UPDATE \"GMan\".student SET status=4 WHERE user_id=%s"
+        if (command == "SUSP" and type == "PROFESSOR"):
+            SQL = "UPDATE \"GMan\".professor SET status=4 WHERE user_id=%s"
+        if (command == "UNSUSP" and type == "STUDENT"):
+            SQL = "UPDATE \"GMan\".student SET status=0 WHERE user_id=%s"
+        if (command == "UNSUSP" and type == "PROFESSOR"):
+            SQL = "UPDATE \"GMan\".professor SET status=0 WHERE user_id=%s"
+        DATA = (userid,)
+        self.query.execute(SQL, DATA)
+        self.connection.commit()
+        return 1
+
+    def retireUser(self, type, userid):
+        if(type == "STUDENT"):
+            SQL = "UPDATE \"GMan\".student SET status=5 WHERE user_id=%s"
+        if (type == "PROFESSOR"):
+            SQL = "UPDATE \"GMan\".professor SET status=5 WHERE user_id=%s"
+        DATA = (userid,)
+        self.query.execute(SQL, DATA)
+        self.connection.commit()
+        return 1
 
     def deleteLogin(self,userid,username):
         SQL = "DELETE FROM \"GMan\".user_login WHERE user_id=%s AND username =%s";
@@ -185,10 +237,14 @@ class databaseUser(database):
         return resultset, 1
 
     def createStudent(self, userid, name, surname, email, faculty, major):
+        SQL = "SELECT term FROM \"GMan\".student"
+        self.query.execute(SQL)
+        resultset = self.query.fetchone()
+        term = resultset.term
         try:
             SQL = "INSERT INTO \"GMan\".student (user_id, \"name\", surname, email, \"year\", status, gpa, \"facultyID\", \"majorID\", term) \
                   VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-            DATA = (userid, name, surname, email, 1, 0, 0.00, faculty, major, 1)
+            DATA = (userid, name, surname, email, 1, 0, 0.00, faculty, major, int(term))
             print(DATA)
             self.query.execute(SQL, DATA)
             self.connection.commit()
@@ -346,12 +402,23 @@ class databaseCourse(database):
             return resultset
         return None
 
-    def getCourseProfessor(self, professorID):
-        SQL = "SELECT * FROM  \"GMan\".\"course\" WHERE \"professorID\" = %s"
-        DATA = (professorID,)
+    def getCoursebyID(self, courseID):
+        SQL = "SELECT * FROM  \"GMan\".\"course\" WHERE \"courseID\" = %s"
+        DATA = (courseID,)
         self.query.execute(SQL, DATA)
-        resultset = self.query.fetchall()
+        resultset = self.query.fetchone()
         return resultset
+
+    def setProfessor(self, courseID, professorID):
+        try:
+            SQL = "UPDATE \"GMan\".course SET \"professorID\"=%s WHERE \"courseID\"=%s"
+            DATA = (professorID,courseID)
+            self.query.execute(SQL, DATA)
+            self.connection.commit()
+            return 1
+        except psycopg2.IntegrityError:
+            return 0
+
 
 class databaseGrade(database):
     def getPastCourse(self, user_id):
@@ -417,6 +484,30 @@ class databaseGrade(database):
         return 1
 
 class databaseAdmin(database):
+
+    def incrementData(self):
+        temp = 10
+        SQL = "SELECT term FROM \"GMan\".student"
+        self.query.execute(SQL)
+        resultset = self.query.fetchone()
+        term = resultset.term
+        if(term == 1):
+            SQL = "UPDATE \"GMan\".student SET term=2 WHERE term = 1"
+            self.query.execute(SQL)
+            self.connection.commit()
+        if(term == 2):
+            SQL = "UPDATE \"GMan\".student SET term=1 WHERE term = 2"
+            self.query.execute(SQL)
+            self.connection.commit()
+            for i in range(10,0,-1):
+                SQL = "UPDATE \"GMan\".student SET \"year\"=%s WHERE \"year\" = %s"
+                DATA = (str(temp), str(temp-1))
+                print(SQL, DATA)
+                self.query.execute(SQL, DATA)
+                self.connection.commit()
+                temp = temp - 1
+        return 1
+
     def getallMajors(self, faculty_id):
         SQL = "SELECT * FROM  \"GMan\".majors WHERE \"facultyID\"=%s ORDER BY \"majorID\""
         DATA = (faculty_id,)

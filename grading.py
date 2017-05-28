@@ -4,6 +4,9 @@ from PySide.QtUiTools import *
 from sendMessageForm import sendMessageUI
 import plugin.databaseConn as database
 import plugin.course as courseItem
+import csv
+import os
+import sys
 
 from giveGrade import addGradeAdmin
 
@@ -93,6 +96,7 @@ class selectCourseUI(QMainWindow):
 
     def addGradeClick(self):
         colCount = 0
+        tempID = 0
         temp = self.course_table.selectionModel().selectedRows()
         if (len(temp) > 0):
             if (self.parent.showCONFIRM("Are you sure?", "Are you sure you assign grades for this course?")):

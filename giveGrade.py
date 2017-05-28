@@ -5,7 +5,7 @@ from datetime import datetime
 import plugin.databaseConn as database
 import plugin.gradeData as grade
 from sendMessageForm import sendMessageUI
-
+import csv
 
 class QTableWidgetDisabledItem(QItemDelegate):
     """
@@ -76,32 +76,80 @@ class addGradeAdmin(QMainWindow):
         self.message.clicked.connect(self.createMessage)
 
     def updatePage(self):
+        self.userID = []
+        self.dataList = []
         self.courseName.setText(self.courseData.getCourseName())
         self.courseID.setText(self.courseData.getCourseID())
         db = database.databaseGrade()
         temp = db.getAllUserCourse(self.courseData.getCourseID(),datetime.now().year)
-        grades = self.createBulk(temp)
+        self.grades = self.createBulk(temp)
         id = db.getUserData(temp)
-        self.size = len(grades)
+        self.size = len(self.grades)
         self.grade_table.setRowCount(self.size)
         i = 0
-        for items in grades:
+        for items in self.grades:
+            self.dataList.append([])
             self.grade_table.setItem(i,0,QTableWidgetItem(items.getUserID()))
             self.grade_table.setItem(i,1,QTableWidgetItem(id[items.getUserID()]))
             self.grade_table.setItem(i,2,QTableWidgetItem(items.getGrade()))
             self.userDataCheck[items.getUserID()] = id[items.getUserID()]
+            self.userID.append(items.getUserID())
+            self.dataList[i].append(items.getUserID())
+            self.dataList[i].append(id[items.getUserID()])
+            self.dataList[i].append(items.getGrade())
             i = i + 1
-        print(self.userDataCheck)
 
     def createMessage(self):
-        self.createM = sendMessageUI(parent = self.parent)
+        self.createM = sendMessageUI(id = "ALL USER", bulk = self.userID, parent = self.parent)
         self.createM.show()
 
     def importFile(self):
-        pass
+        if(self.parent.parent.showCONFIRM("Are you sure?", "The data will be replaced with the data in the file.\nPlease ensure you have the updated file.")):
+            try:
+                dlg = QFileDialog()
+                dlg.setFileMode(QFileDialog.AnyFile)
+                dlg.setFilter("CSV Files (*.csv)")
+                if dlg.exec_():
+                    filenames = dlg.selectedFiles()
+                with open(filenames[0], 'r', newline="\n", encoding="utf-8") as infile:
+                    reader = csv.reader(infile, delimiter=',')
+                    my_list = list(reader)
+                    testData = my_list[0]
+                    if(testData[0] == self.courseData.getCourseName() and testData[1] ==  self.courseData.getCourseID() and testData[2] == str(datetime.now().year)):
+                        my_list = my_list[2:]
+                        i = 0
+                        if(len(my_list)!= len(self.dataList)):
+                            self.parent.parent.showERROR("User Amount Mismatch",
+                                                     "The data in the file mismatch the data in this course.\nPlease Use Correct File Format Exported from the program.")
+                        else:
+                            for data in my_list:
+                                if(data[0] == self.grade_table.item(i,0).text() and data[1] == self.grade_table.item(i,1).text()):
+                                    self.grade_table.setItem(i, 2, QTableWidgetItem(data[2]))
+                                    i = i + 1
+                                else:
+                                    raise KeyError
+                            self.parent.parent.showOK("File Imported", "The Data has been imported")
+
+                    else:
+                        self.parent.parent.showERROR("File Error", "The File you provided is invalid for this course.\nPlease Use Correct File Format Exported from the program.")
+
+            except UnboundLocalError:
+                pass
+            except KeyError:
+                self.parent.parent.showERROR("Data Error", "The Data you provide do not match the records for this course.\
+                                                \nERROR AT: ROW " + str(+3) + "\nThe importing has been stop at user: " + data[1])
 
     def exportFile(self):
-        pass
+        directory = str(QFileDialog.getExistingDirectory(self, "Select Directory"))
+        with open(directory + '\\' + str(self.courseData.getCourseID()) + '.csv', 'w', newline="\n", encoding="utf-8") as outfile:
+            writer = csv.writer(outfile, delimiter=',')
+            writer.writerow([self.courseData.getCourseName(), self.courseData.getCourseID(),datetime.now().year ])
+            writer.writerow(['StudentID', 'StudentName', 'StudentGrade'])
+            for data in self.dataList:
+                writer.writerow(data)
+            writer.writerow(['You can edit', 'anything', 'EXCEPT first 3 column'])
+        outfile.close()
+        self.parent.parent.showOK("Data Exported", "The data has been exported to the directory you have chosen successfully.")
 
     def saveData(self):
         tempData = []
@@ -135,7 +183,3 @@ class addGradeAdmin(QMainWindow):
         for i in data:
             temp.append(grade.gradeData(i, self.courseData))
         return temp
-
-
-
-    

@@ -21,15 +21,15 @@
 
   This is a program created to manage the course/grades/and the student data using 
   Python Object Oriented Programming and POSTGRESql Database. This is to demonstrate
-  how we use our programming plans and diagrams created during the course.
-
+  how we use our programming plans and diagrams created during the course. This Program
+  is currently in the beta testing phase.
 
 # ADDITIONAL DESCRIPTION
 
   This section will be updated once the project has been completed successfully.
 
 # 
-**PROGRAM VERSION: 0.7.9(ALPHA)<br>**
-ALL COMPONENTS IN THE ALPHA VERSION OF THE PROGRAM CAN BE CHANGED OR PUBLISHED WITHOUT ANY RELEASE NOTES<br>
+**PROGRAM VERSION: 1.0.0(BETA)<br>**
+ALL COMPONENTS IN THE BETA VERSION OF THE PROGRAM CAN BE CHANGED OR PUBLISHED WITHOUT ANY RELEASE NOTES<br>
 
-THIS DOCUMENT IS CREATED AS-OF 26 MAY 2017<br>
+THIS DOCUMENT IS CREATED AS-OF 29 MAY 2017<br>
