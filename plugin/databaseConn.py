@@ -178,9 +178,9 @@ class databaseUser(database):
         try:
             SQL = "INSERT INTO \"GMan\".student (user_id, \"name\", surname, email, \"year\", status, gpa, \"facultyID\", \"majorID\", term) \
                   VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-            DATA = (userid, name, surname,1, 0.00, email, faculty, major,1)
+            DATA = (userid, name, surname, email, 1, 0, 0.00, faculty, major, 1)
+            print(DATA)
             self.query.execute(SQL, DATA)
-            self.connection.commit()
             self.connection.commit()
             return (1,1)
         except psycopg2.IntegrityError as e:
@@ -261,12 +261,13 @@ class databaseCourse(database):
     def addCourse(self, information):
         try:
             SQL = "INSERT INTO \"GMan\".course (\"courseID\", \"courseName\", \"facultyID\",\
-              		\"majorID\", \"professorID\", \"year\", term, \"time\", building, room, credits,\"maxStud\", pre)\
-             		 VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+              		\"majorID\", \"professorID\", \"year\", term, \"time\", building, room, credits,\"maxStud\", pre, amt)\
+             		 VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
             DATA = (information["courseID"],information["courseName"],information["facultyID"],\
                     information["majorID"],information["lecturer"], information["year"],  information["term"], \
                     information["period"],information["building"], information["room"],information["credit"], \
-                    information["student_limit"],information["pre"])
+                    information["student_limit"],information["pre"],information["student_limit"])
+            print(DATA)
             self.query.execute(SQL, DATA)
             self.connection.commit()
             return 1
@@ -317,6 +318,12 @@ class databaseCourse(database):
         resultset = self.query.fetchall()
         return resultset
 
+    def getAllCourseINFO(self):
+        SQL = "SELECT * FROM  \"GMan\".\"course\" ORDER BY \"courseID\""
+        self.query.execute(SQL)
+        resultset = self.query.fetchall()
+        return resultset
+
 class databaseGrade(database):
     def getPastCourse(self, user_id):
         SQL = "SELECT * FROM  \"GMan\".\"data\" WHERE user_id=%s AND grade IS NOT NULL ORDER BY \"year\", term"
@@ -350,9 +357,9 @@ class databaseGrade(database):
         self.query.execute(SQL, DATA)
         self.connection.commit()
 
-    def getAllUserCourse(self, courseID):
-        SQL = "SELECT * FROM  \"GMan\".\"data\" WHERE \"courseID\" = %s ORDER BY user_id"
-        DATA = (courseID,)
+    def getAllUserCourse(self, courseID, year):
+        SQL = "SELECT * FROM  \"GMan\".\"data\" WHERE \"courseID\" = %s AND year_taken = %s ORDER BY user_id"
+        DATA = (courseID, year)
         self.query.execute(SQL, DATA)
         resultset = self.query.fetchall()
         return resultset
@@ -368,6 +375,18 @@ class databaseGrade(database):
             temp[data.user_id] = resultset.name + " " + resultset.surname
         return temp
 
+    def updateUserGrade(self, data, courseID, year):
+        for items in data:
+            repeat = 0
+            if(items[1] == "F"):
+                repeat = 2
+            elif(items[1] == "D+" or items[1] == "D"):
+                repeat = 1
+            SQL = "UPDATE \"GMan\".\"data\" SET grade=%s, \"allowRepeat\"=%s WHERE user_id=%s AND \"courseID\"=%s AND year_taken=%s"
+            DATA = (items[1], repeat, items[0], courseID, year)
+            self.query.execute(SQL, DATA)
+            self.connection.commit()
+        return 1
 
 class databaseAdmin(database):
     def getallMajors(self, faculty_id):

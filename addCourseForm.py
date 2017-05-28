@@ -45,6 +45,7 @@ class addCourseUI(QMainWindow):
         self.major = form.findChild(QLineEdit,"major")
         self.student_limit = form.findChild(QLineEdit,"studentLimit")
         self.building = form.findChild(QLineEdit,"building")
+        self.pre = form.findChild(QLineEdit, "pre")
         self.room = form.findChild(QLineEdit,"room")
         self.picture = form.findChild(QLabel,"picture")
         self.picture.setPixmap(self.edu_logo)
@@ -95,6 +96,7 @@ class addCourseUI(QMainWindow):
         self.student_limit.setText("")
         self.building.setText("")
         self.room.setText("")
+        self.pre.setText("")
 
     def saveCourse(self):
         temp = {}
@@ -111,7 +113,7 @@ class addCourseUI(QMainWindow):
         temp["student_limit"] = self.student_limit.text()
         temp["building"] = self.building.text()
         temp["room"] = self.room.text()
-        temp["pre"] = ""
+        temp["pre"] = self.pre.text()
         status = db.addCourse(temp)
         if(status == 1):
             self.parent.showOK("Course Saved", "The course has been saved successfully")
@@ -122,6 +124,3 @@ class addCourseUI(QMainWindow):
             self.parent.showERROR("Data Duplication Error" + status[0], "CourseID already exists.")
         elif (status[0] == "23503"):
             self.parent.showERROR("Data Consistency Error" + status[0], "Either Professor ID, FacultyID, or Major ID is incorrect.")
-
-        db.disconnect()
-        self.close()

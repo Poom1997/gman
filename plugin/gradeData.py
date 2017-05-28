@@ -36,3 +36,7 @@ class gradeData:
 
     def getUserID(self):
         return self.user_id
+
+    def getYearTerm(self):
+        temp = str(self.year) + '/' + str(self.term)
+        return temp

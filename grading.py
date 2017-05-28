@@ -73,8 +73,8 @@ class selectCourseUI(QMainWindow):
 
     def updatePage(self):
         data = self.parent.getCurrentUser()
-        db = database.databaseCourse()
-        temp = db.getCourseProfessor(data.getID())
+        self.db = database.databaseCourse()
+        temp = self.db.getCourseProfessor(data.getID())
         self.allCourse = self.createBulk(temp)
         self.course_table.setRowCount(len(self.allCourse))
         i = 0
@@ -95,7 +95,7 @@ class selectCourseUI(QMainWindow):
                     colCount += 1
         for course in self.allCourse:
             if(course.getCourseID() == tempID):
-                self.addGradeUI = addGradeAdmin(course, parent = self.parent)
+                self.addGradeUI = addGradeAdmin(course, parent = self)
                 self.addGradeUI.updatePage()
                 self.addGradeUI.show()
                 break

@@ -109,17 +109,21 @@ class StudentCourseUI(QMainWindow):
                     colCount+=1
                 self.available_course.removeRow(temp[0].row())
                 self.rowUP -= 1
-            if (tempID in self.allTakenCourse):
+
+            if (tempID in self.allTakenCourseNOOPEN):
+                self.parent.showERROR("Course Not Avaliable",
+                                      "This course is not open for this term. You cannot add this course.")
+            elif (tempID in self.allTakenCourse and tempID in self.allTakenCourseNORE):
                 self.parent.showERROR("Course Error", "You have already taken the course. Therefore, you cannot add this course.")
             elif(limit == 0):
-                self.parent.showERROR("Course Full", "This course is now filled. Therefore, you cannot add this course.")
+                self.parent.showERROR("Course Full", "This course is now filled. You cannot add this course.")
             elif(pre in self.allTakenCourse or len(pre) < 5):
                 if (self.db.addCourseUser(self.data.getID(), self.data.getYear(), self.data.getTerm(), tempID, datetime.now().year, limit)):
                     self.parent.showOK("Course Added", "Your course " + tempID + " has been added to the system.")
             else:
                 self.parent.showERROR("Pre-requisite Course Error", "You have not taken the required course required for this course.\
                                                                     Please complete that course before adding this course.")
-            self.updateCourse()
+            self.updatePage()
         
     def deleteClick(self):
         colCount = 0
@@ -142,9 +146,9 @@ class StudentCourseUI(QMainWindow):
                 self.rowDN -= 1
                 if(self.db.dropCourseUser(self.data.getID() ,tempID, datetime.now().year, limit)):
                     self.parent.showOK("Course Removed", "Your course " + tempID + " has been removed from the system." )
-            self.updateCourse()
+            self.updatePage()
 
-    def updateCourse(self):
+    def updatePage(self):
         currentID = []
         self.data = self.parent.getCurrentUser()
 
@@ -160,6 +164,21 @@ class StudentCourseUI(QMainWindow):
         for elements in temp:
             if(int(elements.allowRepeat) < 2 and elements.grade != None):
                 self.allTakenCourse.append(elements.courseID)
+
+        #Check Re-Grade avaliable
+        temp = self.db.allUserCourse(self.data.getID())
+        self.allTakenCourseNORE = []
+        for elements in temp:
+            if(int(elements.allowRepeat) < 1 and elements.grade != None):
+                self.allTakenCourseNORE.append(elements.courseID)
+
+        #Check term openings
+        temp = self.db.getAllCourseINFO()
+        self.allTakenCourseNOOPEN = []
+        for elements in temp:
+            if(self.data.getTerm() != elements.term):
+                self.allTakenCourseNOOPEN.append(elements.courseID)
+        print(self.allTakenCourseNOOPEN)
 
         for course in self.currentCourse:
             currentID.append(course.getCourseID())
@@ -210,7 +229,7 @@ class StudentCourseUI(QMainWindow):
         currentCourse = []
         for items in self.currentCourse:
             currentCourse.append(items.getCourseID())
-        self.edit = findCourseUI(self.allTakenCourse, currentCourse, parent=self)
+        self.edit = findCourseUI(self.allTakenCourse,self.allTakenCourseNORE,self.allTakenCourseNOOPEN ,currentCourse, parent=self)
         self.edit.show()
 
     def goHome(self):
