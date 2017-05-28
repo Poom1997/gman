@@ -24,7 +24,7 @@ class GUImanager(QMainWindow):
         QMainWindow.__init__(self, None)
         self.setMinimumSize(900, 600)
         self.setFixedSize(900,600)
-        self.setWindowTitle("G-Man version 0.7.9 (Alpha)")
+        self.setWindowTitle("G-Man version 1.0.0 (Beta)")
         
         palette = QPalette()
         palette.setBrush(QPalette.Background, QBrush(QPixmap("resources/images/background.png")))
@@ -60,6 +60,9 @@ class GUImanager(QMainWindow):
         self.central_widget.addWidget(self.see_course_widget)
         self.central_widget.addWidget(self.other_option_widget)
 
+        self.suspension = 0
+        self.graduated = 0
+        self.retired = 0
 
     def changePageLoginSection(self,signal = None):
         if signal == "login":
@@ -89,15 +92,25 @@ class GUImanager(QMainWindow):
 
         if signal == "studentCourse":
             print("studentCourse")
-            self.centralWidget().setCurrentWidget(self.student_course_widget)
-            self.student_course_widget.updatePage()
+            if(self.suspension == 1):
+                self.showERROR("You are suspended", "You are currently suspended. You cannot access this menu.")
+            elif(self.graduated == 1):
+                self.showOK("Hello!", "Your account has been locked by the administrator.")
+            else:
+                self.centralWidget().setCurrentWidget(self.student_course_widget)
+                self.student_course_widget.updatePage()
 
 ############################################## Prof signal ################################################ 
 
         if signal == "grade":
             print("grade")
-            self.centralWidget().setCurrentWidget(self.select_course)
-            self.select_course.updatePage()
+            if (self.suspension == 1):
+                self.showERROR("You are suspended", "You are currently suspended. You cannot access this menu.")
+            elif (self.graduated == 1):
+                self.showOK("Hello!", "Your account has been locked by the administrator.")
+            else:
+                self.centralWidget().setCurrentWidget(self.select_course)
+                self.select_course.updatePage()
 
         if signal == "course":
             print("course")
@@ -127,6 +140,12 @@ class GUImanager(QMainWindow):
         self.user = user
         
     def getCurrentUser(self):
+        if(self.user.getStatus() == 4):
+            self.suspension = 1
+            print("USER SUSPENDED!")
+        if (self.user.getStatus() == 5):
+            self.graduated = 1
+            print("GRAD!")
         return self.user
 
     ##MessageDialogs

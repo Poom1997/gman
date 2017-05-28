@@ -17,7 +17,6 @@ class imageHandler:
         size = os.path.getsize(path)
         im = Image.open(path)
         dimension = im.size
-        print(size, dimension)
         if(size > 200000):
             return "ERRORSIZE"
         if(dimension[0] < 225 or dimension[0] > 235 or dimension[1] < 275 or dimension[1]> 285):

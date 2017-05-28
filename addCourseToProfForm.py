@@ -50,10 +50,29 @@ class addCourseToProfUI(QMainWindow):
         self.close()
 
     def search(self):
-        pass
+        temp = self.courseID.text()
+        data = self.db.getCoursebyID(temp)
+        self.course_id.setText(data.courseID)
+        self.course_name.setText(data.courseName)
+        self.major.setText(data.facultyID + " / " + data.majorID)
+        self.year.setText(str(data.year))
+        self.time.setText(data.time)
+        self.location.setText(data.building + " Room:" + data.room )
+        self.crs.setText(str(data.credits))
+        self.pre_requisite.setText(data.pre)
+        self.prof_name.setText(data.professorID)
 
     def assignProf(self):
-        pass
+        courseID = self.courseID.text()
+        profID = self.prof_name.text()
+        if(self.parent.showCONFIRM("Are you sure?", "Are you sure to assign Professor " + profID + " to course " + courseID + "?")):
+            if(self.db.setProfessor(courseID, profID) == 1):
+                self.parent.showOK("Professor Assigned", "Professor " + profID + " has been assigned to course " + courseID)
+                self.db.disconnect()
+                self.close()
+            else:
+                self.parent.showERROR("ID Do not Exists", "The professor ID you entered does not exists. Please Try Again.")
+
     
 
         

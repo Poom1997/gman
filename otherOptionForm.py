@@ -9,6 +9,8 @@ from addCourseToProfForm import addCourseToProfUI
 from searchCourseByIDForm import searchCourseByIDUI
 from searchProfByCourseID import findProfByCourseIDUI
 from searchCourseByProfIDForm import searchCourseByProfIDUI
+from findCourse import findCourseUI
+import plugin.databaseConn as database
 
 class otherOptionUI(QMainWindow):
     def __init__(self,parent = None):
@@ -68,7 +70,11 @@ class otherOptionUI(QMainWindow):
         self.increase_year.clicked.connect(self.increaseYears)
 
     def increaseYears(self):
-        pass
+        db = database.databaseAdmin()
+        if(self.parent.showCONFIRM("Are you sure?", "Are you sure you want to iterate year and term?\n Once done, it cannot be un-done.")):
+            if (self.parent.showCONFIRM("CRITICAL WARNING","THIS ACTION CANNOT BE UNDONE. PLEASE CONFIRM ACTION.")):
+                if(db.incrementData()):
+                    self.parent.showOK("Data Edited", "All Year and Term are iterated.")
     
     def createMessage(self):
         self.createM = sendMessageUI(parent = self.parent)
@@ -105,8 +111,8 @@ class otherOptionUI(QMainWindow):
         self.assigning.show()
 
     def searchCoursebyID(self):
-        self.searchCourseID = searchCourseByIDUI(parent = self.parent)
-        self.searchCourseID.show()
+        self.findCourseUI = findCourseUI(None, None, None, None, parent = self)
+        self.findCourseUI.show()
 
     def searchProfbyCourse(self):
         self.searchCourseID = findProfByCourseIDUI(parent = self.parent)

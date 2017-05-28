@@ -138,6 +138,8 @@ class profileUI(QMainWindow):
                 self.student_status.setText("Withdrawn")
             elif (status == 4):
                 self.student_status.setText("Suspended")
+            elif (status == 5):
+                self.student_status.setText("Alumni/Withdrawn")
             else:
                 self.student_status.setText("Unknown")
 
@@ -162,7 +164,7 @@ class profileUI(QMainWindow):
             elif (status == 3):
                 self.student_status.setText("Professor.")
             elif (status == 4):
-                self.student_status.setText("Suspend")
+                self.student_status.setText("Suspended")
             elif (status == 5):
                 self.student_status.setText("Retired")
             else:
