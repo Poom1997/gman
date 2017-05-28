@@ -1,3 +1,4 @@
+##Class to create a course as an object##
 class course:
     def __init__(self, data):
         self.courseID = data.courseID

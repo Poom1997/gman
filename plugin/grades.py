@@ -1,3 +1,4 @@
+##Class to create a gradeData as an object##
 class gradeData:
     def __init__(self, data ,courseData):
         self.user_id = data.user_id

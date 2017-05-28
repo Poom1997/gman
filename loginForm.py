@@ -1,7 +1,7 @@
 from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
-import plugin.databaseConn as database
+import plugin.databaseConnect as database
 import plugin.user as curUser
 from forgetPasswordForm import forgetPasswordUI
 
@@ -11,8 +11,8 @@ class LoginUI(QMainWindow):
         self.setMinimumSize(900, 600)
         self.setWindowTitle("Login")
         palette = QPalette()
-        palette.setBrush(QPalette.Background, QBrush(QPixmap("resources/images/background.png")))
-        self.logo = QPixmap("resources/images/templogo.png")
+        palette.setBrush(QPalette.Background, QBrush(QPixmap("resources/images/programBackground.png")))
+        self.logo = QPixmap("resources/images/programLogo.png")
         self.setPalette(palette)
         self.parent = parent
         self.UIinit()
@@ -46,15 +46,10 @@ class LoginUI(QMainWindow):
         
     def logIn(self):
         try:
-            #if(self.user_id.text() == "" or self.password.text() ==""):
-                #raise database.invalidQueryException("Fields cannot be Empty")
-            #status = self.login.userLogin(self.user_id.text(), self.password.text())
-            status = self.login.userLogin("professor2", "DEFAULTPASS123456")
-            #status = self.login.userLogin("professor3", "DEFAULTPASS123456")
-            #status = self.login.userLogin("admin", "DEFAULTPASS123456")
-            #status = self.login.userLogin("crazypet", "12345")
-            #status = self.login.userLogin("mekboltz", "12345")
-            print(status)
+            #DEFAULTPASS123456
+            if(self.user_id.text() == "" or self.password.text() ==""):
+                raise database.invalidQueryException("Fields cannot be Empty")
+            status = self.login.userLogin(self.user_id.text(), self.password.text())
             if(status[0]):
                 self.wronglabel.setText("")
                 self.user_id.setText("")

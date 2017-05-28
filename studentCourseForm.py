@@ -4,7 +4,7 @@ from PySide.QtUiTools import *
 from findCourse import findCourseUI
 from sendMessageForm import sendMessageUI
 from datetime import datetime
-import plugin.databaseConn as database
+import plugin.databaseConnect as database
 import plugin.course as courseItem
 
 class StudentCourseUI(QMainWindow):
@@ -13,8 +13,8 @@ class StudentCourseUI(QMainWindow):
         self.setMinimumSize(900, 600)
         self.setWindowTitle("Courses")
         palette = QPalette()
-        palette.setBrush(QPalette.Background, QBrush(QPixmap("resources/images/background.png")))
-        self.bar = QPixmap("resources/images/bar.png")
+        palette.setBrush(QPalette.Background, QBrush(QPixmap("resources/images/programBackground.png")))
+        self.bar = QPixmap("resources/images/topBarBackground.png")
         self.setPalette(palette)
         self.parent = parent
         self.rowUP = 0

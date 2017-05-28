@@ -2,7 +2,7 @@ from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
 from datetime import datetime
-import plugin.databaseConn as database
+import plugin.databaseConnect as database
 import plugin.course as courseItem
 
 class addCourseToProfUI(QMainWindow):

@@ -1,7 +1,7 @@
 from PySide.QtCore import *
 from PySide.QtGui import *
 from PySide.QtUiTools import *
-import plugin.databaseConn as database
+import plugin.databaseConnect as database
 from sendMessageForm import sendMessageUI
 
 class findUserUI(QMainWindow):

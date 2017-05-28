@@ -1,5 +1,8 @@
 import plugin.image as imageHandle
 
+##Class to create a user as an object##
+
+##Main User##
 class user:
     def __init__(self, data, username, address):
         self.id = data.user_id
@@ -40,6 +43,7 @@ class user:
     def getUsername(self):
         return self.username
 
+##Type of Student, Inherited from main user##
 class student(user):
     def __init__(self, data, username, address, faculty, major):
         super().__init__(data,username, address)
@@ -81,6 +85,7 @@ class student(user):
     def type(self):
         return "STUDENT"
 
+##Type of Professor, Inherited from main user##
 class professor(user):
     def __init__(self, data, username, address, faculty):
         super().__init__(data,username, address)
@@ -111,6 +116,7 @@ class professor(user):
     def type(self):
         return "PROFESSOR"
 
+##Type of Administrator, Inherited from main user##
 class admin(user):
     def __init__(self, data, username, address):
         super().__init__(data, username, address)
@@ -140,4 +146,3 @@ class admin(user):
 
     def type(self):
         return "ADMIN"
-

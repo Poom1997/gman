@@ -8,7 +8,7 @@ class pwUI(QMainWindow):
         self.setMinimumSize(900,600)
         self.setWindowTitle("Forget Your Password")
         palette = QPalette()
-        palette.setBrush(QPalette.Background,QBrush(QPixmap("resources/images/background.png")))
+        palette.setBrush(QPalette.Background,QBrush(QPixmap("resources/images/programBackground.png")))
         self.setPalette(palette)
         self.parent = parent
         self.UIinit()
