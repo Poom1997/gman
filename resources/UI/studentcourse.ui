@@ -349,11 +349,16 @@
     <widget class="QPushButton" name="addButton">
      <property name="geometry">
       <rect>
-       <x>750</x>
+       <x>729</x>
        <y>540</y>
-       <width>93</width>
+       <width>111</width>
        <height>28</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>ADD</string>
@@ -362,11 +367,16 @@
     <widget class="QPushButton" name="deleteButton">
      <property name="geometry">
       <rect>
-       <x>750</x>
+       <x>742</x>
        <y>930</y>
-       <width>93</width>
+       <width>101</width>
        <height>28</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>DELETE</string>
@@ -375,11 +385,16 @@
     <widget class="QPushButton" name="searchCourseButton">
      <property name="geometry">
       <rect>
-       <x>730</x>
+       <x>690</x>
        <y>180</y>
-       <width>111</width>
+       <width>151</width>
        <height>28</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>Search Course</string>

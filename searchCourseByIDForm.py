@@ -4,6 +4,7 @@ from PySide.QtUiTools import *
 from datetime import datetime
 import plugin.databaseConn as database
 import plugin.course as courseItem
+from sendMessageForm import sendMessageUI
 
 class searchCourseByIDUI(QMainWindow):
     def __init__(self,parent = None ):
@@ -21,6 +22,7 @@ class searchCourseByIDUI(QMainWindow):
         #QPushButton
         self.search_button = form.findChild(QPushButton,"searchButton")
         self.cancel_button = form.findChild(QPushButton,"closeButton")
+        self.message = form.findChild(QPushButton, "messageButton")
         
         #LineEdit
         self.course_ID = form.findChild(QLineEdit,"courseID")
@@ -39,6 +41,11 @@ class searchCourseByIDUI(QMainWindow):
         #Connect
         self.search_button.clicked.connect(self.search)
         self.cancel_button.clicked.connect(self.close)
+        self.message.clicked.connect(self.createMessage)
+
+    def createMessage(self):
+        self.createM = sendMessageUI(parent = self.parent)
+        self.createM.show()
 
 
     def cancel(self):
