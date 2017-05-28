@@ -3,8 +3,6 @@ from PySide.QtGui import *
 from PySide.QtUiTools import *
 import plugin.databaseConn as database
 import plugin.course as courseItem
-from sendMessageForm import sendMessageUI
-
 
 class seeCourseProfUI(QMainWindow):
     def __init__(self,parent = None):
@@ -30,8 +28,7 @@ class seeCourseProfUI(QMainWindow):
         self.profile_button = form.findChild(QPushButton,"profileButton")
         self.grade_button = form.findChild(QPushButton,"gradeButton")
         self.course_button = form.findChild(QPushButton,"courseButton")
-        self.temp = form.findChild(QPushButton, "temp")
-        self.temp2 = form.findChild(QPushButton, "temp2")
+        self.other_button = form.findChild(QPushButton, "othersButton")
 
         #page properties
         self.course_table = form.findChild(QTableWidget,"courseTable")
@@ -49,9 +46,8 @@ class seeCourseProfUI(QMainWindow):
         self.home_button.clicked.connect(self.goHome)
         self.profile_button.clicked.connect(self.goProfile)
         self.grade_button.clicked.connect(self.goGrade)
-        self.temp.clicked.connect(self.goTemp)
+        self.other_button.clicked.connect(self.goTemp)
         self.course_button.clicked.connect(self.goCourse)
-        self.temp2.clicked.connect(self.goTemp2)
 
 
     def goHome(self):
@@ -67,11 +63,7 @@ class seeCourseProfUI(QMainWindow):
         self.parent.changePageLoginSection("course")
 
     def goTemp(self):
-        self.createM = sendMessageUI(parent = self.parent)
-        self.createM.show()
-
-    def goTemp2(self):
-        self.parent.changePageLoginSection("login")
+        self.parent.changePageLoginSection("addcourse")
 
     def updatePage(self):
         data = self.parent.getCurrentUser()

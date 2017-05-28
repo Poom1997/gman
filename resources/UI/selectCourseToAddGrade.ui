@@ -34,7 +34,7 @@
       <height>598</height>
      </rect>
     </property>
-    <widget class="QPushButton" name="temp">
+    <widget class="QPushButton" name="othersButton">
      <property name="geometry">
       <rect>
        <x>600</x>
@@ -87,7 +87,7 @@
        <string>Course ID</string>
       </property>
       <property name="textAlignment">
-       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+       <set>AlignCenter</set>
       </property>
      </column>
      <column>
@@ -95,7 +95,7 @@
        <string>Course Name</string>
       </property>
       <property name="textAlignment">
-       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+       <set>AlignCenter</set>
       </property>
      </column>
      <column>
@@ -103,7 +103,7 @@
        <string>Credits</string>
       </property>
       <property name="textAlignment">
-       <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+       <set>AlignCenter</set>
       </property>
      </column>
     </widget>
@@ -170,7 +170,7 @@
       <string>G-Man Systems</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="temp2">
+    <widget class="QPushButton" name="logoutButton">
      <property name="geometry">
       <rect>
        <x>750</x>
@@ -210,7 +210,7 @@
      </property>
     </widget>
     <zorder>barLabel_2</zorder>
-    <zorder>temp</zorder>
+    <zorder>othersButton</zorder>
     <zorder>profileButton</zorder>
     <zorder>homeButton</zorder>
     <zorder>courseTable</zorder>
@@ -218,7 +218,7 @@
     <zorder>gradeButton</zorder>
     <zorder>label_3</zorder>
     <zorder>label_15</zorder>
-    <zorder>temp2</zorder>
+    <zorder>logoutButton</zorder>
     <zorder>addGradeButton</zorder>
    </widget>
   </widget>
