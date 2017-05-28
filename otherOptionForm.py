@@ -46,6 +46,7 @@ class otherOptionUI(QMainWindow):
         self.search_prof_by_course = form.findChild(QPushButton,"searchProfByCourseID")
         self.search_course_by_prof = form.findChild(QPushButton, "searchCourseByProfID")
         self.message = form.findChild(QPushButton, "messageButton")
+        self.increase_year = form.findChild(QPushButton, "increaseYearButton")
 
 
         #Upper Bar pressed
@@ -64,7 +65,11 @@ class otherOptionUI(QMainWindow):
         self.search_prof_by_course.clicked.connect(self.searchProfbyCourse)
         self.search_course_by_prof.clicked.connect(self.searchCoursebyProf)
         self.message.clicked.connect(self.createMessage)
+        self.increase_year.clicked.connect(self.increaseYears)
 
+    def increaseYears(self):
+        pass
+    
     def createMessage(self):
         self.createM = sendMessageUI(parent = self.parent)
         self.createM.show()
