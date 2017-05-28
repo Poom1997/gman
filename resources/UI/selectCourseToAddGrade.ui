@@ -79,7 +79,7 @@
        <x>120</x>
        <y>170</y>
        <width>651</width>
-       <height>311</height>
+       <height>331</height>
       </rect>
      </property>
      <column>
@@ -199,11 +199,16 @@
     <widget class="QPushButton" name="addGradeButton">
      <property name="geometry">
       <rect>
-       <x>630</x>
-       <y>510</y>
-       <width>141</width>
+       <x>580</x>
+       <y>520</y>
+       <width>191</width>
        <height>41</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>Add Grade to Course</string>

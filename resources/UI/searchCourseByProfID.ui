@@ -81,22 +81,27 @@
       <rect>
        <x>30</x>
        <y>60</y>
-       <width>131</width>
+       <width>141</width>
        <height>31</height>
       </rect>
      </property>
      <property name="text">
-      <string>Professor ID</string>
+      <string>Professor ID :</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="profID">
      <property name="geometry">
       <rect>
        <x>170</x>
-       <y>65</y>
+       <y>62</y>
        <width>521</width>
-       <height>25</height>
+       <height>31</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
      </property>
     </widget>
     <widget class="QPushButton" name="searchButton">
@@ -107,6 +112,11 @@
        <width>161</width>
        <height>25</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>Search</string>
@@ -120,6 +130,11 @@
        <width>121</width>
        <height>31</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
      </property>
      <property name="text">
       <string>Close</string>

@@ -175,10 +175,15 @@
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>180</y>
+     <y>170</y>
      <width>141</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>ADD</string>
@@ -188,7 +193,7 @@
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>140</y>
+     <y>130</y>
      <width>161</width>
      <height>31</height>
     </rect>
@@ -206,10 +211,15 @@
    <property name="geometry">
     <rect>
      <x>590</x>
-     <y>180</y>
+     <y>170</y>
      <width>141</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Search</string>
@@ -219,7 +229,7 @@
    <property name="geometry">
     <rect>
      <x>570</x>
-     <y>140</y>
+     <y>130</y>
      <width>181</width>
      <height>31</height>
     </rect>
@@ -237,10 +247,15 @@
    <property name="geometry">
     <rect>
      <x>590</x>
-     <y>320</y>
+     <y>300</y>
      <width>141</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Search </string>
@@ -250,7 +265,7 @@
    <property name="geometry">
     <rect>
      <x>540</x>
-     <y>280</y>
+     <y>260</y>
      <width>241</width>
      <height>31</height>
     </rect>
@@ -268,10 +283,15 @@
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>320</y>
+     <y>300</y>
      <width>141</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Assign</string>
@@ -281,7 +301,7 @@
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>280</y>
+     <y>260</y>
      <width>311</width>
      <height>31</height>
     </rect>
@@ -299,10 +319,15 @@
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>470</y>
+     <y>420</y>
      <width>141</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Search </string>
@@ -312,7 +337,7 @@
    <property name="geometry">
     <rect>
      <x>60</x>
-     <y>430</y>
+     <y>380</y>
      <width>351</width>
      <height>31</height>
     </rect>
@@ -330,7 +355,7 @@
    <property name="geometry">
     <rect>
      <x>480</x>
-     <y>430</y>
+     <y>380</y>
      <width>351</width>
      <height>31</height>
     </rect>
@@ -348,10 +373,15 @@
    <property name="geometry">
     <rect>
      <x>590</x>
-     <y>470</y>
+     <y>420</y>
      <width>141</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Search </string>
@@ -360,8 +390,8 @@
   <widget class="QLabel" name="label_8">
    <property name="geometry">
     <rect>
-     <x>390</x>
-     <y>500</y>
+     <x>170</x>
+     <y>490</y>
      <width>101</width>
      <height>31</height>
     </rect>
@@ -378,14 +408,55 @@
   <widget class="QPushButton" name="messageButton">
    <property name="geometry">
     <rect>
-     <x>370</x>
-     <y>540</y>
+     <x>150</x>
+     <y>530</y>
      <width>141</width>
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
    <property name="text">
     <string>Create</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="increaseYearButton">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>530</y>
+     <width>141</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Update</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_9">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>490</y>
+     <width>161</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Increase Year</string>
    </property>
   </widget>
   <zorder>barLabel</zorder>
@@ -411,6 +482,8 @@
   <zorder>searchCourseByProfID</zorder>
   <zorder>label_8</zorder>
   <zorder>messageButton</zorder>
+  <zorder>increaseYearButton</zorder>
+  <zorder>label_9</zorder>
  </widget>
  <resources/>
  <connections/>
