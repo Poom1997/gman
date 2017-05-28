@@ -107,6 +107,7 @@ class profileUI(QMainWindow):
 
     def editProfile(self):
         self.edit = editProfileUI(parent = self.parent)
+        self.edit.updatePage()
         self.edit.show()
 
     def changePassword(self):
@@ -161,6 +162,8 @@ class profileUI(QMainWindow):
             elif (status == 3):
                 self.student_status.setText("Professor.")
             elif (status == 4):
+                self.student_status.setText("Suspend")
+            elif (status == 5):
                 self.student_status.setText("Retired")
             else:
                 self.student_status.setText("Unknown")

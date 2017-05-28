@@ -240,7 +240,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Dismiss</string>
+    <string>Dismiss All</string>
    </property>
   </widget>
  </widget>

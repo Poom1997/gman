@@ -70,7 +70,6 @@ class databaseLogin(database):
             raise invalidQueryException("Either Username or Password is Incorrect")
         hashed = bytes(resultset.password, encoding="ascii")
         if (bcrypt.hashpw(password, hashed) == hashed):
-            print('correct')
             passwd_enc = bytes(newPassword,encoding ="ascii")
             passwd_hashed = bcrypt.hashpw(passwd_enc, bcrypt.gensalt(14))
             passwd_hashed_dec = passwd_hashed.decode(encoding = "ascii")
@@ -80,6 +79,16 @@ class databaseLogin(database):
             self.connection.commit()
         else:
             raise invalidQueryException("Either Username or Password is Incorrect")
+
+    def resetPassword(self, user_id, username, email, new_pw):
+        passwd_enc = bytes(new_pw, encoding="ascii")
+        passwd_hashed = bcrypt.hashpw(passwd_enc, bcrypt.gensalt(14))
+        passwd_hashed_dec = passwd_hashed.decode(encoding="ascii")
+        SQL = "UPDATE \"GMan\".user_login SET password=%s WHERE username = %s AND user_id = %s AND email = %s"
+        DATA = (passwd_hashed_dec, username, user_id, email)
+        self.query.execute(SQL, DATA)
+        self.connection.commit()
+
 
     def deleteLogin(self,userid,username):
         SQL = "DELETE FROM \"GMan\".user_login WHERE user_id=%s AND username =%s";
@@ -119,6 +128,7 @@ class databaseUser(database):
             self.query.execute(SQL, DATA)
             resultset = self.query.fetchone()
             return resultset
+
         if (inp_data[2] == 1):
             SQL = "SELECT * FROM \"GMan\".professor WHERE user_id =%s"
             DATA = (inp_data[1],)
@@ -267,7 +277,6 @@ class databaseCourse(database):
                     information["majorID"],information["lecturer"], information["year"],  information["term"], \
                     information["period"],information["building"], information["room"],information["credit"], \
                     information["student_limit"],information["pre"],information["student_limit"])
-            print(DATA)
             self.query.execute(SQL, DATA)
             self.connection.commit()
             return 1
@@ -324,6 +333,26 @@ class databaseCourse(database):
         resultset = self.query.fetchall()
         return resultset
 
+    def findProfessorbyCourseID(self, courseID):
+        SQL = "SELECT \"professorID\" FROM  \"GMan\".\"course\" WHERE \"courseID\" = %s"
+        DATA = (courseID,)
+        self.query.execute(SQL, DATA)
+        resultset = self.query.fetchone()
+        if(resultset!=None):
+            SQL = "SELECT  * FROM  \"GMan\".professor WHERE user_id = %s"
+            DATA = (resultset.professorID,)
+            self.query.execute(SQL, DATA)
+            resultset = self.query.fetchone()
+            return resultset
+        return None
+
+    def getCourseProfessor(self, professorID):
+        SQL = "SELECT * FROM  \"GMan\".\"course\" WHERE \"professorID\" = %s"
+        DATA = (professorID,)
+        self.query.execute(SQL, DATA)
+        resultset = self.query.fetchall()
+        return resultset
+
 class databaseGrade(database):
     def getPastCourse(self, user_id):
         SQL = "SELECT * FROM  \"GMan\".\"data\" WHERE user_id=%s AND grade IS NOT NULL ORDER BY \"year\", term"
@@ -371,7 +400,6 @@ class databaseGrade(database):
             DATA = (data.user_id,)
             self.query.execute(SQL, DATA)
             resultset = self.query.fetchone()
-            print(resultset)
             temp[data.user_id] = resultset.name + " " + resultset.surname
         return temp
 
@@ -445,4 +473,28 @@ class databaseAdmin(database):
             return 1
         except psycopg2.IntegrityError:
             return "DUPLICATE"
+
+class databaseMessage(database):
+    def getMessage(self, userID):
+        SQL = "SELECT * FROM \"GMan\".message WHERE \"toUser\" = %s AND dismiss = '0'"
+        DATA = (userID,)
+        self.query.execute(SQL, DATA)
+        resultset = self.query.fetchall()
+        return resultset
+
+    def dismissMessage(self, userID):
+        SQL = "UPDATE \"GMan\".message SET dismiss='1' WHERE \"toUser\"=%s"
+        DATA = (userID,)
+        self.query.execute(SQL, DATA)
+        self.connection.commit()
+
+    def sendMessage(self, toUser, fromUser, message, time):
+        try:
+            SQL = "INSERT INTO \"GMan\".message (\"fromUser\", \"toUser\", message, \"time\", dismiss) VALUES(%s, %s, %s, %s, '0')"
+            DATA = (fromUser, toUser, message, time)
+            self.query.execute(SQL, DATA)
+            self.connection.commit()
+            return 1
+        except psycopg2.IntegrityError:
+            return 0
 
