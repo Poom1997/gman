@@ -147,11 +147,11 @@
      <string>Credits :</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lectName">
+   <widget class="QLineEdit" name="faculty">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>90</y>
+      <x>460</x>
+      <y>160</y>
       <width>311</width>
       <height>21</height>
      </rect>
@@ -312,12 +312,12 @@
      </font>
     </property>
    </widget>
-   <widget class="QLineEdit" name="faculty">
+   <widget class="QLineEdit" name="lectName">
     <property name="geometry">
      <rect>
-      <x>470</x>
-      <y>160</y>
-      <width>301</width>
+      <x>240</x>
+      <y>90</y>
+      <width>311</width>
       <height>21</height>
      </rect>
     </property>
