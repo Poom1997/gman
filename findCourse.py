@@ -8,7 +8,7 @@ import plugin.course as courseItem
 class findCourseUI(QMainWindow):
     def __init__(self,takenCourse,allTakenCourseNORE,allTakenCourseNOOPEN, currentCourse, parent = None ):
         QMainWindow.__init__(self,None)
-        self.setMinimumSize(900,581)
+        self.setMinimumSize(900,611)
         self.setWindowTitle("Find_Course")
         self.parent = parent
         self.UIinit()

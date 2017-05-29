@@ -62,6 +62,7 @@ class viewGradeUI(QMainWindow):
         self.all_term_header.setResizeMode(1, QHeaderView.Stretch)
         self.all_term_header.setResizeMode(2, QHeaderView.ResizeToContents)
         self.all_term_header.setResizeMode(3, QHeaderView.ResizeToContents)
+        self.all_term_header.setResizeMode(4, QHeaderView.ResizeToContents)
 
         self.this_term_header = self.this_term.horizontalHeader()
         self.this_term_header.setResizeMode(0, QHeaderView.ResizeToContents)
