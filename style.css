@@ -1,0 +1,55 @@
+@charset "utf-8";
+
+.rTable { 
+	display: table; width: 100%;
+} 
+
+.rTableRow { 
+	display: table-row;
+}
+
+.rTableHeading { 
+	background-color: #dddddd;
+	display: table-header-group;
+	text-align: center;
+	font-family: Century Gothic;
+	font-size: 15px;
+	font-weight: 700;
+}
+
+.rTableCell, .rTableHead { 
+	display: table-cell;
+	padding: 3px 10px;
+	border: 1px solid #000000;
+	font-family: Century Gothic;
+	font-size: 15px;
+	font-weight: 700;
+}
+
+.rTableBody { 
+	display: table-row-group;
+}
+	
+p {
+    font-family: Century Gothic;
+	font-size: 10px;
+	font-weight: 400;
+}
+
+h1 {
+	color: #1D5D8C; 
+	text-align: center;
+	font-family: Century Gothic;
+	font-size: 33px;
+	font-weight: 800;
+	line-height: 23px
+}
+
+h2 {
+	color: #1D5D8C; 
+	text-align: left;
+	font-family: Century Gothic;
+	font-size: 20px;
+	font-weight: 800;
+	line-height: 23px
+}

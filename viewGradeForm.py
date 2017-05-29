@@ -7,6 +7,7 @@ from sendMessageForm import sendMessageUI
 
 import plugin.databaseConnect as database
 import plugin.grades as grade
+import plugin.printing as printModule
 
 class viewGradeUI(QMainWindow):
     def __init__(self,parent = None):
@@ -19,6 +20,8 @@ class viewGradeUI(QMainWindow):
         self.bar = QPixmap("resources/images/topBarBackground.png")
         self.parent = parent
         self.UIinit()
+        self.userPrintData = []
+        self.userPrintGradeData = []
 
     def UIinit(self):
         loader = QUiLoader()
@@ -51,7 +54,7 @@ class viewGradeUI(QMainWindow):
         self.course_button.clicked.connect(self.goCourse)
         self.temp.clicked.connect(self.goTemp)
         self.temp2.clicked.connect(self.goTemp2)
-        self.print_button.clicked.connect(self.goDummy)
+        self.print_button.clicked.connect(self.print)
 
         #Table Properties
         self.all_term_header = self.all_term.horizontalHeader()
@@ -73,9 +76,10 @@ class viewGradeUI(QMainWindow):
         self.this_term.setSelectionMode(QAbstractItemView.NoSelection)
         self.this_term.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
-    def goDummy(self):
-        self.temp = addGradeAdmin(parent = self.parent)
-        self.temp.show()
+    def print(self):
+        self.printing = printModule.printGrades("STUDENT", self.userPrintData, self.userPrintGradeData, self.parent)
+        self.printing.printPDF()
+        self.parent.showOK("Exported", "File has been saved as PDF.")
 
     def goHome(self):
         self.parent.changePageLoginSection("home")
@@ -103,9 +107,15 @@ class viewGradeUI(QMainWindow):
         all_course = self.createBulk(temp[0], temp[1])
         temp = db.getCurrentCourse(data.getID(), data.getYear(), data.getTerm())
         cur_course = self.createBulk(temp[0], temp[1])
-        print(cur_course)
         currentID = []
 
+        self.userPrintData = []
+        self.userPrintGradeData = []
+
+        self.userPrintData.append(data.getID())
+        self.userPrintData.append(data.getName() +" " + data.getSurname())
+        self.userPrintData.append(data.getFacultyName())
+        self.userPrintData.append(data.getMajorName())
         #Calculating GPA/GPS Variable
         sumGPA = 0
         crsGPA = 0
@@ -116,11 +126,20 @@ class viewGradeUI(QMainWindow):
         i = 0
         self.all_term.setRowCount(len(all_course))
         for grade in all_course:
+            temp = {}
             self.all_term.setItem(i, 0, QTableWidgetItem(grade.getCourseID()))
             self.all_term.setItem(i, 1, QTableWidgetItem(grade.getCourseName()))
             self.all_term.setItem(i, 2, QTableWidgetItem(grade.getCredit()))
             self.all_term.setItem(i, 3, QTableWidgetItem(grade.getYearTerm()))
             self.all_term.setItem(i, 4, QTableWidgetItem(grade.getGrade()))
+
+            temp["CourseID"] = grade.getCourseID()
+            temp["CourseName"] = grade.getCourseName()
+            temp["Credits"] = grade.getCredit()
+            temp["Year"] = grade.getYearTerm()
+            temp["Grades"] = grade.getGrade()
+            self.userPrintGradeData.append(temp)
+
             currentID.append(grade.getCourseID())
             curCrs = int(grade.getCredit())
             crsGPA = crsGPA + curCrs
@@ -193,7 +212,10 @@ class viewGradeUI(QMainWindow):
             status = 2
         if(gpa > 4.00 or gpa <=0):
             self.status_input.setText("INC")
-        db.updateDataStudent(data.getID(), status, gpa)
+
+        self.userPrintData.append(str("{:0.2f}".format(gpa)))
+        self.userPrintData.append(data.getStatusString())
+        db.updateDataStudent(data.getID(), status, str("{:0.2f}".format(gpa)))
         db.disconnect()
 
     def createBulk(self, data, courseData):
