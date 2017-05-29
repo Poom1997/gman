@@ -103,7 +103,17 @@ class mainUI(QMainWindow):
 
     def updatePage(self):
         self.data = self.parent.getCurrentUser()
-        if (self.data.type() == "ADMIN"):
+        if(self.data.type() == "STUDENT"):
+            self.grade_button.setText("Grades")
+            self.course_button.setText("Courses")
+            self.temp.setText("Message")
+            self.temp2.setText("Logout")
+        elif(self.data.type() == "PROFESSOR"):
+            self.grade_button.setText("Grades")
+            self.course_button.setText("Courses")
+            self.temp.setText("Message")
+            self.temp2.setText("Logout")
+        elif (self.data.type() == "ADMIN"):
             self.grade_button.setText("Faculties")
             self.course_button.setText("Majors")
             self.temp.setText("Courses")

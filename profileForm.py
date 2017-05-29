@@ -125,6 +125,11 @@ class profileUI(QMainWindow):
             self.major.setText(data.getMajorName())
             self.year.setText(data.year)
             self.address.setText(data.getAddress())
+            # change Button Name 
+            self.grade_button.setText("Grades")
+            self.course_button.setText("Courses")
+            self.temp.setText("Message")
+            self.temp2.setText("Logout")
 
             # Status
             status = data.getStatus()
@@ -152,6 +157,11 @@ class profileUI(QMainWindow):
             self.major.setText(data.getMajorName())
             self.year.setText(data.getYear())
             self.address.setText(data.getAddress())
+            # change Button Name 
+            self.grade_button.setText("Grades")
+            self.course_button.setText("Courses")
+            self.temp.setText("Message")
+            self.temp2.setText("Logout")
 
             # Status
             status = data.getStatus()

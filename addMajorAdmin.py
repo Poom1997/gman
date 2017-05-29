@@ -43,6 +43,7 @@ class AddMajorUI(QMainWindow):
         self.header = self.majorTable.horizontalHeader()
         self.header.setResizeMode(0,QHeaderView.ResizeToContents)
         self.header.setResizeMode(1,QHeaderView.Stretch)
+        self.header.setResizeMode(2,QHeaderView.ResizeToContents)
 
         self.majorTable.setSelectionMode(QAbstractItemView.NoSelection)
         self.majorTable.setEditTriggers(QAbstractItemView.NoEditTriggers)
