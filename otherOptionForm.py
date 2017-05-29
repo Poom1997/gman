@@ -6,7 +6,6 @@ from addUser import addUserUI
 from findUser import findUserUI
 from searchProfByCourseID import findProfByCourseIDUI
 from addCourseToProfForm import addCourseToProfUI
-from searchCourseByIDForm import searchCourseByIDUI
 from searchProfByCourseID import findProfByCourseIDUI
 from searchCourseByProfIDForm import searchCourseByProfIDUI
 from findCourse import findCourseUI

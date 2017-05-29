@@ -111,7 +111,7 @@ class mainUI(QMainWindow):
         msg = self.db.getMessage(self.data.getID())
         temp = ""
         for messages in msg:
-            temp = "<<" + temp + messages.time + ">> - MESSAGE FROM: "+ messages.fromUser+ " : " + messages.message + "\n"
+            temp = temp + "<<"+ messages.time + ">> - MESSAGE FROM: "+ messages.fromUser+ " : " + messages.message + "\n"
         self.message_box.setText(temp)
 
     def clearMessage(self):
