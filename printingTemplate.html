@@ -1,0 +1,66 @@
+<!Doctype HTML>
+<style type="text/css">
+@import url("style.css");
+</style>
+<p style="text-align: center;"> <img src="programLogo.png" width="100" height="100" alt=""/></p>
+<h1>GMan Systems</h1>
+<h1>== TRANSCRIPT OF RECORDS ==</h1>
+<br>
+<h2>Student Information</h2>
+<div class="rTable">
+	<div class="rTableHeading">
+		<div class="rTableRow">
+			<div class="rTableCell">Student ID</div>
+			<div class="rTableCell">Student Name</div>
+			<div class="rTableCell">Faculty</div>
+			<div class="rTableCell">Degree</div>
+            <div class="rTableCell">Status</div>
+            <div class="rTableCell">GPA</div>
+		</div>
+	</div>
+	<div class="rTableBody">
+		<div class="rTableRow">
+			<div class="rTableCell">{{ ID }}</div>
+			<div class="rTableCell">{{ name }}</div>
+			<div class="rTableCell">{{ faculty }}</div>
+			<div class="rTableCell">{{ degree }}</div>
+            <div class="rTableCell">{{ status }}</div>
+            <div class="rTableCell">{{ GPA }}</div>
+		</div>
+	</div>
+</div>
+<br>
+<br>
+<h2>Student Educational Reports:</h2>
+<div class="rTable">
+	<div class="rTableHeading">
+		<div class="rTableRow">
+			<div class="rTableCell">Course Code</div>
+			<div class="rTableCell">Course Name</div>
+			<div class="rTableCell">Year/Term Taken</div>
+            <div class="rTableCell">Credits</div>
+			<div class="rTableCell">Grade Obtained</div>
+		</div>
+	</div>
+	{% for items in gradesData %}
+	<div class="rTableBody">
+		<div class="rTableRow">
+			<div class="rTableCell">{{items.CourseID}}</div>
+			<div class="rTableCell">{{items.CourseName}}</div>
+			<div class="rTableCell">{{items.Year}}</div>
+            <div class="rTableCell">{{items.Credits}}</div>
+			<div class="rTableCell">{{items.Grades}}</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+<br>
+<h2>Total Grade Point Average:</h2>
+<h1>GPA: {{GPA}}</h1>
+<br>
+<br>
+<h1>== Report Closed ==</h1>
+<br>
+<p style="text-align: right;"><em>This is not valid unless stamped and signed by registrar.</em></p>
+<p style="text-align: right;"><em>For Validation, please contact the registrar's office MON-FRI 08:00 - 17:00</em></p>
+<p style="text-align: right;"><em>File printed as of {{TIME}}</em></p>

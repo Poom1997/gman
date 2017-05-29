@@ -85,6 +85,23 @@ class student(user):
     def type(self):
         return "STUDENT"
 
+    def getStatusString(self):
+        if (self.status == 0):
+            return  "Learning"
+        elif (self.status == 1):
+            return  "Probation"
+        elif (self.status == 2):
+            return  "Retired"
+        elif (self.status == 3):
+            return  "Withdrawn"
+        elif (self.status == 4):
+            return  "Suspended"
+        elif (self.status == 5):
+            return "Graduated/Alumni"
+        else:
+            return "Unknown"
+
+
 ##Type of Professor, Inherited from main user##
 class professor(user):
     def __init__(self, data, username, address, faculty):
