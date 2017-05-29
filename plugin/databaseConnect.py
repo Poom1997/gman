@@ -517,15 +517,18 @@ class databaseGrade(database):
 
     def updateUserGrade(self, data, courseID, year):
         for items in data:
-            repeat = 0
-            if(items[1] == "F"):
-                repeat = 2
-            elif(items[1] == "D+" or items[1] == "D"):
-                repeat = 1
-            SQL = "UPDATE \"GMan\".\"data\" SET grade=%s, \"allowRepeat\"=%s WHERE user_id=%s AND \"courseID\"=%s AND year_taken=%s"
-            DATA = (items[1], repeat, items[0], courseID, year)
-            self.query.execute(SQL, DATA)
-            self.connection.commit()
+            if (len(items) >= 2):
+                repeat = 0
+                if(items[1] == "F"):
+                    repeat = 2
+                elif(items[1] == "D+" or items[1] == "D"):
+                    repeat = 1
+                SQL = "UPDATE \"GMan\".\"data\" SET grade=%s, \"allowRepeat\"=%s WHERE user_id=%s AND \"courseID\"=%s AND year_taken=%s"
+                DATA = (items[1], repeat, items[0], courseID, year)
+                self.query.execute(SQL, DATA)
+                self.connection.commit()
+            else:
+                return 0
         return 1
 
 class databaseAdmin(database):

@@ -116,7 +116,7 @@ class addGradeAdmin(QMainWindow):
                     my_list = list(reader)
                     testData = my_list[0]
                     if(testData[0] == self.courseData.getCourseName() and testData[1] ==  self.courseData.getCourseID() and testData[2] == str(datetime.now().year)):
-                        my_list = my_list[2:]
+                        my_list = my_list[2:-1]
                         i = 0
                         if(len(my_list)!= len(self.dataList)):
                             self.parent.parent.showERROR("User Amount Mismatch",

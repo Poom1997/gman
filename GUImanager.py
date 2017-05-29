@@ -1,6 +1,6 @@
 from loginForm import *
 from mainForm import *
-from pwForm import *
+
 from profileForm import *
 from studentCourseForm import *
 from grading import *
@@ -34,7 +34,6 @@ class GUImanager(QMainWindow):
         self.setCentralWidget(self.central_widget)
         self.login_widget = LoginUI(self)
         self.main_widget = mainUI(self)
-        self.pw_widget = pwUI(self)
         self.add_major_for_admin_widget = AddMajorUI(self)
         self.view_grade_widget = viewGradeUI(self)
         self.addCourse_widget = addCourseUI(self)
@@ -51,7 +50,6 @@ class GUImanager(QMainWindow):
         self.central_widget.addWidget(self.profile_widget)
         self.central_widget.addWidget(self.main_widget)
         self.central_widget.addWidget(self.student_course_widget)
-        self.central_widget.addWidget(self.pw_widget)
         self.central_widget.addWidget(self.addCourse_widget)
         self.central_widget.addWidget(self.profile_widget)
         self.central_widget.addWidget(self.add_major_for_admin_widget)
@@ -67,11 +65,10 @@ class GUImanager(QMainWindow):
     def changePageLoginSection(self,signal = None):
         if signal == "login":
             print("login")
+            self.suspension = 0
+            self.graduated = 0
+            self.retired = 0
             self.centralWidget().setCurrentWidget(self.login_widget)
-
-        if signal == "forget":
-            print("forget")
-            self.centralWidget().setCurrentWidget(self.pw_widget)
 
         if signal == "home":
             print("home")
