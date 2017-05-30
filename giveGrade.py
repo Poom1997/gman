@@ -103,6 +103,7 @@ class addGradeAdmin(QMainWindow):
         self.createM = sendMessageUI(id = "ALL USER", bulk = self.userID, parent = self.parent)
         self.createM.show()
 
+    ##Import CSV file into the program and put the data into the table##
     def importFile(self):
         if(self.parent.parent.showCONFIRM("Are you sure?", "The data will be replaced with the data in the file.\nPlease ensure you have the updated file.")):
             try:
@@ -139,6 +140,7 @@ class addGradeAdmin(QMainWindow):
                 self.parent.parent.showERROR("Data Error", "The Data you provide do not match the records for this course.\
                                                 \nERROR AT: ROW " + str(+3) + "\nThe importing has been stop at user: " + data[1])
 
+    ##Export table that contain list of student ID,name and grade as CSV file format##
     def exportFile(self):
         directory = str(QFileDialog.getExistingDirectory(self, "Select Directory"))
         with open(directory + '\\' + str(self.courseData.getCourseID()) + '.csv', 'w', newline="\n", encoding="utf-8") as outfile:
@@ -151,6 +153,7 @@ class addGradeAdmin(QMainWindow):
         outfile.close()
         self.parent.parent.showOK("Data Exported", "The data has been exported to the directory you have chosen successfully.")
 
+    ##Use for saving data after professor edit student grade##
     def saveData(self):
         tempData = []
         for i in range(0, self.size):
@@ -168,7 +171,7 @@ class addGradeAdmin(QMainWindow):
             else:
                 self.parent.parent.showERROR("Error","The Grade you entered for " + self.grade_table.item(i,0).text() + " is invalid. Please Check." )
 
-
+    ##Grade that professor input must be in this datalist##
     def checkData(self, grade):
         data = ["A", "B+", "B", "C+", "C", "D+", "D", "F"]
         if(grade in data):

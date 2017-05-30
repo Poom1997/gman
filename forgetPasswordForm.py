@@ -31,6 +31,7 @@ class forgetPasswordUI(QMainWindow):
         self.save_button.clicked.connect(self.savePw)
         self.close_button.clicked.connect(self.closeWindow)
 
+    ##Use for saving new password by checking user ID,name and email##
     def savePw(self):
         id = self.user_id.text()
         username = self.user_name.text()

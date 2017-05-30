@@ -83,6 +83,7 @@ class AddFacultyUI(QMainWindow):
             self.faculty_table.setItem(i, 2, QTableWidgetItem(str(data[1][i])))
         print(self.faculty_id.text())
 
+    ##Add faculty into the system##
     def add(self):
         temp = None
         if (self.parent.showCONFIRM("Are you sure?",

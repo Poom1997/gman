@@ -101,22 +101,27 @@ class otherOptionUI(QMainWindow):
         self.addUs = addUserUI(parent = self.parent)
         self.addUs.show()
 
+    ##Search User by using User ID##
     def searchUser(self):
         self.searchUs = findUserUI(parent = self.parent)
         self.searchUs.show()
 
+    ##Assign course to Professors##
     def assignCoursetoProf(self):
         self.assigning = addCourseToProfUI(parent = self.parent)
         self.assigning.show()
 
+    ##Search for course by using course ID##
     def searchCoursebyID(self):
         self.findCourseUI = findCourseUI(None, None, None, None, parent = self)
         self.findCourseUI.show()
 
+    ##Search for Professor by using course ID##
     def searchProfbyCourse(self):
         self.searchCourseID = findProfByCourseIDUI(parent = self.parent)
         self.searchCourseID.show()
 
+    ##Search for course by using professor's ID##
     def searchCoursebyProf(self):
         self.searchCourseID = searchCourseByProfIDUI(parent = self.parent)
         self.searchCourseID.show()

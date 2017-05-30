@@ -27,7 +27,8 @@ class changePasswordUI(QMainWindow):
 
         self.save_button.clicked.connect(self.savePw)
         self.close_button.clicked.connect(self.closeWindow)
-
+        
+    ##Function for changing password for user##
     def savePw(self):
         user = self.parent.getCurrentUser()
         username = user.getUsername()

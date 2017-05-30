@@ -48,7 +48,8 @@ class addCourseToProfUI(QMainWindow):
     def cancel(self):
         self.db.disconnect()
         self.close()
-
+        
+    ##Use to search the course before assign to professor##
     def search(self):
         temp = self.courseID.text()
         data = self.db.getCoursebyID(temp)
@@ -62,6 +63,7 @@ class addCourseToProfUI(QMainWindow):
         self.pre_requisite.setText(data.pre)
         self.prof_name.setText(data.professorID)
 
+    ##Assign the course that has been search from search function above##
     def assignProf(self):
         courseID = self.courseID.text()
         profID = self.prof_name.text()
