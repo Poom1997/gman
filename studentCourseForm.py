@@ -181,7 +181,6 @@ class StudentCourseUI(QMainWindow):
         for elements in temp:
             if(self.data.getTerm() != elements.term):
                 self.allTakenCourseNOOPEN.append(elements.courseID)
-        print(self.allTakenCourseNOOPEN)
 
         for course in self.currentCourse:
             currentID.append(course.getCourseID())

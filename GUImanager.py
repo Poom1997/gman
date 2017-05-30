@@ -62,31 +62,26 @@ class GUImanager(QMainWindow):
 
     def changePageLoginSection(self,signal = None):
         if signal == "login":
-            print("login")
             self.suspension = 0
             self.graduated = 0
             self.retired = 0
             self.centralWidget().setCurrentWidget(self.login_widget)
 
         if signal == "home":
-            print("home")
             self.centralWidget().setCurrentWidget(self.main_widget)
             self.main_widget.updatePage()
 
         if signal == "profile":
-            print("profile")
             self.centralWidget().setCurrentWidget(self.profile_widget)
             self.profile_widget.updatePage()
 
         ## STUDENT signal ##
             
         if signal == "studentGrade":
-            print("studentGrade")
             self.centralWidget().setCurrentWidget(self.view_grade_widget)
             self.view_grade_widget.updatePage()
 
         if signal == "studentCourse":
-            print("studentCourse")
             if(self.suspension == 1):
                 self.showERROR("You are suspended", "You are currently suspended. You cannot access this menu.")
             elif(self.graduated == 1):
@@ -98,7 +93,6 @@ class GUImanager(QMainWindow):
         ## Prof signal ## 
 
         if signal == "grade":
-            print("grade")
             if (self.suspension == 1):
                 self.showERROR("You are suspended", "You are currently suspended. You cannot access this menu.")
             elif (self.graduated == 1):
@@ -108,23 +102,19 @@ class GUImanager(QMainWindow):
                 self.select_course.updatePage()
 
         if signal == "course":
-            print("course")
             self.centralWidget().setCurrentWidget(self.see_course_widget)
             self.see_course_widget.updatePage()
 
         ## Admin signal ## 
 
         if signal == "addcourse":
-            print("addcourse")
             self.centralWidget().setCurrentWidget(self.addCourse_widget)
 
         if signal == "addfaculties":
-            print("addfaculties")
             self.centralWidget().setCurrentWidget(self.add_faculties_for_admin)
             self.add_faculties_for_admin.updatePage()
             
         if signal == "addmajor":
-            print("addmajor")
             self.centralWidget().setCurrentWidget(self.add_major_for_admin_widget)
 
         if signal == "otherOption":
@@ -137,10 +127,8 @@ class GUImanager(QMainWindow):
     def getCurrentUser(self):
         if(self.user.getStatus() == 4):
             self.suspension = 1
-            print("USER SUSPENDED!")
         if (self.user.getStatus() == 5):
             self.graduated = 1
-            print("GRAD!")
         return self.user
 
     ##MessageDialogs
@@ -151,8 +139,6 @@ class GUImanager(QMainWindow):
         msg.setWindowTitle(title)
         msg.setStandardButtons(QMessageBox.Ok)
         ret_val = msg.exec_()
-        if (ret_val == QMessageBox.Ok):
-            print("MessageBox Clicked:", ret_val)
 
     def showCONFIRM(self, title, message):
         msg = QMessageBox()
@@ -162,7 +148,6 @@ class GUImanager(QMainWindow):
         msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
         ret_val = msg.exec_()
         if (ret_val == QMessageBox.Ok):
-            print("MessageBox Clicked:", ret_val)
             return True
         else:
             return False
@@ -174,8 +159,6 @@ class GUImanager(QMainWindow):
         msg.setWindowTitle(title)
         msg.setStandardButtons(QMessageBox.Ok)
         ret_val = msg.exec_()
-        if (ret_val == QMessageBox.Ok):
-            print("MessageBox Clicked:", ret_val)
 def main():
     app = QApplication(sys.argv)
     ui = GUImanager()
