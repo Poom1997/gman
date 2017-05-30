@@ -12,9 +12,9 @@
 
 # AUTHORS AND PROGRAMMER
 
-  Bhurinuth Wongsrisakul (58090030) - Project Manager  <br>
-  Sira Pacheechan (58090037) - GUI Designer and Manager <br>
-  Atiruj Silnumkij (58090044) - Database Administrator <br>
+  Bhurinuth Wongsrisakul (58090030) - Project Manager, Database Administrator  <br>
+  Sira Pacheechan (58090037) - Helper <br>
+  Atiruj Silnumkij (58090044) - GUI Designer and Manager <br>
 
 
 # INITIAL DESCRIPTION
@@ -26,10 +26,10 @@
 
 # ADDITIONAL DESCRIPTION
 
-  This section will be updated once the project has been completed successfully.
+  **None**
 
 # 
 **PROGRAM VERSION: 1.0.0(BETA)<br>**
 ALL COMPONENTS IN THE BETA VERSION OF THE PROGRAM CAN BE CHANGED OR PUBLISHED WITHOUT ANY RELEASE NOTES<br>
 
-THIS DOCUMENT IS CREATED AS-OF 29 MAY 2017<br>
+THIS DOCUMENT IS CREATED AS-OF 31 MAY 2017<br>
