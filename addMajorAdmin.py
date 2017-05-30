@@ -81,6 +81,7 @@ class AddMajorUI(QMainWindow):
     def goOther(self):
         self.parent.changePageLoginSection("otherOption")
 
+    ##Add major into the system##
     def add(self):
         temp = None
         if(self.parent.showCONFIRM("Are you sure?", "Are you sure you want to add a major for this faculty? Once added, it cannot be deleted.")):
@@ -94,6 +95,7 @@ class AddMajorUI(QMainWindow):
             elif (temp == "DUPLICATE"):
                 self.parent.showERROR("Major ID Duplication Error or Faculty not Found", "The ID you entered already exists or the Faculty ID5 is incorrect. Please Try Again.")
 
+    ##Search major by faculty ID##
     def searchMajor(self):
         data = self.db.getallMajors(self.faculty_id.text())
         print(data)

@@ -43,7 +43,8 @@ class LoginUI(QMainWindow):
         except database.invalidQueryException as e:
             self.wronglabel.setText(str(e))
             self.status.setText("Offline")
-        
+            
+    ##Checking Log-in by using user ID and password##    
     def logIn(self):
         try:
             #DEFAULTPASS123456
@@ -82,6 +83,7 @@ class LoginUI(QMainWindow):
             self.user_id.setText("")
             self.password.setText("")       
 
+    ##For user that forget their password##
     def forgetpass(self):
         self.forget = forgetPasswordUI(parent = self.parent)
         self.forget.show()

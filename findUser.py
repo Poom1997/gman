@@ -53,6 +53,7 @@ class findUserUI(QMainWindow):
     def cancel(self):
         self.close()
 
+    ##Search User by using User ID##
     def search(self):
         self.db = database.databaseLogin()
         data = self.db.getInformationUser(self.search_user_id.text())
@@ -114,6 +115,7 @@ class findUserUI(QMainWindow):
         self.createM = sendMessageUI(self.search_user_id.text(),parent=self.parent)
         self.createM.show()
 
+    ## Use too suspend and un-suspend student##
     def suspendUser(self):
         val = 0
         if(self.parent.showCONFIRM("Are you sure?", "Are you sure you want to toggle suspension status for the user?")):
@@ -131,6 +133,7 @@ class findUserUI(QMainWindow):
             self.parent.showOK("User status changed", "User " + self.first_name.text() + " " + self.surname.text() + " suspension status has been changed")
         self.search()
 
+    ##Give graduate status for that student##
     def graduateUser(self):
         val = 0
         if (self.status == 0):
@@ -143,6 +146,7 @@ class findUserUI(QMainWindow):
             self.parent.showOK("User status changed", "User " + self.first_name.text() + " " + self.surname.text() + " has been locked.")
         self.search()
 
+    ##Use to block and un-block user##
     def blockUser(self):
         val = 0
         if (self.parent.showCONFIRM("Are you sure?", "Are you sure you want toggle block status this user?")):
