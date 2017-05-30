@@ -39,6 +39,7 @@ class sendMessageUI(QMainWindow):
     def closeWindow(self):
         self.close()
 
+    ##Create message and send it to other user##
     def sendMes(self):
         db = database.databaseMessage()
         toUser = self.to_user.text()

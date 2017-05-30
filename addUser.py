@@ -64,6 +64,7 @@ class addUserUI(QMainWindow):
     def cancel(self):
         self.close()
 
+    ##Add new user and assign role for each user into system## 
     def add(self):
         self.dbLogin = database.databaseLogin()
         self.dbLogin.createLogin(self.user_id.text(),self.username.text(), self.email.text(), userType = self.status_set)
@@ -91,14 +92,17 @@ class addUserUI(QMainWindow):
             self.parent.showERROR("Data Consistency Error" + status[0],
                                 "Either FacultyID, or Major ID is incorrect OR Username Exists.")
 
+    ##When press student button, state of user will be student##
     def statusChangeStudent(self):
         self.status_set = 0
         self.update()
-
+        
+    ##When press professor button, state of user will be professor##
     def statusChangeProfessor(self):
         self.status_set = 1
         self.update()
 
+    ##When press admin button, state of user will be admin##
     def statusChangeAdmin(self):
         self.status_set = 2
         self.update()

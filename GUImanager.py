@@ -78,7 +78,7 @@ class GUImanager(QMainWindow):
             self.centralWidget().setCurrentWidget(self.profile_widget)
             self.profile_widget.updatePage()
 
-############################################## STUDENT signal ################################################
+        ## STUDENT signal ##
             
         if signal == "studentGrade":
             print("studentGrade")
@@ -95,7 +95,7 @@ class GUImanager(QMainWindow):
                 self.centralWidget().setCurrentWidget(self.student_course_widget)
                 self.student_course_widget.updatePage()
 
-############################################## Prof signal ################################################ 
+        ## Prof signal ## 
 
         if signal == "grade":
             print("grade")
@@ -112,7 +112,7 @@ class GUImanager(QMainWindow):
             self.centralWidget().setCurrentWidget(self.see_course_widget)
             self.see_course_widget.updatePage()
 
-############################################## Admin signal ################################################ 
+        ## Admin signal ## 
 
         if signal == "addcourse":
             print("addcourse")

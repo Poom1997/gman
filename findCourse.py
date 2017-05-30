@@ -59,6 +59,7 @@ class findCourseUI(QMainWindow):
         self.db.disconnect()
         self.close()
 
+    ##Use to search for the course##
     def search(self):
         data = self.db.getCourseFaculty(self.faculty_name.text())
         allCourse = self.createBulk(data)
@@ -81,6 +82,7 @@ class findCourseUI(QMainWindow):
         else:
             self.addSelected_button.setEnabled(False)
 
+    ##Use for selecting the course and add it into current course##
     def add_selected(self):
         colCount = 0
         temp = self.course_table.selectionModel().selectedRows()

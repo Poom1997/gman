@@ -40,6 +40,7 @@ class findProfByCourseIDUI(QMainWindow):
         self.db.disconnect()
         self.close()
 
+    ##Search professor by using course ID##
     def search(self):
         self.db = database.databaseCourse()
         data = self.db.findProfessorbyCourseID(self.search_course_id.text())

@@ -91,7 +91,8 @@ class StudentCourseUI(QMainWindow):
         self.add_button.clicked.connect(self.addClick)
         self.delete_button.clicked.connect(self.deleteClick)
         self.search_course.clicked.connect(self.searchCourse)
-
+        
+    ##When add button is clicked, add the selected course into current course table##
     def addClick(self):
         colCount = 0
         temp = self.available_course.selectionModel().selectedRows()
@@ -126,7 +127,7 @@ class StudentCourseUI(QMainWindow):
                 self.parent.showERROR("Pre-requisite Course Error", "You have not taken the required course required for this course.\
                                                                     Please complete that course before adding this course.")
             self.updatePage()
-        
+    ##When delete button is clicked, delete the selected course from current course table##    
     def deleteClick(self):
         colCount = 0
         temp = self.your_course.selectionModel().selectedRows()
@@ -226,7 +227,7 @@ class StudentCourseUI(QMainWindow):
                 self.available_course.setItem(i,5,QTableWidgetItem(course.getTime()))
                 self.available_course.setItem(i,6,QTableWidgetItem(course.getMaxStud()))
                 i = i + 1
-    
+    ##Use to search other course that student wants to add##
     def searchCourse(self):
         currentCourse = []
         for items in self.currentCourse:

@@ -82,7 +82,8 @@ class addCourseUI(QMainWindow):
 
     def goOther(self):
         self.parent.changePageLoginSection("otherOption")
-
+        
+    ##Use to clear all textField##
     def clearField(self):
         self.course_code.setText("")
         self.course_name.setText("")
@@ -98,6 +99,7 @@ class addCourseUI(QMainWindow):
         self.room.setText("")
         self.pre.setText("")
 
+    ##Use for saving the course after enter Information##
     def saveCourse(self):
         temp = {}
         db = database.databaseCourse()

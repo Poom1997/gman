@@ -51,6 +51,7 @@ class editProfileUI(QMainWindow):
         self.zip_code_edit.setText(curAddress.zipCode)
         self.profile_pic.setPixmap(QPixmap(self.data.pictureGen()))
 
+    ##Use for changing profile picture##
     def photo(self):
         dlg = QFileDialog()
         dlg.setFileMode(QFileDialog.AnyFile)
@@ -71,6 +72,7 @@ class editProfileUI(QMainWindow):
     def cancel(self):
         self.close()
 
+    ##Use for changing the profile information of user##
     def editData(self):
         alterAddress = database.databaseUser()
         alterEmail = database.databaseLogin()

@@ -94,6 +94,7 @@ class selectCourseUI(QMainWindow):
             self.course_table.setItem(i, 2, QTableWidgetItem(course.getCredit()))
             i = i + 1
 
+    ##Use for selecting course that professor want to add grade##
     def addGradeClick(self):
         colCount = 0
         tempID = 0
