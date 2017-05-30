@@ -1,6 +1,5 @@
 from loginForm import *
 from mainForm import *
-
 from profileForm import *
 from studentCourseForm import *
 from grading import *
@@ -44,7 +43,6 @@ class GUImanager(QMainWindow):
         self.select_course = selectCourseUI(self)
         self.see_course_widget = seeCourseProfUI(self)
 
-        
         self.central_widget.addWidget(self.login_widget)
         self.central_widget.addWidget(self.view_grade_widget)
         self.central_widget.addWidget(self.profile_widget)
