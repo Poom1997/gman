@@ -6,7 +6,7 @@
 
   End-Of-Term Project (Group of Three)<br>
 
-  Software Engineering - Year 2 (Sem 2/2015)<br>
+  Software Engineering - Year 2 (Sem 2/2016)<br>
   International College<br>
   King Mongkut's Institute of Technology Ladkrabang (KMITL)<br>
 
@@ -29,7 +29,6 @@
   **None**
 
 # 
-**PROGRAM VERSION: 1.0.0(BETA)<br>**
-ALL COMPONENTS IN THE BETA VERSION OF THE PROGRAM CAN BE CHANGED OR PUBLISHED WITHOUT ANY RELEASE NOTES<br>
+**PROGRAM VERSION: 1.0.0<br>**
 
-THIS DOCUMENT IS CREATED AS-OF 31 MAY 2017<br>
+THIS DOCUMENT IS EDITED AS-OF 12 DECEMBER 2017<br>
